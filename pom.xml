@@ -16,7 +16,8 @@
         <module>smart-service</module>
         <module>smart-config</module>
         <module>smart-service-api</module>
-  </modules>
+    	<module>smart-web</module>
+  	</modules>
 
     <name>smart</name>
 

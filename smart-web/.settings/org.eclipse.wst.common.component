@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="smart-web">
+        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+        <dependent-module archiveName="smart-base-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-base/smart-base">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="smart-service-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-service/smart-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="smart-support-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-support/smart-support">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="smart-domain-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-domain/smart-domain">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="smart-message-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-message/smart-message">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="smart-biz-refund-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-biz-refund/smart-biz-refund">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="smart-biz-account-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-biz-account/smart-biz-account">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="smart-biz-draw-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-biz-draw/smart-biz-draw">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="smart-biz-income-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-biz-income/smart-biz-income">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="smart-biz-custom-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-biz-custom/smart-biz-custom">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="smart-biz-meracc-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-biz-meracc/smart-biz-meracc">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="smart-biz-accquery-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-biz-accquery/smart-biz-accquery">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/smart-web/target/classes"/>
+        <property name="component.exclusion.patterns" value="WEB-INF/classes/logback-test.xml"/>
+        <property name="context-root" value="smart"/>
+    </wb-module>
+</project-modules>
