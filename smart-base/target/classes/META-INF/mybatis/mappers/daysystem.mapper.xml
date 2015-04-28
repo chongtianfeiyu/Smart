@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.somnus.smart.base.dao.DaySystemDao" >
+  <resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.DaySystem" >
+    <id column="DAY_ID" property="dayId" jdbcType="VARCHAR" />
+    <result column="CUT_CODE" property="cutCode" jdbcType="VARCHAR" />
+    <result column="CORE_DATE" property="coreDate" jdbcType="VARCHAR" />
+    <result column="L_CORE_DATE" property="lCoreDate" jdbcType="VARCHAR" />
+    <result column="BL_CORE_DATE" property="blCoreDate" jdbcType="VARCHAR" />
+    <result column="N_CORE_DATE" property="nCoreDate" jdbcType="VARCHAR" />
+    <result column="YEAR_END_DATE" property="yearEndDate" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+  </resultMap>
+
+	<select id="getWorkDay" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select a.DAY_ID,a.CUT_CODE,a.CORE_DATE,a.L_CORE_DATE,a.BL_CORE_DATE,a.N_CORE_DATE,
+			a.YEAR_END_DATE,a.CREATE_TIME,a.CREATE_BY,a.MODIFY_TIME,a.MODIFY_BY
+		from TCOR_DAY_SYSTEM a
+			where a.CUT_CODE = #{cutCode} 
+	</select>
+	
+	
+	<select id="getDaySystem" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select * from TCOR_DAY_SYSTEM where CUT_CODE=#{cutCode}
+	</select>
+	
+</mapper>

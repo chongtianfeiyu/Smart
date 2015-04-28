@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.somnus.smart.base.dao.TcorTrnTranFeeDao" >
+  <resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.TcorTrnTranFee" >
+    <result column="FEE_TRAN_NO" property="feeTranNo" jdbcType="VARCHAR" />
+    <result column="ACC_TRAN_NO" property="accTranNo" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="SUBMIT_TIME" property="submitTime" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    FEE_TRAN_NO, ACC_TRAN_NO, STATUS, SUBMIT_TIME, CREATE_TIME, CREATE_BY, MODIFY_TIME, 
+    MODIFY_BY
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.somnus.smart.base.domain.TcorTrnTranFeeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TCOR_TRN_TRANFEE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.somnus.smart.base.domain.TcorTrnTranFeeExample" >
+    delete from TCOR_TRN_TRANFEE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.somnus.smart.base.domain.TcorTrnTranFee" >
+    insert into TCOR_TRN_TRANFEE (FEE_TRAN_NO, ACC_TRAN_NO, STATUS, 
+      SUBMIT_TIME, CREATE_TIME, CREATE_BY, 
+      MODIFY_TIME, MODIFY_BY)
+    values (#{feeTranNo,jdbcType=VARCHAR}, #{accTranNo,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{submitTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.somnus.smart.base.domain.TcorTrnTranFee" >
+    insert into TCOR_TRN_TRANFEE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="feeTranNo != null" >
+        FEE_TRAN_NO,
+      </if>
+      <if test="accTranNo != null" >
+        ACC_TRAN_NO,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="submitTime != null" >
+        SUBMIT_TIME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="feeTranNo != null" >
+        #{feeTranNo,jdbcType=VARCHAR},
+      </if>
+      <if test="accTranNo != null" >
+        #{accTranNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="submitTime != null" >
+        #{submitTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.somnus.smart.base.domain.TcorTrnTranFeeExample" resultType="java.lang.Integer" >
+    select count(*) from TCOR_TRN_TRANFEE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TCOR_TRN_TRANFEE
+    <set >
+      <if test="record.feeTranNo != null" >
+        FEE_TRAN_NO = #{record.feeTranNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accTranNo != null" >
+        ACC_TRAN_NO = #{record.accTranNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        STATUS = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.submitTime != null" >
+        SUBMIT_TIME = #{record.submitTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createBy != null" >
+        CREATE_BY = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyTime != null" >
+        MODIFY_TIME = #{record.modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyBy != null" >
+        MODIFY_BY = #{record.modifyBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TCOR_TRN_TRANFEE
+    set FEE_TRAN_NO = #{record.feeTranNo,jdbcType=VARCHAR},
+      ACC_TRAN_NO = #{record.accTranNo,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=CHAR},
+      SUBMIT_TIME = #{record.submitTime,jdbcType=VARCHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=VARCHAR},
+      CREATE_BY = #{record.createBy,jdbcType=VARCHAR},
+      MODIFY_TIME = #{record.modifyTime,jdbcType=VARCHAR},
+      MODIFY_BY = #{record.modifyBy,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <select id="getFeeTranNo" resultType="java.lang.String">
+		select
+			to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANFEE.NEXTVAL
+			from
+			dual
+	</select>
+  
+</mapper>

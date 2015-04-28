@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.somnus.smart.base.dao.DiffTraninfoDao" >
+  <resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.DiffTraninfo" >
+    <id column="ERR_NO" property="errNo" jdbcType="VARCHAR" />
+    <result column="ACC_DATE" property="accDate" jdbcType="DATE" />
+    <result column="ERR_TRAN_NO" property="errTranNo" jdbcType="VARCHAR" />
+    <result column="IPS_BILL_NO" property="ipsBillNo" jdbcType="VARCHAR" />
+    <result column="APP_TRAN_NO" property="appTranNo" jdbcType="VARCHAR" />
+    <result column="TRAN_TYPE" property="tranType" jdbcType="VARCHAR" />
+    <result column="TRAN_AMT" property="tranAmt" jdbcType="DECIMAL" />
+    <result column="ERR_KIND" property="errKind" jdbcType="CHAR" />
+    <result column="ERR_CODE" property="errCode" jdbcType="VARCHAR" />
+    <result column="ERR_REMARK" property="errRemark" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ERR_NO,ACC_DATE, ERR_TRAN_NO, IPS_BILL_NO, APP_TRAN_NO, TRAN_TYPE, TRAN_AMT, ERR_KIND, ERR_CODE, 
+    ERR_REMARK, STATUS, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY
+  </sql>
+  <select id="selectUndoCnt" resultType="int" parameterType="map">
+	select
+	count(*)
+	from TCOR_DIFF_TRANINFO
+	<where>
+		<trim prefix="(" suffix=")" prefixOverrides="and | AND">
+			<if test="errTranNo != null and errTranNo !='' ">
+				AND ERR_TRAN_NO = #{errTranNo,jdbcType=VARCHAR}
+			</if>
+			<if test="ipsBillNo != null and ipsBillNo !='' ">
+				AND IPS_BILL_NO = #{ipsBillNo,jdbcType=VARCHAR}
+			</if>
+			<if test="appTranNo != null and appTranNo !='' ">
+				AND APP_TRAN_NO = #{appTranNo,jdbcType=VARCHAR}
+			</if>
+			<if test="tranType != null and tranType !='' ">
+				AND TRAN_TYPE = #{tranType,jdbcType=VARCHAR}
+			</if>
+			<if test="errKind != null and errKind !='' ">
+				AND ERR_KIND = #{errKind,jdbcType=CHAR}
+			</if>
+			<if test="errCode != null and errCode !='' ">
+				AND ERR_CODE = #{errCode,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status !='' ">
+				AND STATUS = #{status,jdbcType=CHAR}
+			</if>
+			<if test="accDate != null and accDate !='' ">
+				AND ACC_DATE = #{accDate,jdbcType=DATE}
+			</if>
+			<if test="createBy != null and createBy !='' ">
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="modifyTime != null and modifyTime !='' ">
+				AND MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR}
+			</if>
+			<if test="modifyBy != null and modifyBy !='' ">
+				AND MODIFY_BY = #{modifyBy,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</where>
+  </select>
+  <select id="selectByDiffTraninfo" resultMap="BaseResultMap" parameterType="map">
+	select
+	<include refid="Base_Column_List" />
+	from TCOR_DIFF_TRANINFO
+	<where>
+		<trim prefix="(" suffix=")" prefixOverrides="and | AND">
+			<if test="errTranNo != null and errTranNo !='' ">
+				AND ERR_TRAN_NO = #{errTranNo,jdbcType=VARCHAR}
+			</if>
+			<if test="ipsBillNo != null and ipsBillNo !='' ">
+				AND IPS_BILL_NO = #{ipsBillNo,jdbcType=VARCHAR}
+			</if>
+			<if test="appTranNo != null and appTranNo !='' ">
+				AND APP_TRAN_NO = #{appTranNo,jdbcType=VARCHAR}
+			</if>
+			<if test="tranType != null and tranType !='' ">
+				AND TRAN_TYPE = #{tranType,jdbcType=VARCHAR}
+			</if>
+			<if test="errKind != null and errKind !='' ">
+				AND ERR_KIND = #{errKind,jdbcType=CHAR}
+			</if>
+			<if test="errCode != null and errCode !='' ">
+				AND ERR_CODE = #{errCode,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status !='' ">
+				AND STATUS = #{status,jdbcType=CHAR}
+			</if>
+			<if test="accDate != null and accDate !='' ">
+				AND ACC_DATE = #{accDate,jdbcType=DATE}
+			</if>
+			<if test="createBy != null and createBy !='' ">
+				AND CREATE_BY = #{createBy,jdbcType=VARCHAR}
+			</if>
+			<if test="modifyTime != null and modifyTime !='' ">
+				AND MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR}
+			</if>
+			<if test="modifyBy != null and modifyBy !='' ">
+				AND MODIFY_BY = #{modifyBy,jdbcType=VARCHAR}
+			</if>
+		</trim>
+	</where>
+  </select>
+  <select id="getDiffTranSequences" resultType="string" >
+   select SEQ_DIFF_TRAN_ID.nextVal from dual
+  </select>
+  
+  <select id="selectErrTranNoExist" resultType="int" parameterType="java.lang.String" >
+    select count(1) from TCOR_DIFF_TRANINFO
+    where ERR_TRAN_NO = #{errTranNo,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+   select 
+    <include refid="Base_Column_List" />
+     from TCOR_DIFF_TRANINFO
+    where err_no = #{errNo,jdbcType=VARCHAR}
+  </select>
+  
+  <insert id="insert" parameterType="com.somnus.smart.base.domain.DiffTraninfo" >
+    insert into TCOR_DIFF_TRANINFO (ERR_NO,ACC_DATE, ERR_TRAN_NO, IPS_BILL_NO, 
+      APP_TRAN_NO, TRAN_TYPE, TRAN_AMT, 
+      ERR_KIND, ERR_CODE, ERR_REMARK, 
+      STATUS, CREATE_TIME, CREATE_BY, 
+      MODIFY_TIME, MODIFY_BY)
+    values (#{errNo,jdbcType=VARCHAR},#{accDate,jdbcType=DATE}, #{errTranNo,jdbcType=VARCHAR}, #{ipsBillNo,jdbcType=VARCHAR}, 
+      #{appTranNo,jdbcType=VARCHAR}, #{tranType,jdbcType=VARCHAR}, #{tranAmt,jdbcType=DECIMAL}, 
+      #{errKind,jdbcType=CHAR}, #{errCode,jdbcType=VARCHAR}, #{errRemark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR})
+  </insert>
+  <update id="update" parameterType="com.somnus.smart.base.domain.DiffTraninfo" >
+    update TCOR_DIFF_TRANINFO
+    <set >
+      <if test="errTranNo != null" >
+        ERR_TRAN_NO = #{errTranNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ipsBillNo != null" >
+        IPS_BILL_NO = #{ipsBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="appTranNo != null" >
+        APP_TRAN_NO = #{appTranNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tranType != null" >
+        TRAN_TYPE = #{tranType,jdbcType=VARCHAR},
+      </if>
+      <if test="tranAmt != null" >
+        TRAN_AMT = #{tranAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="errKind != null" >
+        ERR_KIND = #{errKind,jdbcType=CHAR},
+      </if>
+      <if test="errCode != null" >
+        ERR_CODE = #{errCode,jdbcType=VARCHAR},
+      </if>
+      <if test="errRemark != null" >
+        ERR_REMARK = #{errRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ERR_NO = #{errNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

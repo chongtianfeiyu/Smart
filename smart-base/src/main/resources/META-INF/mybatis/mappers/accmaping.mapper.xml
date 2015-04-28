@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.somnus.smart.base.dao.AccMappingDao" >
+  <resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.AccMapping" >
+    <result column="SPE_ACCT_CODE" property="speAcctCode" jdbcType="VARCHAR" />
+    <result column="STD_ACCT_CODE" property="stdAcctCode" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SPE_ACCT_CODE,STD_ACCT_CODE,
+	CREATE_TIME,CREATE_BY,
+	MODIFY_TIME,MODIFY_BY
+  </sql>
+  
+  <insert id="insert" parameterType="com.somnus.smart.base.domain.AccMapping" >
+    insert into TCOR_ACC_MAPPING (
+    	SPE_ACCT_CODE,STD_ACCT_CODE,
+		CREATE_TIME,CREATE_BY,
+		MODIFY_TIME,MODIFY_BY
+	)
+    values (
+    	#{speAcctCode,jdbcType=VARCHAR}, #{stdAcctCode,jdbcType=VARCHAR}, 
+      	#{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      	#{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}
+	)
+  </insert>
+  
+  <select id="selectStdAccCodeBySpeAccCode" parameterType="string" resultType="string">
+  	select t.std_acct_code from tcor_acc_mapping t where t.spe_acct_code =#{speAccCode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectSpeAccCodeByStdAccCode" parameterType="string" resultType="string">
+  	select t.spe_acct_code from tcor_acc_mapping t where t.std_acct_code =#{stdAccCode,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

@@ -1,0 +1,59 @@
+package com.somnus.smart.domain.account;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+
+import com.somnus.smart.base.dao.TrnTranDrawDao;
+import com.somnus.smart.base.domain.TrnTranDraw;
+import com.somnus.smart.domain.DomainHelper;
+import com.somnus.smart.domain.DomainModel;
+
+/**
+ * 出款附属
+ * 
+ * @author Administrator
+ * @version $Id: Ledgerdetail.java, v 0.1 2014-10-29 下午04:44:14 Administrator Exp $
+ */
+public class TranDraw extends TrnTranDraw implements DomainModel<TranDraw, TrnTranDraw> {
+
+    private static TrnTranDrawDao     dao;
+
+    private static Logger             LOGGER = LoggerFactory.getLogger(TranDraw.class);
+
+    public TranDraw() {
+    }
+
+    public static TranDraw getInstance() {
+        return (TranDraw) DomainHelper.getDomainInstance(TranDraw.class);
+    }
+
+    public static void init(ApplicationContext ctx) {
+        dao = ctx.getBean(TrnTranDrawDao.class);
+    }
+
+    /**
+     * 根据TrnAccDetail返回AccDetail
+     * 
+     * @param model
+     * @return
+     */
+    private static TranDraw getTranDraw(TrnTranDrawDao model) {
+        TranDraw tranDraw = getInstance();
+        if (model != null) {
+            DomainHelper.setDomainData(tranDraw, model);
+        }
+        return tranDraw;
+    }
+
+    /**
+     * 落地
+     * 
+     * @return
+     */
+    public boolean save() {
+        dao.insert(this);
+        return true;
+    }
+
+}

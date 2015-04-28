@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.somnus.smart.base.dao.CfgAccEntryDao">
+	<resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.CfgAccEntry">
+		<id column="ACC_ENTRY_CODE" property="accEntryCode" jdbcType="VARCHAR" />
+		<result column="ACC_ENTRY_TYPE" property="accEntryType"
+			jdbcType="CHAR" />
+		<result column="SUB_CODE_1ST" property="subCode1st" jdbcType="VARCHAR" />
+		<result column="REL_SUB_CODE_1ST" property="relSubCode1st"
+			jdbcType="VARCHAR" />
+		<result column="SUB_INDEX_1ST" property="subIndex1st" jdbcType="DECIMAL" />
+		<result column="CD_FLAG_1ST" property="cdFlag1st" jdbcType="CHAR" />
+		<result column="SUB_AMT_TYPE_1ST" property="subAmtType1st"
+			jdbcType="CHAR" />
+		<result column="SUB_AMT_SIGN_1ST" property="subAmtSign1st"
+			jdbcType="CHAR" />
+		<result column="SEQ_NO_1ST" property="seqNo1st" jdbcType="DECIMAL" />
+		<result column="SUB_TYPE_1ST" property="subType1st" jdbcType="CHAR" />
+		<result column="IS_RED_1ST" property="isRed1st" jdbcType="CHAR" />
+		<result column="SUB_DIR_1ST" property="subDir1st" jdbcType="CHAR" />
+		<result column="SUB_CODE_2ND" property="subCode2nd" jdbcType="VARCHAR" />
+		<result column="REL_SUB_CODE_2ND" property="relSubCode2nd"
+			jdbcType="VARCHAR" />
+		<result column="SUB_INDEX_2ND" property="subIndex2nd" jdbcType="DECIMAL" />
+		<result column="CD_FLAG_2ND" property="cdFlag2nd" jdbcType="CHAR" />
+		<result column="SUB_AMT_TYPE_2ND" property="subAmtType2nd"
+			jdbcType="CHAR" />
+		<result column="SUB_AMT_SIGN_2ND" property="subAmtSign2nd"
+			jdbcType="CHAR" />
+		<result column="SEQ_NO_2ND" property="seqNo2nd" jdbcType="DECIMAL" />
+		<result column="SUB_TYPE_2ND" property="subType2nd" jdbcType="CHAR" />
+		<result column="IS_RED_2ND" property="isRed2nd" jdbcType="CHAR" />
+		<result column="SUB_DIR_2ND" property="subDir2nd" jdbcType="CHAR" />
+		<result column="SUB_CODE_3RD" property="subCode3rd" jdbcType="VARCHAR" />
+		<result column="REL_SUB_CODE_3RD" property="relSubCode3rd"
+			jdbcType="VARCHAR" />
+		<result column="SUB_INDEX_3RD" property="subIndex3rd" jdbcType="DECIMAL" />
+		<result column="CD_FLAG_3RD" property="cdFlag3rd" jdbcType="CHAR" />
+		<result column="SUB_AMT_TYPE_3RD" property="subAmtType3rd"
+			jdbcType="CHAR" />
+		<result column="SUB_AMT_SIGN_3RD" property="subAmtSign3rd"
+			jdbcType="CHAR" />
+		<result column="SEQ_NO_3RD" property="seqNo3rd" jdbcType="DECIMAL" />
+		<result column="SUB_TYPE_3RD" property="subType3rd" jdbcType="CHAR" />
+		<result column="IS_RED_3RD" property="isRed3rd" jdbcType="CHAR" />
+		<result column="SUB_DIR_3RD" property="subDir3rd" jdbcType="CHAR" />
+		<result column="SUB_CODE_4TH" property="subCode4th" jdbcType="VARCHAR" />
+		<result column="REL_SUB_CODE_4TH" property="relSubCode4th"
+			jdbcType="VARCHAR" />
+		<result column="SUB_INDEX_4TH" property="subIndex4th" jdbcType="DECIMAL" />
+		<result column="CD_FLAG_4TH" property="cdFlag4th" jdbcType="CHAR" />
+		<result column="SUB_AMT_TYPE_4TH" property="subAmtType4th"
+			jdbcType="CHAR" />
+		<result column="SUB_AMT_SIGN_4TH" property="subAmtSign4th"
+			jdbcType="CHAR" />
+		<result column="SEQ_NO_4TH" property="seqNo4th" jdbcType="DECIMAL" />
+		<result column="SUB_TYPE_4TH" property="subType4th" jdbcType="CHAR" />
+		<result column="IS_RED_4TH" property="isRed4th" jdbcType="CHAR" />
+		<result column="SUB_DIR_4TH" property="subDir4th" jdbcType="CHAR" />
+		<result column="STATUS" property="status" jdbcType="CHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+		<result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+		<result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+		<result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ACC_ENTRY_CODE, ACC_ENTRY_TYPE, SUB_CODE_1ST, REL_SUB_CODE_1ST, SUB_INDEX_1ST,
+		CD_FLAG_1ST,
+		SUB_AMT_TYPE_1ST, SUB_AMT_SIGN_1ST, SEQ_NO_1ST, SUB_TYPE_1ST, IS_RED_1ST, SUB_DIR_1ST,
+		SUB_CODE_2ND, REL_SUB_CODE_2ND, SUB_INDEX_2ND, CD_FLAG_2ND,
+		SUB_AMT_TYPE_2ND, SUB_AMT_SIGN_2ND,
+		SEQ_NO_2ND, SUB_TYPE_2ND, IS_RED_2ND, SUB_DIR_2ND, SUB_CODE_3RD,
+		REL_SUB_CODE_3RD,
+		SUB_INDEX_3RD, CD_FLAG_3RD, SUB_AMT_TYPE_3RD, SUB_AMT_SIGN_3RD, SEQ_NO_3RD,
+		SUB_TYPE_3RD,
+		IS_RED_3RD, SUB_DIR_3RD, SUB_CODE_4TH, REL_SUB_CODE_4TH, SUB_INDEX_4TH,
+		CD_FLAG_4TH,
+		SUB_AMT_TYPE_4TH, SUB_AMT_SIGN_4TH, SEQ_NO_4TH, SUB_TYPE_4TH, IS_RED_4TH, SUB_DIR_4TH,
+		STATUS, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY
+	</sql>
+	<select id="selectByLikeKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from TCOR_CFG_ACCENTRY
+		where ACC_ENTRY_CODE like #{accEntryCode,jdbcType=VARCHAR}||'%'
+	</select>
+	<select id="selectByKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from TCOR_CFG_ACCENTRY
+		where ACC_ENTRY_CODE = #{accEntryCode,jdbcType=VARCHAR};
+	</select>
+</mapper>

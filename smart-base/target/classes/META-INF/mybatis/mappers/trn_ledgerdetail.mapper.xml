@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.somnus.smart.base.dao.TrnLedgerDetailDao">
+	 <resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.TrnLedgerDetail" >
+    <id column="LED_TRAN_NO" property="ledTranNo" jdbcType="VARCHAR" />
+    <result column="ACC_ENTRY_CODE" property="accEntryCode" jdbcType="VARCHAR" />
+    <result column="ACC_TRAN_NO" property="accTranNo" jdbcType="VARCHAR" />
+    <result column="ACC_ENTRY_TYPE" property="accEntryType" jdbcType="CHAR" />
+    <result column="ACC_CODE_1ST" property="accCode1st" jdbcType="VARCHAR" />
+    <result column="SUB_ACC_CODE_1ST" property="subAccCode1st" jdbcType="VARCHAR" />
+    <result column="FIR_SUB_CODE_1ST" property="firSubCode1st" jdbcType="VARCHAR" />
+    <result column="REL_SUB_CODE_1ST" property="relSubCode1st" jdbcType="VARCHAR" />
+    <result column="SUB_INDEX_1ST" property="subIndex1st" jdbcType="DECIMAL" />
+    <result column="SEQ_NO_1ST" property="seqNo1st" jdbcType="DECIMAL" />
+    <result column="SUB_TYPE_1ST" property="subType1st" jdbcType="CHAR" />
+    <result column="CD_FLAG_1ST" property="cdFlag1st" jdbcType="CHAR" />
+    <result column="TRAN_AMT_1ST" property="tranAmt1st" jdbcType="DECIMAL" />
+    <result column="ACC_CODE_2ND" property="accCode2nd" jdbcType="VARCHAR" />
+    <result column="SUB_ACC_CODE_2ND" property="subAccCode2nd" jdbcType="VARCHAR" />
+    <result column="SUB_CODE_2ND" property="subCode2nd" jdbcType="VARCHAR" />
+    <result column="REL_SUB_CODE_2ND" property="relSubCode2nd" jdbcType="VARCHAR" />
+    <result column="SUB_INDEX_2ND" property="subIndex2nd" jdbcType="DECIMAL" />
+    <result column="SEQ_NO_2ND" property="seqNo2nd" jdbcType="DECIMAL" />
+    <result column="SUB_TYPE_2ND" property="subType2nd" jdbcType="CHAR" />
+    <result column="CD_FLAG_2ND" property="cdFlag2nd" jdbcType="CHAR" />
+    <result column="TRAN_AMT_2ND" property="tranAmt2nd" jdbcType="DECIMAL" />
+    <result column="ACC_CODE_3RD" property="accCode3rd" jdbcType="VARCHAR" />
+    <result column="SUB_ACC_CODE_3RD" property="subAccCode3rd" jdbcType="VARCHAR" />
+    <result column="SUB_CODE_3RD" property="subCode3rd" jdbcType="VARCHAR" />
+    <result column="REL_SUB_CODE_3RD" property="relSubCode3rd" jdbcType="VARCHAR" />
+    <result column="SUB_INDEX_3RD" property="subIndex3rd" jdbcType="DECIMAL" />
+    <result column="SEQ_NO_3RD" property="seqNo3rd" jdbcType="DECIMAL" />
+    <result column="SUB_TYPE_3RD" property="subType3rd" jdbcType="CHAR" />
+    <result column="CD_FLAG_3RD" property="cdFlag3rd" jdbcType="CHAR" />
+    <result column="TRAN_AMT_3RD" property="tranAmt3rd" jdbcType="DECIMAL" />
+    <result column="ACC_CODE_4TH" property="accCode4th" jdbcType="VARCHAR" />
+    <result column="SUB_ACC_CODE_4TH" property="subAccCode4th" jdbcType="VARCHAR" />
+    <result column="SUB_CODE_4TH" property="subCode4th" jdbcType="VARCHAR" />
+    <result column="REL_SUB_CODE_4TH" property="relSubCode4th" jdbcType="VARCHAR" />
+    <result column="SUB_INDEX_4TH" property="subIndex4th" jdbcType="DECIMAL" />
+    <result column="SEQ_NO_4TH" property="seqNo4th" jdbcType="DECIMAL" />
+    <result column="SUB_TYPE_4TH" property="subType4th" jdbcType="CHAR" />
+    <result column="CD_FLAG_4TH" property="cdFlag4th" jdbcType="CHAR" />
+    <result column="TRAN_AMT_4TH" property="tranAmt4th" jdbcType="DECIMAL" />
+    <result column="CCY_CODE" property="ccyCode" jdbcType="VARCHAR" />
+    <result column="APP_TRAN_DATE" property="appTranDate" jdbcType="TIMESTAMP" />
+    <result column="SUBMIT_ACC_DATE" property="submitAccDate" jdbcType="DATE" />
+    <result column="ACC_STATUS" property="accStatus" jdbcType="CHAR" />
+    <result column="ACC_DATE" property="accDate" jdbcType="DATE" />
+    <result column="IPS_BILL_NO" property="ipsBillNo" jdbcType="VARCHAR" />
+    <result column="APP_TRAN_NO" property="appTranNo" jdbcType="VARCHAR" />
+    <result column="TRAN_TYPE" property="tranType" jdbcType="VARCHAR" />
+    <result column="SYS_CODE" property="sysCode" jdbcType="VARCHAR" />
+    <result column="CUS_TRAN_NO" property="cusTranNo" jdbcType="VARCHAR" />
+    <result column="TRAN_REMARK" property="tranRemark" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+  </resultMap>
+
+	 <sql id="Base_Column_List" >
+    LED_TRAN_NO, ACC_ENTRY_CODE, ACC_TRAN_NO, ACC_ENTRY_TYPE, ACC_CODE_1ST, SUB_ACC_CODE_1ST, 
+    FIR_SUB_CODE_1ST, REL_SUB_CODE_1ST, SUB_INDEX_1ST, SEQ_NO_1ST, SUB_TYPE_1ST, CD_FLAG_1ST, 
+    TRAN_AMT_1ST, ACC_CODE_2ND, SUB_ACC_CODE_2ND, SUB_CODE_2ND, REL_SUB_CODE_2ND, SUB_INDEX_2ND, 
+    SEQ_NO_2ND, SUB_TYPE_2ND, CD_FLAG_2ND, TRAN_AMT_2ND, ACC_CODE_3RD, SUB_ACC_CODE_3RD, 
+    SUB_CODE_3RD, REL_SUB_CODE_3RD, SUB_INDEX_3RD, SEQ_NO_3RD, SUB_TYPE_3RD, CD_FLAG_3RD, 
+    TRAN_AMT_3RD, ACC_CODE_4TH, SUB_ACC_CODE_4TH, SUB_CODE_4TH, REL_SUB_CODE_4TH, SUB_INDEX_4TH, 
+    SEQ_NO_4TH, SUB_TYPE_4TH, CD_FLAG_4TH, TRAN_AMT_4TH, CCY_CODE, APP_TRAN_DATE, SUBMIT_ACC_DATE, 
+    ACC_STATUS, ACC_DATE, IPS_BILL_NO, APP_TRAN_NO, TRAN_TYPE, SYS_CODE, CUS_TRAN_NO, 
+    TRAN_REMARK, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY
+  </sql>
+	<sql id="whereCondition">
+		<where>
+			<trim prefix="(" suffix=")" prefixOverrides="and | AND">
+				<if test="ledTranNo != null and ledTranNo != '' ">
+					and LED_TRAN_NO = #{ledTranNo,jdbcType=VARCHAR}
+				</if>
+				<if test="accTranNo != null and accTranNo != '' ">
+					and ACC_TRAN_NO = #{accTranNo,jdbcType=VARCHAR}
+				</if>
+				<if test="accStatus != null and accStatus != '' ">
+					and ACC_STATUS = #{accStatus,jdbcType=CHAR}
+				</if>
+			</trim>
+		</where>
+	</sql>
+
+	<update id="update" parameterType="com.somnus.smart.base.domain.TrnLedgerDetail">
+		update TCOR_TRN_LEDGERDETAIL
+		<set>
+			<if test="accDate != null">
+				ACC_DATE = #{accDate,jdbcType=VARCHAR},
+			</if>
+			<if test="accStatus != null">
+				ACC_STATUS = #{accStatus,jdbcType=CHAR},
+			</if>
+			<if test="modifyTime != null">
+				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+			</if>
+			<if test="modifyBy != null">
+				MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where LED_TRAN_NO = #{ledTranNo,jdbcType=VARCHAR}
+	</update>
+
+	<select id="select" resultMap="BaseResultMap"
+		parameterType="com.somnus.smart.base.domain.TrnLedgerDetail">
+		select
+		<include refid="Base_Column_List" />
+		from TCOR_TRN_LEDGERDETAIL
+		<include refid="whereCondition" />
+	</select>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	    select 
+	    <include refid="Base_Column_List" />
+	    from TCOR_TRN_LEDGERDETAIL
+	    where LED_TRAN_NO = #{ledTranNo,jdbcType=VARCHAR}
+  </select>
+
+	<insert id="insert" parameterType="com.somnus.smart.base.domain.TrnLedgerDetail">
+		<selectKey resultType="java.lang.String" keyProperty="ledTranNo"
+			order="BEFORE">
+			select
+			'NC'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_LEDGERDETAIL.NEXTVAL
+			from
+			dual
+		</selectKey>
+		  insert into TCOR_TRN_LEDGERDETAIL (LED_TRAN_NO, ACC_ENTRY_CODE, ACC_TRAN_NO, 
+      ACC_ENTRY_TYPE, ACC_CODE_1ST, SUB_ACC_CODE_1ST, 
+      FIR_SUB_CODE_1ST, REL_SUB_CODE_1ST, SUB_INDEX_1ST, 
+      SEQ_NO_1ST, SUB_TYPE_1ST, CD_FLAG_1ST, 
+      TRAN_AMT_1ST, ACC_CODE_2ND, SUB_ACC_CODE_2ND, 
+      SUB_CODE_2ND, REL_SUB_CODE_2ND, SUB_INDEX_2ND, 
+      SEQ_NO_2ND, SUB_TYPE_2ND, CD_FLAG_2ND, 
+      TRAN_AMT_2ND, ACC_CODE_3RD, SUB_ACC_CODE_3RD, 
+      SUB_CODE_3RD, REL_SUB_CODE_3RD, SUB_INDEX_3RD, 
+      SEQ_NO_3RD, SUB_TYPE_3RD, CD_FLAG_3RD, 
+      TRAN_AMT_3RD, ACC_CODE_4TH, SUB_ACC_CODE_4TH, 
+      SUB_CODE_4TH, REL_SUB_CODE_4TH, SUB_INDEX_4TH, 
+      SEQ_NO_4TH, SUB_TYPE_4TH, CD_FLAG_4TH, 
+      TRAN_AMT_4TH, CCY_CODE, APP_TRAN_DATE, 
+      SUBMIT_ACC_DATE, ACC_STATUS, ACC_DATE, 
+      IPS_BILL_NO, APP_TRAN_NO, TRAN_TYPE, 
+      SYS_CODE, CUS_TRAN_NO, TRAN_REMARK, 
+      CREATE_TIME, CREATE_BY, MODIFY_TIME, 
+      MODIFY_BY)
+    values (#{ledTranNo,jdbcType=VARCHAR}, #{accEntryCode,jdbcType=VARCHAR}, #{accTranNo,jdbcType=VARCHAR}, 
+      #{accEntryType,jdbcType=CHAR}, #{accCode1st,jdbcType=VARCHAR}, #{subAccCode1st,jdbcType=VARCHAR}, 
+      #{firSubCode1st,jdbcType=VARCHAR}, #{relSubCode1st,jdbcType=VARCHAR}, #{subIndex1st,jdbcType=DECIMAL}, 
+      #{seqNo1st,jdbcType=DECIMAL}, #{subType1st,jdbcType=CHAR}, #{cdFlag1st,jdbcType=CHAR}, 
+      #{tranAmt1st,jdbcType=DECIMAL}, #{accCode2nd,jdbcType=VARCHAR}, #{subAccCode2nd,jdbcType=VARCHAR}, 
+      #{subCode2nd,jdbcType=VARCHAR}, #{relSubCode2nd,jdbcType=VARCHAR}, #{subIndex2nd,jdbcType=DECIMAL}, 
+      #{seqNo2nd,jdbcType=DECIMAL}, #{subType2nd,jdbcType=CHAR}, #{cdFlag2nd,jdbcType=CHAR}, 
+      #{tranAmt2nd,jdbcType=DECIMAL}, #{accCode3rd,jdbcType=VARCHAR}, #{subAccCode3rd,jdbcType=VARCHAR}, 
+      #{subCode3rd,jdbcType=VARCHAR}, #{relSubCode3rd,jdbcType=VARCHAR}, #{subIndex3rd,jdbcType=DECIMAL}, 
+      #{seqNo3rd,jdbcType=DECIMAL}, #{subType3rd,jdbcType=CHAR}, #{cdFlag3rd,jdbcType=CHAR}, 
+      #{tranAmt3rd,jdbcType=DECIMAL}, #{accCode4th,jdbcType=VARCHAR}, #{subAccCode4th,jdbcType=VARCHAR}, 
+      #{subCode4th,jdbcType=VARCHAR}, #{relSubCode4th,jdbcType=VARCHAR}, #{subIndex4th,jdbcType=DECIMAL}, 
+      #{seqNo4th,jdbcType=DECIMAL}, #{subType4th,jdbcType=CHAR}, #{cdFlag4th,jdbcType=CHAR}, 
+      #{tranAmt4th,jdbcType=DECIMAL}, #{ccyCode,jdbcType=VARCHAR}, #{appTranDate,jdbcType=TIMESTAMP}, 
+      #{submitAccDate,jdbcType=DATE}, #{accStatus,jdbcType=CHAR}, #{accDate,jdbcType=DATE}, 
+      #{ipsBillNo,jdbcType=VARCHAR}, #{appTranNo,jdbcType=VARCHAR}, #{tranType,jdbcType=VARCHAR}, 
+      #{sysCode,jdbcType=VARCHAR}, #{cusTranNo,jdbcType=VARCHAR}, #{tranRemark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
+      #{modifyBy,jdbcType=VARCHAR})
+	</insert>
+
+</mapper>

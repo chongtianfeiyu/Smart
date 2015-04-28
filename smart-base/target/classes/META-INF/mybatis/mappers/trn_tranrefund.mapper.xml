@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.somnus.smart.base.dao.TrnTranRefundDao" >
+  <resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.TrnTranRefund" >
+    <id column="REF_TRAN_NO" property="refTranNo" jdbcType="VARCHAR" />
+    <result column="ACC_TRAN_NO" property="accTranNo" jdbcType="VARCHAR" />
+    <result column="ORI_APP_TRAN_NO" property="oriAppTranNo" jdbcType="VARCHAR" />
+    <result column="ORI_MER_BILL_NO" property="oriMerBillNo" jdbcType="VARCHAR" />
+    <result column="ORI_TRAN_AMT" property="oriTranAmt" jdbcType="DECIMAL" />
+    <result column="ORI_BILL_DATE" property="oriBillDate" jdbcType="TIMESTAMP" />
+    <result column="ORI_SUPPLIER_BILL_NO" property="oriSupplierBillNo" jdbcType="VARCHAR" />
+    <result column="ORI_REFRENCE_NO" property="oriRefrenceNo" jdbcType="VARCHAR" />
+    <result column="ORI_AUTH_NO" property="oriAuthNo" jdbcType="VARCHAR" />
+    <result column="REFUND_AMT" property="refundAmt" jdbcType="DECIMAL" />
+    <result column="CHANNEL_CODE" property="channelCode" jdbcType="VARCHAR" />
+    <result column="CARD_NO" property="cardNo" jdbcType="VARCHAR" />
+    <result column="CARD_NO_EX" property="cardNoEx" jdbcType="VARCHAR" />
+    <result column="CARDHOLDER" property="cardholder" jdbcType="VARCHAR" />
+    <result column="APP_REFUND_DATE" property="appRefundDate" jdbcType="TIMESTAMP" />
+    <result column="BILL_REMARK" property="billRemark" jdbcType="VARCHAR" />
+    <result column="REFUND_ARG" property="refundArg" jdbcType="VARCHAR" />
+    <result column="REF_TYPE" property="refType" jdbcType="CHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="SUBMIT_TIME" property="submitTime" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+    <result column="BIZ_TYPE" property="bizType" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    REF_TRAN_NO, ACC_TRAN_NO, ORI_APP_TRAN_NO, ORI_MER_BILL_NO, ORI_TRAN_AMT, ORI_BILL_DATE, 
+    ORI_SUPPLIER_BILL_NO, ORI_REFRENCE_NO, ORI_AUTH_NO, REFUND_AMT, CHANNEL_CODE, CARD_NO, 
+    CARD_NO_EX, CARDHOLDER, APP_REFUND_DATE, BILL_REMARK, REFUND_ARG, REF_TYPE, 
+    STATUS, SUBMIT_TIME, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY, BIZ_TYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TCOR_TRN_TRANREFUND
+    where REF_TRAN_NO = #{refTranNo,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByAccTranNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TCOR_TRN_TRANREFUND
+    where ACC_TRAN_NO = #{accTranNo,jdbcType=VARCHAR}
+  </select>
+  
+  
+  <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnTranRefund" >
+    	<selectKey resultType="java.lang.String" keyProperty="refTranNo"
+			order="BEFORE">
+			select
+			to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANREFUND.NEXTVAL
+			from
+			dual
+		</selectKey>
+		insert into TCOR_TRN_TRANREFUND (REF_TRAN_NO, ACC_TRAN_NO, ORI_APP_TRAN_NO, 
+      ORI_MER_BILL_NO, ORI_TRAN_AMT, ORI_BILL_DATE, 
+      ORI_SUPPLIER_BILL_NO, ORI_REFRENCE_NO, ORI_AUTH_NO, 
+      REFUND_AMT, CHANNEL_CODE, CARD_NO, 
+      CARD_NO_EX, CARDHOLDER, APP_REFUND_DATE, 
+      BILL_REMARK, REFUND_ARG, 
+      REF_TYPE, STATUS, SUBMIT_TIME, 
+      CREATE_TIME, CREATE_BY, MODIFY_TIME, 
+      MODIFY_BY, BIZ_TYPE
+      )
+    values (#{refTranNo,jdbcType=VARCHAR}, #{accTranNo,jdbcType=VARCHAR}, #{oriAppTranNo,jdbcType=VARCHAR}, 
+      #{oriMerBillNo,jdbcType=VARCHAR}, #{oriTranAmt,jdbcType=DECIMAL}, #{oriBillDate,jdbcType=TIMESTAMP}, 
+      #{oriSupplierBillNo,jdbcType=VARCHAR}, #{oriRefrenceNo,jdbcType=VARCHAR}, #{oriAuthNo,jdbcType=VARCHAR}, 
+      #{refundAmt,jdbcType=DECIMAL}, #{channelCode,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, 
+      #{cardNoEx,jdbcType=VARCHAR}, #{cardholder,jdbcType=VARCHAR}, #{appRefundDate,jdbcType=TIMESTAMP}, 
+      #{billRemark,jdbcType=VARCHAR}, #{refundArg,jdbcType=VARCHAR},
+      #{refType,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{submitTime,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
+      #{modifyBy,jdbcType=VARCHAR}, #{bizType,jdbcType=CHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.somnus.smart.base.domain.TrnTranRefund" >
+    update TCOR_TRN_TRANREFUND
+    <set >
+      <if test="accTranNo != null" >
+        ACC_TRAN_NO = #{accTranNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oriAppTranNo != null" >
+        ORI_APP_TRAN_NO = #{oriAppTranNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oriMerBillNo != null" >
+        ORI_MER_BILL_NO = #{oriMerBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oriTranAmt != null" >
+        ORI_TRAN_AMT = #{oriTranAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="oriBillDate != null" >
+        ORI_BILL_DATE = #{oriBillDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oriSupplierBillNo != null" >
+        ORI_SUPPLIER_BILL_NO = #{oriSupplierBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oriRefrenceNo != null" >
+        ORI_REFRENCE_NO = #{oriRefrenceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="oriAuthNo != null" >
+        ORI_AUTH_NO = #{oriAuthNo,jdbcType=VARCHAR},
+      </if>
+      <if test="refundAmt != null" >
+        REFUND_AMT = #{refundAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="channelCode != null" >
+        CHANNEL_CODE = #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        CARD_NO = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNoEx != null" >
+        CARD_NO_EX = #{cardNoEx,jdbcType=VARCHAR},
+      </if>
+      <if test="cardholder != null" >
+        CARDHOLDER = #{cardholder,jdbcType=VARCHAR},
+      </if>
+      <if test="appRefundDate != null" >
+        APP_REFUND_DATE = #{appRefundDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="billRemark != null" >
+        BILL_REMARK = #{billRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="refundArg != null" >
+        REFUND_ARG = #{refundArg,jdbcType=VARCHAR},
+      </if>
+      <if test="refType != null" >
+        REF_TYPE = #{refType,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="submitTime != null" >
+        SUBMIT_TIME = #{submitTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        BIZ_TYPE = #{bizType,jdbcType=CHAR},
+      </if>
+    </set>
+    where REF_TRAN_NO = #{refTranNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

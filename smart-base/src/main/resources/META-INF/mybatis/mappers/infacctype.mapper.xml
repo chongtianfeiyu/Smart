@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.somnus.smart.base.dao.InfAcctypeDao" >
+  <resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.InfAcctype" >
+    <id column="ACC_TYPE" property="accType" jdbcType="VARCHAR" />
+    <result column="ACC_TYPE_NAME" property="accTypeName" jdbcType="VARCHAR" />
+    <result column="BASE_FLAG" property="baseFlag" jdbcType="CHAR" />
+    <result column="TEMP_ACCT_FLAG" property="tempAcctFlag" jdbcType="CHAR" />
+    <result column="SUB_CODE" property="subCode" jdbcType="VARCHAR" />
+    <result column="OPEN_ACC_FLAG" property="openAccFlag" jdbcType="CHAR" />
+    <result column="ACC_KIND" property="accKind" jdbcType="CHAR" />
+    <result column="IS_REAL_BAL" property="isRealBal" jdbcType="CHAR" />
+    <result column="INTERNAL_OPEN_FLAG" property="internalOpenFlag" jdbcType="CHAR" />
+    <result column="ENTERPRISE_OPEN_FLAG" property="enterpriseOpenFlag" jdbcType="CHAR" />
+    <result column="PERSONAL_OPEN_FLAG" property="personalOpenFlag" jdbcType="CHAR" />
+    <result column="ERASE_FLG" property="eraseFlg" jdbcType="CHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="AccSubResultMap" type="com.somnus.smart.base.domain.Accsubentity" >
+    <result column="ACC_TYPE" property="accType" jdbcType="VARCHAR" />
+    <result column="ACC_TYPE_NAME" property="accTypeName" jdbcType="VARCHAR" />
+    <result column="BASE_FLAG" property="baseFlag" jdbcType="CHAR" />
+    <result column="TEMP_ACCT_FLAG" property="tempAcctFlag" jdbcType="CHAR" />
+    <result column="SUB_CODE" property="subCode" jdbcType="VARCHAR" />
+    <result column="ACC_KIND" property="accKind" jdbcType="CHAR" />
+    <result column="IS_REAL_BAL" property="isRealBal" jdbcType="CHAR" />
+    <result column="INTERNAL_OPEN_FLAG" property="internalOpenFlag" jdbcType="CHAR" />
+    <result column="ENTERPRISE_OPEN_FLAG" property="enterpriseOpenFlag" jdbcType="CHAR" />
+    <result column="PERSONAL_OPEN_FLAG" property="personalOpenFlag" jdbcType="CHAR" />
+    <result column="ERASE_FLG" property="eraseFlg" jdbcType="CHAR" />
+    <result column="SUB_CODE_1ST" property="subCode1st" jdbcType="VARCHAR" />
+    <result column="SUB_NAME_1ST" property="subName1st" jdbcType="VARCHAR" />
+    <result column="SUB_LEN_1ST" property="subLen1st" jdbcType="DECIMAL" />
+    <result column="SUB_CODE_2ST" property="subCode2st" jdbcType="VARCHAR" />
+    <result column="SUB_LEN_2ST" property="subLen2st" jdbcType="DECIMAL" />
+    <result column="SUB_CODE_3RD" property="subCode3rd" jdbcType="VARCHAR" />
+    <result column="SUB_LEN_3RD" property="subLen3rd" jdbcType="DECIMAL" />
+    <result column="SUB_CODE_4TH" property="subCode4th" jdbcType="VARCHAR" />
+    <result column="SUB_LEN_4TH" property="subLen4th" jdbcType="DECIMAL" />
+    <result column="SUB_TYPE" property="subType" jdbcType="CHAR" />
+    <result column="SUB_LEAF_LEVER" property="subLeafLever" jdbcType="CHAR" />
+    <result column="BAL_CTRL_DIR" property="balCtrlDir" jdbcType="CHAR" />
+    <result column="BAL_ZERO_FLAG" property="balZeroFlag" jdbcType="CHAR" />
+    <result column="RED_FLAG" property="redFlag" jdbcType="CHAR" />
+    <result column="OPEN_ACC_FLAG" property="openAccFlag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ACC_TYPE, ACC_TYPE_NAME, BASE_FLAG, TEMP_ACCT_FLAG, SUB_CODE, OPEN_ACC_FLAG, ACC_KIND, 
+    IS_REAL_BAL, INTERNAL_OPEN_FLAG, ENTERPRISE_OPEN_FLAG, PERSONAL_OPEN_FLAG, ERASE_FLG, 
+    STATUS, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY
+  </sql>
+  
+  <select id="selectInnerAcc" resultMap="AccSubResultMap" parameterType="java.lang.String">
+    select * from TCOR_INF_ACCTYPE a, TCOR_INF_SUBDICT b 
+    where a.SUB_CODE = #{subCode,jdbcType=VARCHAR} and a.SUB_CODE = b.SUB_CODE_1ST 
+    and a.STATUS='1' and b.STATUS='1'
+  </select>
+  
+  <select id="selectEnterprise" resultMap="AccSubResultMap">
+    select *
+    from TCOR_INF_ACCTYPE a, TCOR_INF_SUBDICT b 
+    where a.ENTERPRISE_OPEN_FLAG = '1' and a.ACC_KIND = '1' and a.SUB_CODE = b.SUB_CODE_1ST 
+    and a.STATUS='1' and b.STATUS='1'
+  </select>
+  
+  <select id="selectIndividual" resultMap="AccSubResultMap">
+    select *
+    from TCOR_INF_ACCTYPE a, TCOR_INF_SUBDICT b 
+    where a.PERSONAL_OPEN_FLAG = '1' and a.ACC_KIND = '1' and a.SUB_CODE = b.SUB_CODE_1ST 
+    and a.STATUS='1' and b.STATUS='1'
+  </select>
+  
+  <select id="selectEpBySubCode" resultMap="AccSubResultMap" parameterType="java.lang.String">
+    select *
+    from TCOR_INF_ACCTYPE a, TCOR_INF_SUBDICT b 
+    where a.ENTERPRISE_OPEN_FLAG = '1' and a.ACC_KIND = '1' and a.SUB_CODE = #{subCode,jdbcType=VARCHAR}
+    and a.STATUS='1' and b.STATUS='1' and b.SUB_CODE_1ST = a.SUB_CODE
+  </select>
+  
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TCOR_INF_ACCTYPE
+    where ACC_TYPE = #{accType,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TCOR_INF_ACCTYPE
+    where ACC_TYPE = #{accType,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.somnus.smart.base.domain.InfAcctype" >
+    insert into TCOR_INF_ACCTYPE (ACC_TYPE, ACC_TYPE_NAME, BASE_FLAG, 
+      TEMP_ACCT_FLAG, SUB_CODE, OPEN_ACC_FLAG, 
+      ACC_KIND, IS_REAL_BAL, INTERNAL_OPEN_FLAG, 
+      ENTERPRISE_OPEN_FLAG, PERSONAL_OPEN_FLAG, ERASE_FLG, 
+      STATUS, CREATE_TIME, CREATE_BY, 
+      MODIFY_TIME, MODIFY_BY)
+    values (#{accType,jdbcType=VARCHAR}, #{accTypeName,jdbcType=VARCHAR}, #{baseFlag,jdbcType=CHAR}, 
+      #{tempAcctFlag,jdbcType=CHAR}, #{subCode,jdbcType=VARCHAR}, #{openAccFlag,jdbcType=CHAR}, 
+      #{accKind,jdbcType=CHAR}, #{isRealBal,jdbcType=CHAR}, #{internalOpenFlag,jdbcType=CHAR}, 
+      #{enterpriseOpenFlag,jdbcType=CHAR}, #{personalOpenFlag,jdbcType=CHAR}, #{eraseFlg,jdbcType=CHAR}, 
+      #{status,jdbcType=CHAR}, #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.somnus.smart.base.domain.InfAcctype" >
+    insert into TCOR_INF_ACCTYPE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accType != null" >
+        ACC_TYPE,
+      </if>
+      <if test="accTypeName != null" >
+        ACC_TYPE_NAME,
+      </if>
+      <if test="baseFlag != null" >
+        BASE_FLAG,
+      </if>
+      <if test="tempAcctFlag != null" >
+        TEMP_ACCT_FLAG,
+      </if>
+      <if test="subCode != null" >
+        SUB_CODE,
+      </if>
+      <if test="openAccFlag != null" >
+        OPEN_ACC_FLAG,
+      </if>
+      <if test="accKind != null" >
+        ACC_KIND,
+      </if>
+      <if test="isRealBal != null" >
+        IS_REAL_BAL,
+      </if>
+      <if test="internalOpenFlag != null" >
+        INTERNAL_OPEN_FLAG,
+      </if>
+      <if test="enterpriseOpenFlag != null" >
+        ENTERPRISE_OPEN_FLAG,
+      </if>
+      <if test="personalOpenFlag != null" >
+        PERSONAL_OPEN_FLAG,
+      </if>
+      <if test="eraseFlg != null" >
+        ERASE_FLG,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accType != null" >
+        #{accType,jdbcType=VARCHAR},
+      </if>
+      <if test="accTypeName != null" >
+        #{accTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="baseFlag != null" >
+        #{baseFlag,jdbcType=CHAR},
+      </if>
+      <if test="tempAcctFlag != null" >
+        #{tempAcctFlag,jdbcType=CHAR},
+      </if>
+      <if test="subCode != null" >
+        #{subCode,jdbcType=VARCHAR},
+      </if>
+      <if test="openAccFlag != null" >
+        #{openAccFlag,jdbcType=CHAR},
+      </if>
+      <if test="accKind != null" >
+        #{accKind,jdbcType=CHAR},
+      </if>
+      <if test="isRealBal != null" >
+        #{isRealBal,jdbcType=CHAR},
+      </if>
+      <if test="internalOpenFlag != null" >
+        #{internalOpenFlag,jdbcType=CHAR},
+      </if>
+      <if test="enterpriseOpenFlag != null" >
+        #{enterpriseOpenFlag,jdbcType=CHAR},
+      </if>
+      <if test="personalOpenFlag != null" >
+        #{personalOpenFlag,jdbcType=CHAR},
+      </if>
+      <if test="eraseFlg != null" >
+        #{eraseFlg,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyBy != null" >
+        #{modifyBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.InfAcctype" >
+    update TCOR_INF_ACCTYPE
+    <set >
+      <if test="accTypeName != null" >
+        ACC_TYPE_NAME = #{accTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="baseFlag != null" >
+        BASE_FLAG = #{baseFlag,jdbcType=CHAR},
+      </if>
+      <if test="tempAcctFlag != null" >
+        TEMP_ACCT_FLAG = #{tempAcctFlag,jdbcType=CHAR},
+      </if>
+      <if test="subCode != null" >
+        SUB_CODE = #{subCode,jdbcType=VARCHAR},
+      </if>
+      <if test="openAccFlag != null" >
+        OPEN_ACC_FLAG = #{openAccFlag,jdbcType=CHAR},
+      </if>
+      <if test="accKind != null" >
+        ACC_KIND = #{accKind,jdbcType=CHAR},
+      </if>
+      <if test="isRealBal != null" >
+        IS_REAL_BAL = #{isRealBal,jdbcType=CHAR},
+      </if>
+      <if test="internalOpenFlag != null" >
+        INTERNAL_OPEN_FLAG = #{internalOpenFlag,jdbcType=CHAR},
+      </if>
+      <if test="enterpriseOpenFlag != null" >
+        ENTERPRISE_OPEN_FLAG = #{enterpriseOpenFlag,jdbcType=CHAR},
+      </if>
+      <if test="personalOpenFlag != null" >
+        PERSONAL_OPEN_FLAG = #{personalOpenFlag,jdbcType=CHAR},
+      </if>
+      <if test="eraseFlg != null" >
+        ERASE_FLG = #{eraseFlg,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ACC_TYPE = #{accType,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.somnus.smart.base.domain.InfAcctype" >
+    update TCOR_INF_ACCTYPE
+    set ACC_TYPE_NAME = #{accTypeName,jdbcType=VARCHAR},
+      BASE_FLAG = #{baseFlag,jdbcType=CHAR},
+      TEMP_ACCT_FLAG = #{tempAcctFlag,jdbcType=CHAR},
+      SUB_CODE = #{subCode,jdbcType=VARCHAR},
+      OPEN_ACC_FLAG = #{openAccFlag,jdbcType=CHAR},
+      ACC_KIND = #{accKind,jdbcType=CHAR},
+      IS_REAL_BAL = #{isRealBal,jdbcType=CHAR},
+      INTERNAL_OPEN_FLAG = #{internalOpenFlag,jdbcType=CHAR},
+      ENTERPRISE_OPEN_FLAG = #{enterpriseOpenFlag,jdbcType=CHAR},
+      PERSONAL_OPEN_FLAG = #{personalOpenFlag,jdbcType=CHAR},
+      ERASE_FLG = #{eraseFlg,jdbcType=CHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      MODIFY_BY = #{modifyBy,jdbcType=VARCHAR}
+    where ACC_TYPE = #{accType,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectAccByType" resultMap="AccSubResultMap" parameterType="java.lang.String">
+    select * from TCOR_INF_ACCTYPE a, TCOR_INF_SUBDICT b 
+    where a.ACC_TYPE = #{accType,jdbcType=VARCHAR} and a.SUB_CODE = b.SUB_CODE_1ST 
+    and a.STATUS='1' and b.STATUS='1'
+  </select>
+</mapper>

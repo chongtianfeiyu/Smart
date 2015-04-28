@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.somnus.smart.base.dao.TrnTranrefuseDao" >
+  <resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.TrnTranrefuse" >
+    <id column="REF_TRAN_NO" property="refTranNo" jdbcType="VARCHAR" />
+    <result column="ACC_TRAN_NO" property="accTranNo" jdbcType="VARCHAR" />
+    <result column="CARD_NO" property="cardNo" jdbcType="VARCHAR" />
+    <result column="CARD_NO_EX" property="cardNoEx" jdbcType="VARCHAR" />
+    <result column="CARDHOLDER" property="cardholder" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="SUBMIT_TIME" property="submitTime" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    REF_TRAN_NO, ACC_TRAN_NO, CARD_NO, CARD_NO_EX, CARDHOLDER, STATUS, SUBMIT_TIME, CREATE_TIME, 
+    CREATE_BY, MODIFY_TIME, MODIFY_BY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TCOR_TRN_TRANREFUSE
+    where REF_TRAN_NO = #{refTranNo,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnTranrefuse" >
+    <selectKey resultType="java.lang.String" keyProperty="refTranNo" order="BEFORE">
+	 select
+	 to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANREFUSE.NEXTVAL
+	 from
+	 dual
+	</selectKey>
+    insert into TCOR_TRN_TRANREFUSE (REF_TRAN_NO, ACC_TRAN_NO, CARD_NO, 
+      CARD_NO_EX, CARDHOLDER, STATUS, 
+      SUBMIT_TIME, CREATE_TIME, CREATE_BY, 
+      MODIFY_TIME, MODIFY_BY)
+    values (#{refTranNo,jdbcType=VARCHAR}, #{accTranNo,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, 
+      #{cardNoEx,jdbcType=VARCHAR}, #{cardholder,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, 
+      #{submitTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
+      #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.TrnTranrefuse" >
+    update TCOR_TRN_TRANREFUSE
+    <set >
+      <if test="accTranNo != null" >
+        ACC_TRAN_NO = #{accTranNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        CARD_NO = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNoEx != null" >
+        CARD_NO_EX = #{cardNoEx,jdbcType=VARCHAR},
+      </if>
+      <if test="cardholder != null" >
+        CARDHOLDER = #{cardholder,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="submitTime != null" >
+        SUBMIT_TIME = #{submitTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where REF_TRAN_NO = #{refTranNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

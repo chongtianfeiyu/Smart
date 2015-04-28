@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>smart</artifactId>
+        <groupId>com.somnus</groupId>
+        <version>8.0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>smart-biz</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>smart-biz-account</module>
+        <module>smart-biz-accquery</module>
+        <module>smart-biz-custom</module>
+        <module>smart-biz-draw</module>
+        <module>smart-biz-income</module>
+        <module>smart-biz-meracc</module>
+        <module>smart-biz-refund</module>
+  </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.somnus</groupId>
+            <artifactId>smart-base</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.somnus.rest.core</groupId>
+            <artifactId>rest-core</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

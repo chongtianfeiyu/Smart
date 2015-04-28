@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.somnus.smart.base.dao.TrnDrawDao" >
+  <resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.TrnDraw" >
+    <id column="DRAW_ID" property="drawId" jdbcType="VARCHAR" />
+    <result column="SYS_CODE" property="sysCode" jdbcType="VARCHAR" />
+    <result column="APP_BATCH_NO" property="appBatchNo" jdbcType="VARCHAR" />
+    <result column="APP_TRAN_NO" property="appTranNo" jdbcType="VARCHAR" />
+    <result column="PAY_TRAN_NO" property="payTranNo" jdbcType="VARCHAR" />
+    <result column="SUPPLIER_BILL_NO" property="supplierBillNo" jdbcType="VARCHAR" />
+    <result column="PRD_CODE" property="prdCode" jdbcType="VARCHAR" />
+    <result column="MER_CODE" property="merCode" jdbcType="VARCHAR" />
+    <result column="MER_NAME" property="merName" jdbcType="VARCHAR" />
+    <result column="MER_ACC_CODE" property="merAccCode" jdbcType="VARCHAR" />
+    <result column="MER_ACC_NAME" property="merAccName" jdbcType="VARCHAR" />
+    <result column="MER_BIZ_KIND" property="merBizKind" jdbcType="CHAR" />
+    <result column="TRAN_TYPE" property="tranType" jdbcType="VARCHAR" />
+    <result column="CCY_CODE" property="ccyCode" jdbcType="VARCHAR" />
+    <result column="TRAN_AMOUNT" property="tranAmount" jdbcType="DECIMAL" />
+    <result column="TRAN_DATE" property="tranDate" jdbcType="DATE" />
+    <result column="BIZ_TYPE" property="bizType" jdbcType="VARCHAR" />
+    <result column="PAYEE_BANK_CODE" property="payeeBankCode" jdbcType="VARCHAR" />
+    <result column="PAYEE_BRA_BANK_CODE" property="payeeBraBankCode" jdbcType="VARCHAR" />
+    <result column="PAYEE_BRA_BANK_NAME" property="payeeBraBankName" jdbcType="VARCHAR" />
+    <result column="PAYEE_BANK_ACC_CODE" property="payeeBankAccCode" jdbcType="VARCHAR" />
+    <result column="PAYEE_BANK_ACC_NAME" property="payeeBankAccName" jdbcType="VARCHAR" />
+    <result column="PAYEE_BANK_ACC_TYPE" property="payeeBankAccType" jdbcType="VARCHAR" />
+    <result column="PAYER_BANK_CODE" property="payerBankCode" jdbcType="VARCHAR" />
+    <result column="PAYER_BRA_BANK_CODE" property="payerBraBankCode" jdbcType="VARCHAR" />
+    <result column="PAYER_BRA_BANK_NAME" property="payerBraBankName" jdbcType="VARCHAR" />
+    <result column="IPS_ACCOUNT" property="ipsAccount" jdbcType="VARCHAR" />
+    <result column="CHANNEL_CODE" property="channelCode" jdbcType="VARCHAR" />
+    <result column="CHANNEL_NAME" property="channelName" jdbcType="VARCHAR" />
+    <result column="IS_ONLINE" property="isOnline" jdbcType="CHAR" />
+    <result column="FILE_ID" property="fileId" jdbcType="VARCHAR" />
+    <result column="TAB_TIME" property="tabTime" jdbcType="TIMESTAMP" />
+    <result column="PRI_NO" property="priNo" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="FINISH_FLAG" property="finishFlag" jdbcType="CHAR" />
+    <result column="FINISH_NO" property="finishNo" jdbcType="VARCHAR" />
+    <result column="FINISH_TIME" property="finishTime" jdbcType="DATE" />
+    <result column="ERROR_MESSAGE" property="errorMessage" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="RESV1" property="resv1" jdbcType="VARCHAR" />
+    <result column="RESV2" property="resv2" jdbcType="VARCHAR" />
+    <result column="RESV3" property="resv3" jdbcType="VARCHAR" />
+    <result column="RESV4" property="resv4" jdbcType="VARCHAR" />
+    <result column="RESV5" property="resv5" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+    <result column="BANK_COST" property="bankCost" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DRAW_ID, SYS_CODE, APP_BATCH_NO, APP_TRAN_NO, PAY_TRAN_NO, SUPPLIER_BILL_NO, PRD_CODE, 
+    MER_CODE, MER_NAME, MER_ACC_CODE, MER_ACC_NAME, MER_BIZ_KIND, TRAN_TYPE, CCY_CODE, 
+    TRAN_AMOUNT, TRAN_DATE, BIZ_TYPE, PAYEE_BANK_CODE, PAYEE_BRA_BANK_CODE, PAYEE_BRA_BANK_NAME, 
+    PAYEE_BANK_ACC_CODE, PAYEE_BANK_ACC_NAME, PAYEE_BANK_ACC_TYPE, PAYER_BANK_CODE, PAYER_BRA_BANK_CODE, 
+    PAYER_BRA_BANK_NAME, IPS_ACCOUNT, CHANNEL_CODE, CHANNEL_NAME, IS_ONLINE, FILE_ID, 
+    TAB_TIME, PRI_NO, STATUS, FINISH_FLAG, FINISH_NO, FINISH_TIME, ERROR_MESSAGE, REMARK, 
+    RESV1, RESV2, RESV3, RESV4, RESV5, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY,BANK_COST
+  </sql>
+  
+   <select id="selectByAppFlag" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TCOR_TRN_DRAW
+    where APP_TRAN_NO = #{appTranNo,jdbcType=VARCHAR}
+    and Finish_Flag = '1'
+  </select>
+  
+  <select id="selectByFlag" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TCOR_TRN_DRAW
+    where DRAW_ID = #{drawId,jdbcType=VARCHAR}
+    and Finish_Flag = '1'
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TCOR_TRN_DRAW
+    where DRAW_ID = #{drawId,jdbcType=VARCHAR}
+  </select>
+ 	<select id="getDrawId" resultType="java.lang.String">
+		select
+			'DR'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_DRAW.NEXTVAL
+			from
+			dual
+	</select>
+<insert id="insertInSeq" parameterType="com.somnus.smart.base.domain.TrnDraw" >
+	<selectKey resultType="java.lang.String" keyProperty="drawId"
+			order="BEFORE">
+			select
+			'DR'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_DRAW.NEXTVAL
+			from
+			dual
+		</selectKey>
+    insert into TCOR_TRN_DRAW (DRAW_ID, SYS_CODE, APP_BATCH_NO, 
+      APP_TRAN_NO, PAY_TRAN_NO, SUPPLIER_BILL_NO, 
+      PRD_CODE, MER_CODE, MER_NAME, 
+      MER_ACC_CODE, MER_ACC_NAME, MER_BIZ_KIND, 
+      TRAN_TYPE, CCY_CODE, TRAN_AMOUNT, 
+      TRAN_DATE, BIZ_TYPE, PAYEE_BANK_CODE, 
+      PAYEE_BRA_BANK_CODE, PAYEE_BRA_BANK_NAME, PAYEE_BANK_ACC_CODE, 
+      PAYEE_BANK_ACC_NAME, PAYEE_BANK_ACC_TYPE, PAYER_BANK_CODE, 
+      PAYER_BRA_BANK_CODE, PAYER_BRA_BANK_NAME, IPS_ACCOUNT, 
+      CHANNEL_CODE, CHANNEL_NAME, IS_ONLINE, 
+      FILE_ID, TAB_TIME, PRI_NO, 
+      STATUS, FINISH_FLAG, FINISH_NO, 
+      FINISH_TIME, ERROR_MESSAGE, REMARK, 
+      RESV1, RESV2, RESV3, 
+      RESV4, RESV5, CREATE_TIME, 
+      CREATE_BY, MODIFY_TIME, MODIFY_BY
+      )
+    values (#{drawId,jdbcType=VARCHAR}, #{sysCode,jdbcType=VARCHAR}, #{appBatchNo,jdbcType=VARCHAR}, 
+      #{appTranNo,jdbcType=VARCHAR}, #{payTranNo,jdbcType=VARCHAR}, #{supplierBillNo,jdbcType=VARCHAR}, 
+      #{prdCode,jdbcType=VARCHAR}, #{merCode,jdbcType=VARCHAR}, #{merName,jdbcType=VARCHAR}, 
+      #{merAccCode,jdbcType=VARCHAR}, #{merAccName,jdbcType=VARCHAR}, #{merBizKind,jdbcType=CHAR}, 
+      #{tranType,jdbcType=VARCHAR}, #{ccyCode,jdbcType=VARCHAR}, #{tranAmount,jdbcType=DECIMAL}, 
+      #{tranDate,jdbcType=DATE}, #{bizType,jdbcType=VARCHAR}, #{payeeBankCode,jdbcType=VARCHAR}, 
+      #{payeeBraBankCode,jdbcType=VARCHAR}, #{payeeBraBankName,jdbcType=VARCHAR}, #{payeeBankAccCode,jdbcType=VARCHAR}, 
+      #{payeeBankAccName,jdbcType=VARCHAR}, #{payeeBankAccType,jdbcType=VARCHAR}, #{payerBankCode,jdbcType=VARCHAR}, 
+      #{payerBraBankCode,jdbcType=VARCHAR}, #{payerBraBankName,jdbcType=VARCHAR}, #{ipsAccount,jdbcType=VARCHAR}, 
+      #{channelCode,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, #{isOnline,jdbcType=CHAR}, 
+      #{fileId,jdbcType=VARCHAR}, #{tabTime,jdbcType=TIMESTAMP}, #{priNo,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{finishFlag,jdbcType=CHAR}, #{finishNo,jdbcType=VARCHAR}, 
+      #{finishTime,jdbcType=DATE}, #{errorMessage,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{resv1,jdbcType=VARCHAR}, #{resv2,jdbcType=VARCHAR}, #{resv3,jdbcType=VARCHAR}, 
+      #{resv4,jdbcType=VARCHAR}, #{resv5,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}
+      )
+  </insert>	
+	
+  <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnDraw" >
+    insert into TCOR_TRN_DRAW (DRAW_ID, SYS_CODE, APP_BATCH_NO, 
+      APP_TRAN_NO, PAY_TRAN_NO, SUPPLIER_BILL_NO, 
+      PRD_CODE, MER_CODE, MER_NAME, 
+      MER_ACC_CODE, MER_ACC_NAME, MER_BIZ_KIND, 
+      TRAN_TYPE, CCY_CODE, TRAN_AMOUNT, 
+      TRAN_DATE, BIZ_TYPE, PAYEE_BANK_CODE, 
+      PAYEE_BRA_BANK_CODE, PAYEE_BRA_BANK_NAME, PAYEE_BANK_ACC_CODE, 
+      PAYEE_BANK_ACC_NAME, PAYEE_BANK_ACC_TYPE, PAYER_BANK_CODE, 
+      PAYER_BRA_BANK_CODE, PAYER_BRA_BANK_NAME, IPS_ACCOUNT, 
+      CHANNEL_CODE, CHANNEL_NAME, IS_ONLINE, 
+      FILE_ID, TAB_TIME, PRI_NO, 
+      STATUS, FINISH_FLAG, FINISH_NO, 
+      FINISH_TIME, ERROR_MESSAGE, REMARK, 
+      RESV1, RESV2, RESV3, 
+      RESV4, RESV5, CREATE_TIME, 
+      CREATE_BY, MODIFY_TIME, MODIFY_BY
+      )
+    values (#{drawId,jdbcType=VARCHAR}, #{sysCode,jdbcType=VARCHAR}, #{appBatchNo,jdbcType=VARCHAR}, 
+      #{appTranNo,jdbcType=VARCHAR}, #{payTranNo,jdbcType=VARCHAR}, #{supplierBillNo,jdbcType=VARCHAR}, 
+      #{prdCode,jdbcType=VARCHAR}, #{merCode,jdbcType=VARCHAR}, #{merName,jdbcType=VARCHAR}, 
+      #{merAccCode,jdbcType=VARCHAR}, #{merAccName,jdbcType=VARCHAR}, #{merBizKind,jdbcType=CHAR}, 
+      #{tranType,jdbcType=VARCHAR}, #{ccyCode,jdbcType=VARCHAR}, #{tranAmount,jdbcType=DECIMAL}, 
+      #{tranDate,jdbcType=DATE}, #{bizType,jdbcType=VARCHAR}, #{payeeBankCode,jdbcType=VARCHAR}, 
+      #{payeeBraBankCode,jdbcType=VARCHAR}, #{payeeBraBankName,jdbcType=VARCHAR}, #{payeeBankAccCode,jdbcType=VARCHAR}, 
+      #{payeeBankAccName,jdbcType=VARCHAR}, #{payeeBankAccType,jdbcType=VARCHAR}, #{payerBankCode,jdbcType=VARCHAR}, 
+      #{payerBraBankCode,jdbcType=VARCHAR}, #{payerBraBankName,jdbcType=VARCHAR}, #{ipsAccount,jdbcType=VARCHAR}, 
+      #{channelCode,jdbcType=VARCHAR}, #{channelName,jdbcType=VARCHAR}, #{isOnline,jdbcType=CHAR}, 
+      #{fileId,jdbcType=VARCHAR}, #{tabTime,jdbcType=TIMESTAMP}, #{priNo,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{finishFlag,jdbcType=CHAR}, #{finishNo,jdbcType=VARCHAR}, 
+      #{finishTime,jdbcType=DATE}, #{errorMessage,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{resv1,jdbcType=VARCHAR}, #{resv2,jdbcType=VARCHAR}, #{resv3,jdbcType=VARCHAR}, 
+      #{resv4,jdbcType=VARCHAR}, #{resv5,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}
+      )
+  </insert>
+   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.TrnDraw" >
+    update TCOR_TRN_DRAW
+    <set >
+      <if test="sysCode != null" >
+        SYS_CODE = #{sysCode,jdbcType=VARCHAR},
+      </if>
+      <if test="appBatchNo != null" >
+        APP_BATCH_NO = #{appBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="appTranNo != null" >
+        APP_TRAN_NO = #{appTranNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payTranNo != null" >
+        PAY_TRAN_NO = #{payTranNo,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierBillNo != null" >
+        SUPPLIER_BILL_NO = #{supplierBillNo,jdbcType=VARCHAR},
+      </if>
+      <if test="prdCode != null" >
+        PRD_CODE = #{prdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="merCode != null" >
+        MER_CODE = #{merCode,jdbcType=VARCHAR},
+      </if>
+      <if test="merName != null" >
+        MER_NAME = #{merName,jdbcType=VARCHAR},
+      </if>
+      <if test="merAccCode != null" >
+        MER_ACC_CODE = #{merAccCode,jdbcType=VARCHAR},
+      </if>
+      <if test="merAccName != null" >
+        MER_ACC_NAME = #{merAccName,jdbcType=VARCHAR},
+      </if>
+      <if test="merBizKind != null" >
+        MER_BIZ_KIND = #{merBizKind,jdbcType=CHAR},
+      </if>
+      <if test="tranType != null" >
+        TRAN_TYPE = #{tranType,jdbcType=VARCHAR},
+      </if>
+      <if test="ccyCode != null" >
+        CCY_CODE = #{ccyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tranAmount != null" >
+        TRAN_AMOUNT = #{tranAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="tranDate != null" >
+        TRAN_DATE = #{tranDate,jdbcType=DATE},
+      </if>
+      <if test="bizType != null" >
+        BIZ_TYPE = #{bizType,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeBankCode != null" >
+        PAYEE_BANK_CODE = #{payeeBankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeBraBankCode != null" >
+        PAYEE_BRA_BANK_CODE = #{payeeBraBankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeBraBankName != null" >
+        PAYEE_BRA_BANK_NAME = #{payeeBraBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeBankAccCode != null" >
+        PAYEE_BANK_ACC_CODE = #{payeeBankAccCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeBankAccName != null" >
+        PAYEE_BANK_ACC_NAME = #{payeeBankAccName,jdbcType=VARCHAR},
+      </if>
+      <if test="payeeBankAccType != null" >
+        PAYEE_BANK_ACC_TYPE = #{payeeBankAccType,jdbcType=VARCHAR},
+      </if>
+      <if test="payerBankCode != null" >
+        PAYER_BANK_CODE = #{payerBankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payerBraBankCode != null" >
+        PAYER_BRA_BANK_CODE = #{payerBraBankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payerBraBankName != null" >
+        PAYER_BRA_BANK_NAME = #{payerBraBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="ipsAccount != null" >
+        IPS_ACCOUNT = #{ipsAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="channelCode != null" >
+        CHANNEL_CODE = #{channelCode,jdbcType=VARCHAR},
+      </if>
+      <if test="channelName != null" >
+        CHANNEL_NAME = #{channelName,jdbcType=VARCHAR},
+      </if>
+      <if test="isOnline != null" >
+        IS_ONLINE = #{isOnline,jdbcType=CHAR},
+      </if>
+      <if test="fileId != null" >
+        FILE_ID = #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="tabTime != null" >
+        TAB_TIME = #{tabTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="priNo != null" >
+        PRI_NO = #{priNo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="finishFlag != null" >
+        FINISH_FLAG = #{finishFlag,jdbcType=CHAR},
+      </if>
+      <if test="finishNo != null" >
+        FINISH_NO = #{finishNo,jdbcType=VARCHAR},
+      </if>
+      <if test="finishTime != null" >
+        FINISH_TIME = #{finishTime,jdbcType=DATE},
+      </if>
+      <if test="errorMessage != null" >
+        ERROR_MESSAGE = #{errorMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="resv1 != null" >
+        RESV1 = #{resv1,jdbcType=VARCHAR},
+      </if>
+      <if test="resv2 != null" >
+        RESV2 = #{resv2,jdbcType=VARCHAR},
+      </if>
+      <if test="resv3 != null" >
+        RESV3 = #{resv3,jdbcType=VARCHAR},
+      </if>
+      <if test="resv4 != null" >
+        RESV4 = #{resv4,jdbcType=VARCHAR},
+      </if>
+      <if test="resv5 != null" >
+        RESV5 = #{resv5,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DRAW_ID = #{drawId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectWriteOffConfirm" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    	from TCOR_TRN_DRAW where DRAW_ID = #{drawId,jdbcType=VARCHAR} and STATUS in('03','08') and FINISH_FLAG='0'
+  </select>
+  <select id="selectWriteOffCancel" resultMap="BaseResultMap">
+	 select 
+    <include refid="Base_Column_List" />
+    	from TCOR_TRN_DRAW where DRAW_ID = #{drawId,jdbcType=VARCHAR} and STATUS='04' and FINISH_FLAG='0'
+  </select>
+  
+</mapper>

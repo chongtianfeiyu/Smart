@@ -1,0 +1,68 @@
+package com.somnus.smart.domain.account;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+
+import com.somnus.smart.base.dao.TrnTranVoucherDao;
+import com.somnus.smart.base.domain.TrnTranVoucher;
+import com.somnus.smart.domain.DomainHelper;
+import com.somnus.smart.domain.DomainModel;
+
+/**
+ * 凭证附属
+ * 
+ * @author Administrator
+ * @version $Id: Ledgerdetail.java, v 0.1 2014-10-29 下午04:44:14 Administrator Exp $
+ */
+public class TranVoucher extends TrnTranVoucher implements DomainModel<TranVoucher, TrnTranVoucher> {
+
+    private static TrnTranVoucherDao  dao;
+
+    private static Logger             LOGGER = LoggerFactory.getLogger(TranVoucher.class);
+
+    public TranVoucher() {
+    }
+
+    public static TranVoucher getInstance() {
+        return (TranVoucher) DomainHelper.getDomainInstance(TranVoucher.class);
+    }
+
+    public static void init(ApplicationContext ctx) {
+        dao = ctx.getBean(TrnTranVoucherDao.class);
+    }
+
+    /**
+     * 根据TrnAccDetail返回AccDetail
+     * 
+     * @param model
+     * @return
+     */
+    private static TranVoucher getTranVoucher(TrnTranVoucher model) {
+        TranVoucher tranVoucher = getInstance();
+        if (model != null) {
+            DomainHelper.setDomainData(tranVoucher, model);
+        }
+        return tranVoucher;
+    }
+
+    /**
+     * 落地
+     * 
+     * @return
+     */
+    public boolean save() {
+        dao.insert(this);
+        return true;
+    }
+
+    public boolean update() {
+        int count = dao.updateByPrimaryKeySelective(this);
+        if (count > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+}

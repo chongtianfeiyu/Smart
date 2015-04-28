@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.somnus.smart.base.dao.TrnTransferDao" >
+  <resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.TrnTransfer" >
+    <id column="TRANSFER_ID" property="transferId" jdbcType="VARCHAR" />
+    <result column="ACC_DATE" property="accDate" jdbcType="DATE" />
+    <result column="MER_CODE" property="merCode" jdbcType="VARCHAR" />
+    <result column="MER_NAME" property="merName" jdbcType="VARCHAR" />
+    <result column="MER_ACC_CODE" property="merAccCode" jdbcType="VARCHAR" />
+    <result column="CCY_CODE" property="ccyCode" jdbcType="VARCHAR" />
+    <result column="TRAN_AMOUNT" property="tranAmount" jdbcType="DECIMAL" />
+    <result column="CUR_BAL" property="curBal" jdbcType="DECIMAL" />
+    <result column="RESERVE_BAL" property="reserveBal" jdbcType="DECIMAL" />
+    <result column="FREEZE_BAL" property="freezeBal" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="VARCHAR" />
+    <result column="CREATE_BY" property="createBy" jdbcType="VARCHAR" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
+    <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
+    <result column="BATCH_NO" property="batchNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    TRANSFER_ID, ACC_DATE, MER_CODE, MER_NAME, MER_ACC_CODE, CCY_CODE, TRAN_AMOUNT, CUR_BAL, 
+    RESERVE_BAL, FREEZE_BAL, STATUS, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY,BATCH_NO
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TCOR_TRN_TRANSFER
+    where TRANSFER_ID = #{transferId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="select" resultMap="BaseResultMap" parameterType="com.somnus.smart.base.domain.TrnTransfer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TCOR_TRN_TRANSFER
+    <where>
+		<trim prefix="(" suffix=")" prefixOverrides="and | AND">
+			<if test="transferId != null and transferId !='' ">
+				TRANSFER_ID = #{transferId,jdbcType=VARCHAR}
+			</if>
+		
+			<if test="accDate != null">
+				and ACC_DATE = #{accDate,jdbcType=DATE}
+			</if>
+			<if test="merAccCode != null and merAccCode !='' ">
+				and MER_ACC_CODE = #{merAccCode,jdbcType=VARCHAR}
+			</if>
+			<if test="ccyCode != null and ccyCode !='' ">
+				and CCY_CODE = #{ccyCode,jdbcType=VARCHAR}
+			</if>
+			<if test="merCode != null and merCode !='' ">
+				and MER_CODE = #{merCode,jdbcType=VARCHAR}
+			</if>
+			<if test="status != null and status !='' ">
+				and STATUS = #{status,jdbcType=VARCHAR}
+			</if>
+			<if test="batchNo != null and batchNo !='' " >
+	        	and BATCH_NO = #{batchNo,jdbcType=VARCHAR}
+	        </if>
+		</trim>
+	</where>
+  </select>
+  
+  <select id="selectBatchNo" resultType="java.lang.String" parameterType="com.somnus.smart.base.domain.TrnTransfer" >
+    select 
+    max(BATCH_NO)
+    from TCOR_TRN_TRANSFER
+    <where>
+		<trim prefix="(" suffix=")" prefixOverrides="and | AND">
+			<if test="accDate != null">
+				and ACC_DATE = #{accDate,jdbcType=DATE}
+			</if>			
+			<if test="status != null and status !='' ">
+				and STATUS = #{status,jdbcType=VARCHAR}
+			</if>			
+		</trim>
+	</where>
+  </select>
+  
+  <select id="getBatchNo" resultType="java.lang.String">
+	select
+	 to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANSFER.NEXTVAL
+	from
+	dual
+</select>
+  
+  <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnTransfer" >
+  		<selectKey resultType="java.lang.String" keyProperty="transferId"
+			order="BEFORE">
+			select
+			'TR'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANSFER.NEXTVAL
+			from
+			dual
+		</selectKey>
+   insert into TCOR_TRN_TRANSFER (TRANSFER_ID, ACC_DATE, MER_CODE, 
+      MER_NAME, MER_ACC_CODE, CCY_CODE, 
+      TRAN_AMOUNT, CUR_BAL, RESERVE_BAL, 
+      FREEZE_BAL, STATUS, CREATE_TIME, 
+      CREATE_BY, MODIFY_TIME, MODIFY_BY, 
+      BATCH_NO)
+    values (#{transferId,jdbcType=VARCHAR}, #{accDate,jdbcType=DATE}, #{merCode,jdbcType=VARCHAR}, 
+      #{merName,jdbcType=VARCHAR}, #{merAccCode,jdbcType=VARCHAR}, #{ccyCode,jdbcType=VARCHAR}, 
+      #{tranAmount,jdbcType=DECIMAL}, #{curBal,jdbcType=DECIMAL}, #{reserveBal,jdbcType=DECIMAL}, 
+      #{freezeBal,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+      #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}, 
+      #{batchNo,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.TrnTransfer" >
+    update TCOR_TRN_TRANSFER
+    <set >
+      <if test="accDate != null" >
+        ACC_DATE = #{accDate,jdbcType=DATE},
+      </if>
+      <if test="merCode != null" >
+        MER_CODE = #{merCode,jdbcType=VARCHAR},
+      </if>
+      <if test="merName != null" >
+        MER_NAME = #{merName,jdbcType=VARCHAR},
+      </if>
+      <if test="merAccCode != null" >
+        MER_ACC_CODE = #{merAccCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ccyCode != null" >
+        CCY_CODE = #{ccyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="tranAmount != null" >
+        TRAN_AMOUNT = #{tranAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="curBal != null" >
+        CUR_BAL = #{curBal,jdbcType=DECIMAL},
+      </if>
+      <if test="reserveBal != null" >
+        RESERVE_BAL = #{reserveBal,jdbcType=DECIMAL},
+      </if>
+      <if test="freezeBal != null" >
+        FREEZE_BAL = #{freezeBal,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null" >
+        CREATE_BY = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyBy != null" >
+        MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null" >
+        BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TRANSFER_ID = #{transferId,jdbcType=VARCHAR} and STATUS in ('0','2')
+  </update>
+</mapper>
