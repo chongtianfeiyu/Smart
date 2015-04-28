@@ -15,7 +15,7 @@
         <module>smart-domain</module>
         <module>smart-service</module>
         <module>smart-config</module>
-    <module>smart-service-api</module>
+        <module>smart-service-api</module>
   </modules>
 
     <name>smart</name>
@@ -635,7 +635,7 @@
                     <artifactId>maven-war-plugin</artifactId>
                     <version>${war.plugin.version}</version>
                     <configuration>
-                        <!-- 打包时的常规排除�?-->
+                        <!-- 打包时的常规排除�?-->
                         <packagingExcludes>
                             WEB-INF/classes/logback-test.xml
                         </packagingExcludes>
@@ -697,7 +697,7 @@
         </snapshotRepository>
     </distributionManagement>
 
-    <!-- SCM # �?��SVN的命令行工具支持 -->
+    <!-- SCM # SVN的命令行工具支持 -->
     <scm>
         <connection>${scm.trunk}</connection>
         <developerConnection>${scm.trunk}</developerConnection>
