@@ -18,7 +18,7 @@ import com.somnus.rest.core.client.RESTfulJsonClientFactory;
  * @date 2015年2月27日 下午4:20:10  
  */
 public class IncomeResourceTestCase extends AbstractTestSupport {
-	private static final String BASE_URL = "http://localhost:8080/bacs/resource/";
+	private static final String BASE_URL = "http://localhost:8080/smart/resource/";
 	IncomeResource incomeResource = RESTfulJsonClientFactory.createClient(IncomeResource.class, BASE_URL);
 	@Test
     public void deposit() throws Exception {
@@ -54,7 +54,7 @@ public class IncomeResourceTestCase extends AbstractTestSupport {
     	request.setThdAccCode("1009760040");
     	
     	System.out.println("个人充值请求>>>:"+ JsonUtils.toString(request));
-    	IncomeResource incomeResource= ApplicationContextHolder.getBean(IncomeResource.class);
+    	/*IncomeResource incomeResource= ApplicationContextHolder.getBean(IncomeResource.class);*/
     	AccountResponse accountResponse = incomeResource.deposit(request);
         System.out.println("个人充值响应<<<:"+JsonUtils.toString(accountResponse));
     } 

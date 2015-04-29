@@ -92,18 +92,5 @@ INPUT {
 		</table>
 		<input type="hidden" id="action" name="action" value="1">
 	</form>
-	<hr size="1" noshade width="100%">
-	<table align="center" border="0" cellpadding="0" cellspacing="0"
-		width="620">
-		<tr valign="center">
-			<td height="40">
-				<p align="center">
-					Copyright 2012-2015<a href="http://www.ipayment.com.cn">iPayment.com.cn</a>All
-					Rights Reserved.<br> &copy; 版权所有:<a
-						href="http://www.ipayment.com.cn" target="_blank">上海环迅电子商务有限公司</a>
-				</p>
-			</td>
-		</tr>
-	</table>
 </body>
 </html>

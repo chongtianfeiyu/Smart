@@ -17,7 +17,7 @@ import com.somnus.rest.core.client.RESTfulJsonClientFactory;
  * @date 2015年2月9日 上午10:05:15  
  */
 public class MeracctResourceTestcase extends AbstractTestSupport {
-	private static final String BASE_URL = "http://localhost:8080/bacs/resource/";
+	private static final String BASE_URL = "http://localhost:8080/smart/resource/";
 	MeracctResource meracctResource = RESTfulJsonClientFactory.createClient(MeracctResource.class, BASE_URL);
 	@Test
     public void insertPerAcct() throws Exception {
@@ -47,7 +47,7 @@ public class MeracctResourceTestcase extends AbstractTestSupport {
     	/*request.setStdAcctCode("acc10001"); 账户类型为专用账户时必需*/
     	
     	System.out.println("个人开户请求>>>:"+ JsonUtils.toString(request));
-    	MeracctResource meracctResource= ApplicationContextHolder.getBean(MeracctResource.class);
+    	/*MeracctResource meracctResource= ApplicationContextHolder.getBean(MeracctResource.class);*/
     	Message message=meracctResource.createPersonAccount(request);
         System.out.println("个人开户响应<<<:"+JsonUtils.toString(message));
     }
@@ -75,7 +75,7 @@ public class MeracctResourceTestcase extends AbstractTestSupport {
     	request.setLevel("1");
     	
     	System.out.println("个人账户变更请求>>>:"+ JsonUtils.toString(request));
-    	MeracctResource meracctResource= ApplicationContextHolder.getBean(MeracctResource.class);
+    	/*MeracctResource meracctResource= ApplicationContextHolder.getBean(MeracctResource.class);*/
     	Message message=meracctResource.updatePersonAccount(request);
         System.out.println("个人账户变更响应<<<:"+JsonUtils.toString(message));
     }
