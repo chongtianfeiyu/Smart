@@ -1,14 +1,14 @@
 <configuration>
-	<property name="log.base" value="/var/logs/bacs" />
+	<property name="log.base" value="logs/smart" />
 	<property name="pattern"
 		value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{sessionId}] %-5level [%thread] %logger{80} :%msg%n" />
 
-    <!--bacs根 -->
+    <!--smart根 -->
     <appender name="root"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-root.log</file>
+        <file>${log.base}/smart-root.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-root-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-root-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -21,9 +21,9 @@
     
     <appender name="domain"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-domain.log</file>
+        <file>${log.base}/smart-domain.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-domain-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-domain-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -37,9 +37,9 @@
     <!-- 异常 -->
     <appender name="exception"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-exception.log</file>
+        <file>${log.base}/smart-exception.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-exception-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-exception-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -51,10 +51,10 @@
     </appender>
 
     <!--记账 -->
-    <appender name="bacs-bas" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-bas.log</file>
+    <appender name="smart-base" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/smart-base.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-bas-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-base-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -66,10 +66,10 @@
     </appender>
     
         <!--通过服务 -->
-    <appender name="bacs-service" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-service.log</file>
+    <appender name="smart-service" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/smart-service.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-service-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-service-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -80,10 +80,10 @@
         </encoder>
     </appender>
     
-    <appender name="bacs-biz-account" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-biz-account.log</file>
+    <appender name="smart-biz-account" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/smart-biz-account.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-biz-account-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-biz-account-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -94,10 +94,10 @@
         </encoder>
     </appender>
     
-    <appender name="bacs-biz-refund" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-biz-refund.log</file>
+    <appender name="smart-biz-refund" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/smart-biz-refund.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-biz-refund-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-biz-refund-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -108,10 +108,10 @@
         </encoder>
     </appender>
     
-    <appender name="bacs-biz-income" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-biz-income.log</file>
+    <appender name="smart-biz-income" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/smart-biz-income.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-biz-income-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-biz-income-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -122,10 +122,10 @@
         </encoder>
     </appender>
     
-    <appender name="bacs-biz-draw" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-biz-draw.log</file>
+    <appender name="smart-biz-draw" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/smart-biz-draw.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-biz-draw-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-biz-draw-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -136,10 +136,10 @@
         </encoder>
     </appender>
     
-    <appender name="bacs-biz-meracc" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-biz-meracc.log</file>
+    <appender name="smart-biz-meracc" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/smart-biz-meracc.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-biz-meracc-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-biz-meracc-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -150,10 +150,10 @@
         </encoder>
     </appender>
     
-    <appender name="bacs-biz-custom" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-biz-custom.log</file>
+    <appender name="smart-biz-custom" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/smart-biz-custom.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-biz-custom-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-biz-custom-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -164,10 +164,10 @@
         </encoder>
     </appender>
     
-    <appender name="bacs-biz-accquery" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-biz-accquery.log</file>
+    <appender name="smart-biz-accquery" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/smart-biz-accquery.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-biz-accquery-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-biz-accquery-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -178,10 +178,10 @@
         </encoder>
     </appender>
     
-     <appender name="bacs-master" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.base}/bacs-master.log</file>
+     <appender name="smart-master" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.base}/smart-master.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/bacs-master-%i.%d{yyyy-MM-dd}.log.gz
+            <fileNamePattern>${log.base}/%d{yyyy-MM-dd}/smart-master-%i.%d{yyyy-MM-dd}.log.gz
             </fileNamePattern>
             <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <MaxFileSize>30MB</MaxFileSize>
@@ -192,59 +192,59 @@
         </encoder>
     </appender>
 
-	<logger name="com.somnus.smart.bas" additivity="false">
+	<logger name="com.somnus.smart.base" additivity="false">
 		<level value="info" />
-		<appender-ref ref="bacs-bas" />
+		<appender-ref ref="smart-base" />
 	</logger>
 	
 	<logger name="com.somnus.smart.domain" additivity="false">
 		<level value="info" />
-		<appender-ref ref="bacs-domain" />
+		<appender-ref ref="smart-domain" />
 	</logger>
 	
 	<logger name="com.somnus.smart.service" additivity="false">
 		<level value="info" />
-		<appender-ref ref="bacs-service" />
+		<appender-ref ref="smart-service" />
 	</logger>
     
      <logger name="com.somnus.smart.biz.account" additivity="false">
         <level value="info" />
-        <appender-ref ref="bacs-biz-account" />
+        <appender-ref ref="smart-biz-account" />
     </logger>
     
     <logger name="com.somnus.smart.biz.income" additivity="false">
         <level value="info" />
-        <appender-ref ref="bacs-biz-income" />
+        <appender-ref ref="smart-biz-income" />
     </logger>
     
     <logger name="com.somnus.smart.biz.draw" additivity="false">
         <level value="info" />
-        <appender-ref ref="bacs-biz-draw" />
+        <appender-ref ref="smart-biz-draw" />
     </logger>
     
     <logger name="com.somnus.smart.biz.refund" additivity="false">
         <level value="info" />
-        <appender-ref ref="bacs-biz-refund" />
+        <appender-ref ref="smart-biz-refund" />
     </logger>
     
     <logger name="com.somnus.smart.biz.meracc" additivity="false">
         <level value="info" />
-        <appender-ref ref="bacs-biz-meracc" />
+        <appender-ref ref="smart-biz-meracc" />
     </logger>
     
     <logger name="com.somnus.smart.biz.custom" additivity="false">
         <level value="info" />
-        <appender-ref ref="bacs-biz-custom" />
+        <appender-ref ref="smart-biz-custom" />
     </logger>
     
     <logger name="com.somnus.smart.biz.accquery" additivity="false">
         <level value="info" />
-        <appender-ref ref="bacs-biz-accquery" />
+        <appender-ref ref="smart-biz-accquery" />
     </logger>
 
      <logger name="com.somnus.smart.master" additivity="false">
         <level value="info" />
-        <appender-ref ref="bacs-master" />
+        <appender-ref ref="smart-master" />
     </logger>
 
 	<!-- 日志过滤 -->

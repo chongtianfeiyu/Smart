@@ -13,12 +13,12 @@
     <dependencies>
         <dependency>
             <groupId>com.somnus</groupId>
-            <artifactId>smart-service</artifactId>
+            <artifactId>smart-domain</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.somnus</groupId>
-            <artifactId>smart-domain</artifactId>
+            <artifactId>smart-service</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -28,4 +28,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    
 </project>

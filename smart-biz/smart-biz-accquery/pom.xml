@@ -11,17 +11,17 @@
     <artifactId>smart-biz-accquery</artifactId>
   
     <dependencies>
-	    <dependency>
-	        <groupId>com.somnus</groupId>
-	        <artifactId>smart-service</artifactId>
-	        <version>${project.version}</version>
-	    </dependency>
-	    <dependency>
-	        <groupId>com.somnus</groupId>
-	        <artifactId>smart-config</artifactId>
-	        <version>${project.version}</version>
-	        <scope>test</scope>
-	    </dependency>
+        <dependency>
+            <groupId>com.somnus</groupId>
+            <artifactId>smart-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.somnus</groupId>
+            <artifactId>smart-config</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
   
 </project>
