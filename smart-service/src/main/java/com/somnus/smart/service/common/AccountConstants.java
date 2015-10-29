@@ -3,7 +3,7 @@ package com.somnus.smart.service.common;
 
 public class AccountConstants extends BasConstants {
 	/**
-	 * IPS下发处理状态 0: 未出款 1：已出款
+	 * isp下发处理状态 0: 未出款 1：已出款
 	 */
 	public static final String ISSUED_STATUS_NOT = "0";
 	public static final String ISSUED_STATUS_OUT = "1";

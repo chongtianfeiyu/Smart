@@ -36,7 +36,7 @@ public class BuckleDrawRequest extends Message {
 	@NotEmpty
 	private String payerCode;
 	@NotEmpty
-	/** 付款方类型0： 个人  1： 商户  2 : IPS */
+	/** 付款方类型0： 个人  1： 商户  2 : ISP */
 	private String payerType;
 	/** 付款方账号 */
 	@NotEmpty

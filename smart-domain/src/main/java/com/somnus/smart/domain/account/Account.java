@@ -161,7 +161,7 @@ public class Account {
 	}
 
 	/**
-	 * IPS账户收单记账
+	 * isp账户收单记账
 	 * 
 	 * @param transaction
 	 * @param entryKey

@@ -24,7 +24,7 @@ public class BuckleDrawRequest extends Message {
     private String tranCode;
     /** 基础产品代码 */
 	private String prdCode;
-	/** IPS订单号 */
+	/** isp订单号 */
 	private String ipsBillNo;
 	/** 应用交易流水号 */
 	@NotEmpty

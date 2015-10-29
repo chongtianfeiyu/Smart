@@ -73,7 +73,7 @@ public interface IncomeService {
     Transaction createCancelReverseTran(CancelReverseRequest cancelReverseRequest) throws Exception;
     
     /**
-     * 创建IPS账户支付记账交易流水
+     * 创建isp账户支付记账交易流水
      * 
      * @param ipsPayRequest
      * @return
@@ -115,7 +115,7 @@ public interface IncomeService {
     void incomeAsynAccount(Transaction transaction, String entryKey, Date accDate, boolean checkRed) throws Exception;
     
     /**
-     * IPS账户收单记账
+     * isp账户收单记账
      * 
      * @param transaction
      * @param entryKey

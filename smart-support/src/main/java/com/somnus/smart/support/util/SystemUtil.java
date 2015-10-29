@@ -11,7 +11,6 @@ import com.somnus.smart.support.common.Constants;
 
 /**   
  * @Title: SystemUtil
- * @Package: com.ips.core.bacs.common.util
  * @Description: TODO
  * @author: cjliu
  * @date: 2012-9-13下午7:30:00

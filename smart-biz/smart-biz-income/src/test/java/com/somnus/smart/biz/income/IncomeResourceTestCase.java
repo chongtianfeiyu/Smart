@@ -83,7 +83,7 @@ public class IncomeResourceTestCase extends AbstractTestSupport {
         request.setInitiatorFlg("1");//发起方标识 0:收款方 1：付款方 2：其他
         
         request.setPayeeCode("100976");//个人没有，商户才有  其实就是商户号 merCode MER_CODE
-        request.setPayeeType("1");//0： 个人  1： 商户  2 : IPS
+        request.setPayeeType("1");//0： 个人  1： 商户  2 : isp
         request.setPayeeAccCode("1009760040");
         
         request.setTranAmt(new BigDecimal(100));

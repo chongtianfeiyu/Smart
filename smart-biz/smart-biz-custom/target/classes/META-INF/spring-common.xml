@@ -7,13 +7,13 @@
 
      <!-- 基础应用平台-退款服务 -->
 	<!-- <bean id="refundResource" class="com.somnus.rest.core.spring.RestfulFactoryBean">
-        <property name="serviceInterface" value="com.ips.core.psfp.refund.biz.refund.resource.RefundResource" /> 
+        <property name="serviceInterface" value="com.somnus.core.psfp.refund.biz.refund.resource.RefundResource" /> 
         <property name="serviceUrl" value="${refund.interface.url}" />
 	</bean> -->
 	
 	<!-- 基础应用平台-出款服务 -->
 	<!-- <bean id="issuedCallBackResource" class="com.somnus.rest.core.spring.RestfulFactoryBean">
-        <property name="serviceInterface" value="com.ips.core.psfp.issued.biz.issued.resource.IssuedCallBackResource" /> 
+        <property name="serviceInterface" value="com.somnus.core.psfp.issued.biz.issued.resource.IssuedCallBackResource" /> 
         <property name="serviceUrl" value="${issued.interface.url}" />
 	</bean> -->
     

@@ -27,7 +27,7 @@ public class DepositRequest extends Message {
 	@NotEmpty
 	private String prdCode;
 	
-	/** IPS订单号 */
+	/** isp订单号 */
 	private String ipsBillNo;
     
     /** 应用交易流水号 */

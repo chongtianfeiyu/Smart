@@ -8,7 +8,7 @@ public class IncomeConstants extends BasConstants {
 	 */
 	public final static String ENTRY_KEY_INCOME_PRE = "1101";
 	/**
-	 * ips账户收单前缀1102
+	 * isp账户收单前缀1102
 	 */
 	public final static String ENTRY_KEY_IPSINCOME_PRE = "11020";
 	/**

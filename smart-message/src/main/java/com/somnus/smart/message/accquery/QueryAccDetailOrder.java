@@ -6,7 +6,7 @@ import java.util.Date;
 public class QueryAccDetailOrder {
 	/**商户订单号*/
 	private String cusTranNo;
-	/**IPS订单号*/
+	/**isp订单号*/
 	private String ipsBillNo;
 	/**应用交易流水号*/
 	private String appTranNo;

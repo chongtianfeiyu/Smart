@@ -6,7 +6,7 @@ import com.somnus.smart.message.account.AccountResponse;
 import com.somnus.smart.message.account.IpsPayRequest;
 
 /**
- * IPS账户支付记账
+ * isp账户支付记账
  *
  * @author IH745
  * @version 1.0 13-10-15

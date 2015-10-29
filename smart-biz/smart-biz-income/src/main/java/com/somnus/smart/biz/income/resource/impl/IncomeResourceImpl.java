@@ -34,7 +34,7 @@ import com.somnus.smart.support.common.JsonUtils;
 import com.somnus.smart.support.exceptions.BizException;
 
 /**
- * 银行卡收单、撤销冲正、IPS账户支付记账
+ * 银行卡收单、撤销冲正、isp账户支付记账
  * 
  * @author 李太平
  * @version $Id: IncomeResourceNewImpl.java, v 0.1 2014-11-20 下午02:21:42 李太平  Exp $
@@ -223,7 +223,7 @@ public class IncomeResourceImpl implements IncomeResource {
             if (availableBal.compareTo(ipsPayRequest.getTranAmt()) < 0) {
                 throw new BizException("账户余额不足");
             }
-            // 5、创建ips账户支付记载交易流水
+            // 5、创建isp账户支付记载交易流水
             Transaction transaction = incomeService.createIPSPayTran(ipsPayRequest);
             // 6、同步记账
             String entryKey = IncomeConstants.ENTRY_KEY_IPSINCOME_PRE + transaction.getFeeFlag() + transaction.getFeeStlMode();

@@ -32,7 +32,7 @@ public class RefundConstants extends BasConstants {
 	 */
 	public static final String ENTRY_KEY_INCOME_AUTOREFUND = "6101100";
 	/**
-	 * ips退款
+	 * isp退款
 	 */
 	public static final String ENTRY_KEY_IPS_REFUND = "1183000";
 	

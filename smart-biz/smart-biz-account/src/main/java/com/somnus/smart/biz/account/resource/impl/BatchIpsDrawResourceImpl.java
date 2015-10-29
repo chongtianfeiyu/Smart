@@ -28,10 +28,7 @@ import com.somnus.smart.support.common.JsonUtils;
 import com.somnus.smart.support.exceptions.BizException;
 
 /**
- * 下发到IPS账户记账
- * 
- * @author 李太平
- * @version $Id: BatchIpsDrawResourceNewImpl.java, v 0.1 2014-11-28 下午02:14:19 李太平 Exp $
+ * 下发到isp账户记账
  */
 @Component
 @Validated

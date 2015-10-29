@@ -41,11 +41,11 @@ public class AccountTransResourceTestCase extends AbstractTestSupport {
     	request.setInitiatorFlg("1");//发起方标识 0:收款方 1：付款方 2：其他
     	
     	request.setPayeeCode("/*100100100100*/");//个人没有，商户才有  其实就是商户号 merCode MER_CODE
-        request.setPayeeType("0");//0： 个人  1： 商户  2 : IPS
+        request.setPayeeType("0");//0： 个人  1： 商户  2 : ISP
         request.setPayeeAccCode("100100100100");
         
         request.setPayerCode("/*100100100110*/");//个人没有，商户才有  其实就是商户号 merCode MER_CODE
-        request.setPayerType("0");//0： 个人  1： 商户  2 : IPS
+        request.setPayerType("0");//0： 个人  1： 商户  2 : ISP
         request.setPayerAccCode("100100100110");
         
         request.setTranType("111");

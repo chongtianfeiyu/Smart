@@ -40,7 +40,7 @@ public class BatchIpsDrawResourceTestCase extends AbstractTestSupport {
     	request.setInitiatorFlg("1");//发起方标识 0:收款方 1：付款方 2：其他
     	
         request.setPayerCode("100976");//个人没有，商户才有  其实就是商户号 merCode MER_CODE
-        request.setPayerType("1");//0： 个人  1： 商户  2 : IPS
+        request.setPayerType("1");//0： 个人  1： 商户  2 : ISP
         request.setPayerAccCode("1009760040");
         
         request.setTranType("111");
@@ -60,12 +60,12 @@ public class BatchIpsDrawResourceTestCase extends AbstractTestSupport {
         request.setTotalFeeAmt(new BigDecimal(1));
         
         Order order = new Order();
-        order.setIpsBillNo("BO223456789");
+        order.setISPBillNo("BO223456789");
         order.setAppTranNo("APP201504281001532498");
         order.setAppTranDate(new Date());
         order.setMerBillNo("BA223456789");//商户流水号
         order.setPayeeCode("/*100100100100*/");//个人没有，商户才有  其实就是商户号 merCode MER_CODE
-        order.setPayeeType("0");//0： 个人  1： 商户  2 : IPS
+        order.setPayeeType("0");//0： 个人  1： 商户  2 : ISP
         order.setPayeeAccCode("100100100100");
         order.setTranAmt(new BigDecimal(100));//交易金额
         order.setFeeAmt(new BigDecimal(1));//手续费
