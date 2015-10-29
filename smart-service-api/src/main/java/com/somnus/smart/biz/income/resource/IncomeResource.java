@@ -46,7 +46,7 @@ public interface IncomeResource {
     public AccountResponse cancelReverse(@Valid CancelReverseRequest cancelReverseRequest);
     
     /**
-     * IPS账户支付
+     * 账户支付
      * 
      * @param request
      * @return

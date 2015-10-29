@@ -25,7 +25,7 @@ public class QueryAccDetailRequest extends Message {
 	private String accDateEnd;
 	/**商户订单号*/
 	private String cusTranNo;
-	/**Ips订单号*/
+	/**订单号*/
 	private String ipsBillNo;
 	/**当前页码*/
 	private int pageNum;

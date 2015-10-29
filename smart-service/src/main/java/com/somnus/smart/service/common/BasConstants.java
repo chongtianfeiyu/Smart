@@ -131,10 +131,10 @@ public class BasConstants {
 	public final static String BIZ_KIND_PERSON = "0";
 	/**商户类型  1：商户 */
 	public final static String BIZ_KIND_CUS = "1";
-	/**商户类型  2：银行或IPS */
-	public final static String BIZ_KIND_BANKORIPS = "2";
+	/**商户类型  2：银行 */
+	public final static String BIZ_KIND_BANK = "2";
 	/**
-	 * 默认发生机构：迅付
+	 * 默认发生机构：
 	 */
 	public final static String DEFAULT_SUPPLIER_CODE = "10000";
 

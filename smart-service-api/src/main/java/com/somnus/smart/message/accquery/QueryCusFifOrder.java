@@ -7,7 +7,7 @@ public class QueryCusFifOrder {
 	
 	/**商户订单号*/
 	private String cusTranNo;
-	/**IPS订单号*/
+	/**订单号*/
 	private String ipsBillNo;
 	/**应用交易流水号*/
 	private String appTranNo;
