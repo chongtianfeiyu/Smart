@@ -14,7 +14,7 @@ import com.somnus.rest.core.client.RESTfulJsonClientFactory;
 
 /** 
  * @description: TODO 
- * @author yh.liu
+ * @author Somnus
  * @date 2015年2月27日 下午4:20:10  
  */
 public class AccountTransResourceTestCase extends AbstractTestSupport {

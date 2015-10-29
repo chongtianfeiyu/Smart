@@ -27,7 +27,7 @@ import com.somnus.smart.support.exceptions.BizException;
 /**
  * 
  * @description: TODO 
- * @author yh.liu
+ * @author Somnus
  * date 2015年3月6日 下午6:08:17
  */
 @Component

@@ -9,7 +9,7 @@ import com.somnus.smart.service.common.CommonTransfer;
 
 /** 
  * @description: TODO 
- * @author yh.liu
+ * @author Somnus
  * date 2015年2月27日 上午11:45:20  
  */
 public class DepositTransfer extends CommonTransfer {

@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * 
  * @description: TODO 
- * @author yh.liu
+ * @author Somnus
  * date 2015年3月6日 下午6:14:57
  */
 public class IssuedEntity {

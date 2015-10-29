@@ -14,7 +14,7 @@ import com.somnus.smart.message.Message;
 /**
  * DepositRequest 个人充值记账请求
  * 
- * @author yh.liu
+ * @author Somnus
  */
 public class DepositRequest extends Message {
 

@@ -10,7 +10,7 @@ import com.somnus.smart.support.mybatis.annotation.MyBatisRepository;
 /**
  * 账户类型DAO
  * @author bo.zhang
- * @update yh.liu
+ * @update Somnus
  */
 @MyBatisRepository
 public interface InfAcctypeDao {

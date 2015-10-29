@@ -17,7 +17,7 @@ import com.somnus.rest.core.client.RESTfulJsonClientFactory;
 
 /** 
  * @description: TODO 
- * @author yh.liu
+ * @author Somnus
  * @date 2015年2月27日 下午4:20:10  
  */
 public class BatchIpsDrawResourceTestCase extends AbstractTestSupport {
@@ -60,7 +60,7 @@ public class BatchIpsDrawResourceTestCase extends AbstractTestSupport {
         request.setTotalFeeAmt(new BigDecimal(1));
         
         Order order = new Order();
-        order.setISPBillNo("BO223456789");
+        order.setIpsBillNo("BO223456789");
         order.setAppTranNo("APP201504281001532498");
         order.setAppTranDate(new Date());
         order.setMerBillNo("BA223456789");//商户流水号

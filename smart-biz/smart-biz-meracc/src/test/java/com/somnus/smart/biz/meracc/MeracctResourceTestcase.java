@@ -13,7 +13,7 @@ import com.somnus.rest.core.client.RESTfulJsonClientFactory;
 
 /** 
  * @description: TODO 
- * @author yh.liu
+ * @author Somnus
  * @date 2015年2月9日 上午10:05:15  
  */
 public class MeracctResourceTestcase extends AbstractTestSupport {

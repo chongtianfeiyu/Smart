@@ -2,7 +2,7 @@ package com.somnus.smart.base.domain;
 
 /** 
  * @description: TODO 
- * @author yh.liu
+ * @author Somnus
  * date 2015年2月6日 下午6:04:44  
  */
 public class AccMapping {

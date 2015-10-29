@@ -5,7 +5,7 @@ import com.somnus.smart.support.mybatis.annotation.MyBatisRepository;
 
 /**
  * 个人账户信息DAO
- * @author yh.liu
+ * @author Somnus
  *
  */
 @MyBatisRepository

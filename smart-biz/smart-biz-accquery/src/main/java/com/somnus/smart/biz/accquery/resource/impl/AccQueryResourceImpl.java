@@ -37,7 +37,7 @@ import com.somnus.smart.support.exceptions.BizException;
 /**
  * 
  * @description: 账户查询接口
- * @author yh.liu date 2015年3月6日 下午6:13:10
+ * @author Somnus date 2015年3月6日 下午6:13:10
  */
 @Component
 @Validated

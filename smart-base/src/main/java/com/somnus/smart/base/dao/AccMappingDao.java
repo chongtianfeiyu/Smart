@@ -7,7 +7,7 @@ import com.somnus.smart.support.mybatis.annotation.MyBatisRepository;
 
 /** 
  * 个人账户对应关系DAO（标准账户-专业账户）
- * @author yh.liu
+ * @author Somnus
  * date 2015年2月6日 下午5:55:35  
  */
 @MyBatisRepository
