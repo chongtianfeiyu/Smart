@@ -169,7 +169,7 @@
     STATUS, BLN_MODE, BLN_STATUS, CAN_BLN_DATE, BLN_DATE, ERR_MSG, VOUCHER_NO, ORI_APP_TRAN_NO, 
     TRAN_REMARK, RESV1, RESV2, RESV3, RESV4, RESV5, CREATE_TIME, CREATE_BY, MODIFY_TIME, 
     MODIFY_BY
-  </sql>
+  	</sql>
 	<sql id="where_condition">
 		<where>
 			<trim prefix="(" suffix=")" prefixOverrides="and | AND">
