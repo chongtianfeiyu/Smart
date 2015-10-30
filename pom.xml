@@ -26,7 +26,7 @@
         <rest.core.version>3.2.0</rest.core.version>
         <!-- spring -->
         <spring.version>3.2.1.RELEASE</spring.version>
-        <mybatis.paginator.version>8.2.5</mybatis.paginator.version>
+        <mybatis.paginator.version>1.2.17</mybatis.paginator.version>
         <!-- mybatis -->
         <mybatis.version>3.1.1</mybatis.version>
         <mybatis.spring.version>1.2.0</mybatis.spring.version>
@@ -63,9 +63,14 @@
         <jstl.version>1.2</jstl.version>
         <geronimo.version>1.1.1</geronimo.version>
         <!-- JDBC Driver -->
+        <!-- 
         <jdbc.driver.groupId>com.oracle</jdbc.driver.groupId>
         <jdbc.driver.artifactId>ojdbc14</jdbc.driver.artifactId>
         <jdbc.driver.version>10.2.0.4.0</jdbc.driver.version>
+        -->
+        <jdbc.driver.groupId>mysql</jdbc.driver.groupId>
+        <jdbc.driver.artifactId>mysql-connector-java</jdbc.driver.artifactId>
+        <jdbc.driver.version>5.1.27</jdbc.driver.version>
         <!-- servlet & jsp -->
         <servlet.version>2.5</servlet.version>
         <jsp.version>2.2</jsp.version>
@@ -671,7 +676,7 @@
         </repository>
     </repositories>
     <!-- 公共插件仓库地址 -->
-    <pluginRepositories>
+    <!-- <pluginRepositories>
         <pluginRepository>
             <id>public</id>
             <name>Public Repositories</name>
@@ -683,7 +688,7 @@
                 <enabled>true</enabled>
             </snapshots>
         </pluginRepository>
-    </pluginRepositories>
+    </pluginRepositories> -->
 
     <distributionManagement>
         <!-- 正式发布版本 -->
