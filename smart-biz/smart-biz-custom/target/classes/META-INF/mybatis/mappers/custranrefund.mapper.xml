@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.somnus.smart.biz.custom.dao.CusTranRefundDao" >
-  <select id="selectRefType" resultType="java.lang.String" parameterType="java.lang.String">
-    select b.REF_TYPE from TCOR_TRN_TRANSACTION a 
-    left join TCOR_TRN_TRANREFUND b 
-	on a.ACC_TRAN_NO = b.ACC_TRAN_NO where a.APP_TRAN_NO = #{appTranNo}
-  </select>
-</mapper>
