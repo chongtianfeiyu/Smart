@@ -641,7 +641,7 @@
                     <artifactId>maven-war-plugin</artifactId>
                     <version>${war.plugin.version}</version>
                     <configuration>
-                        <!-- 打包时的常规排除�?-->
+                        <!-- 打包时的常规排除项-->
                         <packagingExcludes>
                             WEB-INF/classes/logback-test.xml
                         </packagingExcludes>
