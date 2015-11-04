@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * @Title: ValidateUtil
  * @Description: 报文验证工具类
- * @author: cjliu modify by caobin - using commons-lang3
+ * @author: cjliu modify by Somnus - using commons-lang3
  * @date: 2012-9-19下午7:19:59
  * @version: 1.0
  */

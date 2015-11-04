@@ -3,7 +3,7 @@ package com.somnus.smart.support.exceptions;
 /**
  * SysException
  *
- * @author caobin
+ * @author Somnus
  * @version 1.0 2013-4-17
  */
 @SuppressWarnings("serial")

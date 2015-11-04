@@ -13,7 +13,7 @@ import com.somnus.smart.support.util.ValidateUtil;
 /**
  * @className:CheckUtil
  * @Description:校验类
- * @author shellshen modify by caobin
+ * @author shellshen modify by Somnus
  * @date:2012-8-16下午2:14:03
  * 
  */

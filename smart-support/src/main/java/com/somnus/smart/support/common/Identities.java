@@ -6,7 +6,7 @@ import java.util.UUID;
 
 /**
  * @Description 生成唯一ID算法
- * @author caobin
+ * @author Somnus
  * @date 2012-11-15
  * @version 1.0
  */
