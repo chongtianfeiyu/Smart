@@ -16,9 +16,6 @@ import com.somnus.smart.support.util.DateUtil;
 
 /**
  * 分账户明细
- * 
- * @author Administrator
- * @version $Id: Ledgerdetail.java, v 0.1 2014-10-29 下午04:44:14 Administrator Exp $
  */
 public class AccDetail extends TrnAccDetail implements DomainModel<AccDetail, TrnAccDetail> {
 

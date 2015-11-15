@@ -28,12 +28,14 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     ISS_TRAN_NO, ACC_TRAN_NO, IPS_BILL_NO, CUS_TRAN_NO, APP_TRAN_NO, APP_TRAN_DATE, TRAN_AMT, 
     ORD_AMT, FEE_AMT, PAYEE_CODE, PAYEE_ACC_CODE, PAYEE_TYPE, PAYEE_BANK_CODE, PAYEE_BRA_BANK_CODE, 
     PAYEE_BRA_BANK_NAME, PAYEE_BANK_ACC_CODE, PAYEE_BANK_ACC_NAME, PAYEE_BANK_ACC_TYPE, 
     STATUS, TRAN_REMARK, SUBMIT_TIME, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -64,12 +66,11 @@
   </select>
   
   <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnTranIssued" >
-    <selectKey resultType="java.lang.String" keyProperty="issTranNo"
-			order="BEFORE">
-			select
-			to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANISSUED.NEXTVAL
-			from
-			dual
+	<selectKey resultType="java.lang.String" keyProperty="issTranNo" order="BEFORE">
+		select 
+		to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANISSUED.NEXTVAL 
+		from 
+		dual
 	</selectKey>
     insert into TCOR_TRN_TRANISSUED (ISS_TRAN_NO, ACC_TRAN_NO, IPS_BILL_NO, 
       CUS_TRAN_NO, APP_TRAN_NO, APP_TRAN_DATE, 
@@ -91,13 +92,11 @@
       #{modifyBy,jdbcType=VARCHAR})
   </insert>
 			
-	<select id="getIssTranNo" resultType="java.lang.String">
-		select
-			to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANISSUED.NEXTVAL
-			from
-			dual
-	</select>
-   <insert id="insertNoSeq" parameterType="com.somnus.smart.base.domain.TrnTranIssued" >
+  <select id="getIssTranNo" resultType="java.lang.String">
+	select to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANISSUED.NEXTVAL from dual
+  </select>
+  
+  <insert id="insertNoSeq" parameterType="com.somnus.smart.base.domain.TrnTranIssued" >
     insert into TCOR_TRN_TRANISSUED (ISS_TRAN_NO, ACC_TRAN_NO, IPS_BILL_NO, 
       CUS_TRAN_NO, APP_TRAN_NO, APP_TRAN_DATE, 
       TRAN_AMT, ORD_AMT, FEE_AMT, 
@@ -117,8 +116,9 @@
       #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
       #{modifyBy,jdbcType=VARCHAR})
   </insert>
+  
   <update id="updateByPrimaryKey" parameterType="com.somnus.smart.base.domain.TrnTranIssued" >
-  update TCOR_TRN_TRANISSUED
+	update TCOR_TRN_TRANISSUED
     <set >
       <if test="payeeCode != null" >
         PAYEE_CODE = #{payeeCode,jdbcType=VARCHAR},
@@ -175,12 +175,11 @@
         MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
       </if>
     </set>
-   where ISS_TRAN_NO = #{issTranNo,jdbcType=VARCHAR}
+	where ISS_TRAN_NO = #{issTranNo,jdbcType=VARCHAR}
   </update>
   
-  
- <update id="updateByPrimaryKeyStatus" parameterType="com.somnus.smart.base.domain.TrnTranIssued" >
-  update TCOR_TRN_TRANISSUED
+  <update id="updateByPrimaryKeyStatus" parameterType="com.somnus.smart.base.domain.TrnTranIssued" >
+	update TCOR_TRN_TRANISSUED
     <set >
       <if test="payeeCode != null" >
         PAYEE_CODE = #{payeeCode,jdbcType=VARCHAR},
@@ -237,6 +236,7 @@
         MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
       </if>
     </set>
-   where ISS_TRAN_NO = #{issTranNo,jdbcType=VARCHAR} and STATUS = '2'
+	where ISS_TRAN_NO = #{issTranNo,jdbcType=VARCHAR} and STATUS = '2'
   </update>
+  
 </mapper>

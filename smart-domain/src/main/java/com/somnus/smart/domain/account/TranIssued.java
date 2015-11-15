@@ -14,9 +14,6 @@ import com.somnus.smart.domain.DomainModel;
 
 /**
  * 下发审核附属
- * 
- * @author Administrator
- * @version $Id: Ledgerdetail.java, v 0.1 2014-10-29 下午04:44:14 Administrator Exp $
  */
 public class TranIssued extends TrnTranIssued implements DomainModel<TranIssued, TrnTranIssued> {
 

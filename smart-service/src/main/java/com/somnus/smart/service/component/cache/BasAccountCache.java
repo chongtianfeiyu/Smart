@@ -8,12 +8,6 @@ import com.somnus.smart.base.dao.MerBasicPrdCfgDao;
 import com.somnus.smart.base.domain.MerBasicPrdCfg;
 import com.somnus.smart.service.common.CacheConstants;
 
-/**
- * BasAccountCache
- *
- * @author IH745
- * @version 1.0 13-10-11
- */
 @Component
 public class BasAccountCache {
 

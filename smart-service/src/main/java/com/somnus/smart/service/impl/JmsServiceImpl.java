@@ -10,11 +10,6 @@ import org.springframework.stereotype.Component;
 import com.somnus.smart.base.domain.TrnTransaction;
 import com.somnus.smart.service.JmsService;
 
-/**
- * @author IH745
- * @date 2013-10-11
- * 
- */
 @Component
 public class JmsServiceImpl implements JmsService {
 

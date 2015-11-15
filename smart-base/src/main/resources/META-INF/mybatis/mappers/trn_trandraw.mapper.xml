@@ -17,17 +17,20 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
  <sql id="Base_Column_List" >
     DRA_TRAN_NO, ACC_TRAN_NO, PAYEE_BANK_CODE, PAYEE_BRA_BANK_CODE, PAYEE_BRA_BANK_NAME, 
     PAYEE_BANK_ACC_CODE, PAYEE_BANK_ACC_NAME, PAYEE_BANK_ACC_TYPE, STATUS, SUBMIT_TIME, 
     CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from TCOR_TRN_TRANDRAW
     where DRA_TRAN_NO = #{draTranNo,jdbcType=VARCHAR}
   </select>
+  
    <select id="selectByAccTranNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -36,13 +39,12 @@
   </select>
   
   <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnTranDraw" >
-  		<selectKey resultType="java.lang.String" keyProperty="draTranNo"
-			order="BEFORE">
-			select
-			to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANDRAW.NEXTVAL
-			from
-			dual
-		</selectKey>
+	<selectKey resultType="java.lang.String" keyProperty="draTranNo" order="BEFORE">
+		select 
+		to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANDRAW.NEXTVAL 
+		from 
+		dual
+	</selectKey>
     insert into TCOR_TRN_TRANDRAW (DRA_TRAN_NO, ACC_TRAN_NO, PAYEE_BANK_CODE, 
       PAYEE_BRA_BANK_CODE, PAYEE_BRA_BANK_NAME, PAYEE_BANK_ACC_CODE, 
       PAYEE_BANK_ACC_NAME, PAYEE_BANK_ACC_TYPE, STATUS, 
@@ -54,6 +56,7 @@
       #{submitTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
       #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR})
   </insert>
+  
   <update id="updateByPrimaryKey" parameterType="com.somnus.smart.base.domain.TrnTranDraw" >
     update TCOR_TRN_TRANDRAW
     <set >
@@ -96,4 +99,5 @@
     </set>
     where DRA_TRAN_NO = #{draTranNo,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

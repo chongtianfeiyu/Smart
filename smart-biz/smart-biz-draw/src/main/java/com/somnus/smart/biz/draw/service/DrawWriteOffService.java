@@ -5,8 +5,6 @@ import com.somnus.smart.domain.account.Transaction;
 
 /**
  * 核销接口
- * @author IH745
- *
  */
 public interface DrawWriteOffService {
 	

@@ -34,6 +34,7 @@
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     ACCT_ID, ACCT_CODE, MER_CODE, ACCT_NAME, CURRENCY, BANK_CODE, BANK_NAME, BANK_KEY, 
     BRANCH_CODE, BRANCH_NAME, BANK_ACCT_NO, BANK_ACCT_NAME, STL_TYPE, BAL_FLOOR, AUTO_TRANSFER, 
@@ -41,6 +42,7 @@
     ALLOW_OUT, OUT_FLAG, REMARK, VERSION, STATUS, OPER_FLAG, EFFECT_DATE, LOSE_EFFECT_DATE, 
     MODIFY_BY, MODIFY_TIME
   </sql>
+  
   <select id="selectByConstraints" resultMap="BaseResultMap" parameterType="com.somnus.smart.base.domain.MerAccount" >
     select 
     <include refid="Base_Column_List" />
@@ -59,7 +61,10 @@
   </select>
   
   <select id="getMeraccSequences" resultType="string" >
-   select SEQ_MER_ACCOUNT_ID.nextVal from dual
+	select 
+	SEQ_MER_ACCOUNT_ID.nextVal 
+	from 
+	dual
   </select>
   
    <select id="selectAllProtocolDrawAccounts" resultMap="BaseResultMap" >
@@ -75,10 +80,12 @@
     from TCIM_MER_ACCOUNT
     where ACCT_ID = #{acctId,jdbcType=DECIMAL}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from TCIM_MER_ACCOUNT
     where ACCT_ID = #{acctId,jdbcType=DECIMAL}
   </delete>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.MerAccount" >
     insert into TCIM_MER_ACCOUNT (ACCT_ID, ACCT_CODE, MER_CODE, 
       ACCT_NAME, CURRENCY, BANK_CODE, 
@@ -106,10 +113,9 @@
   
    <insert id="merge" parameterType="com.somnus.smart.base.domain.MerAccount" >
     MERGE INTO TCIM_MER_ACCOUNT  T
-  USING DUAL
-  ON(T.ACCT_ID = #{acctId,jdbcType=DECIMAL})
-WHEN not MATCHED THEN
-    
+	USING DUAL
+	ON(T.ACCT_ID = #{acctId,jdbcType=DECIMAL})
+	WHEN not MATCHED THEN
     insert (ACCT_ID, ACCT_CODE, MER_CODE, 
       ACCT_NAME, CURRENCY, BANK_CODE, 
       BANK_NAME, BANK_KEY, BRANCH_CODE, 
@@ -132,7 +138,6 @@ WHEN not MATCHED THEN
       #{version,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, #{operFlag,jdbcType=VARCHAR}, 
       #{effectDate,jdbcType=VARCHAR}, #{loseEffectDate,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}, 
       #{modifyTime,jdbcType=TIMESTAMP})
-      
       WHEN MATCHED THEN  UPDATE 
     <set >
       <if test="acctName != null" >
@@ -318,4 +323,5 @@ WHEN not MATCHED THEN
     </set>
     where ACCT_CODE = #{acctCode,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

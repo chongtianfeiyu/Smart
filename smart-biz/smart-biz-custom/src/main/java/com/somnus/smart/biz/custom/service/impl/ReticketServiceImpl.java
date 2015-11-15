@@ -20,9 +20,6 @@ import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 退票记账业务处理实现
- * 
- * @author 李太平
- * @version $Id: ReticketServiceImpl.java, v 0.1 2014-11-25 下午01:46:14 李太平 Exp $
  */
 @Component
 public class ReticketServiceImpl implements ReticketService {

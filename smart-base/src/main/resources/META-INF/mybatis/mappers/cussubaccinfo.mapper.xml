@@ -31,6 +31,7 @@
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
     <result column="LAST_INITIAL_BAL" property="lastInitialBal" jdbcType="DECIMAL" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     SUB_ACC_CODE, SUB_ACC_NAME, ACC_DATE, MER_ACC_CODE, SUB_CODE, REL_SUB_CODE, BAL_DIR, 
     CCY_CODE, CUR_BAL, AVAIL_BAL, BIZ_FREEZE_BAL, MAG_FREEZE_BAL,PAYABLE_FREEZE_BAL, INITIAL_BAL, DEBIT_AMT,
@@ -60,29 +61,31 @@
   <select id="getCussubaccSequences" resultType="string" >
    select SEQ_SUB_ACC_CODE.nextVal from dual
   </select>
+  
   <select id="selectBycode" resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from
-		${tableName} a
-		where REL_SUB_CODE = #{relSubCode,jdbcType=VARCHAR}
-		<if test="merAccCode != null and merAccCode != ''">
-			and MER_ACC_CODE = #{merAccCode,jdbcType=VARCHAR} 
-		</if>		
-		and CCY_CODE = #{ccyCode,jdbcType=VARCHAR}
-	</select>
+	select
+	<include refid="Base_Column_List" />
+	from
+	${tableName} a
+	where REL_SUB_CODE = #{relSubCode,jdbcType=VARCHAR}
+	<if test="merAccCode != null and merAccCode != ''">
+		and MER_ACC_CODE = #{merAccCode,jdbcType=VARCHAR} 
+	</if>		
+	and CCY_CODE = #{ccyCode,jdbcType=VARCHAR}
+  </select>
   
   <insert id="insert" parameterType="map" >
-  INSERT INTO ${tableName} (SUB_ACC_CODE, SUB_ACC_NAME, ACC_DATE, 
-      MER_ACC_CODE, SUB_CODE, REL_SUB_CODE, 
-      BAL_DIR, CCY_CODE, CUR_BAL, 
-      AVAIL_BAL, BIZ_FREEZE_BAL, MAG_FREEZE_BAL,PAYABLE_FREEZE_BAL,
-      INITIAL_BAL, DEBIT_AMT, CREDIT_AMT, 
-      ACC_TYPE, OVER_FLAG, ACC_STATUS, 
-      OPEN_DATE, OPEN_BY, CLOSE_DATE, 
-      CLOSE_BY, CREATE_TIME, CREATE_BY, 
-      MODIFY_TIME, MODIFY_BY, LAST_INITIAL_BAL)
-    values (
+	INSERT INTO ${tableName} (
+		SUB_ACC_CODE, SUB_ACC_NAME, ACC_DATE, 
+		MER_ACC_CODE, SUB_CODE, REL_SUB_CODE, 
+		BAL_DIR, CCY_CODE, CUR_BAL, 
+		AVAIL_BAL, BIZ_FREEZE_BAL, MAG_FREEZE_BAL,PAYABLE_FREEZE_BAL,
+		INITIAL_BAL, DEBIT_AMT, CREDIT_AMT, 
+		ACC_TYPE, OVER_FLAG, ACC_STATUS, 
+		OPEN_DATE, OPEN_BY, CLOSE_DATE, 
+		CLOSE_BY, CREATE_TIME, CREATE_BY, 
+		MODIFY_TIME, MODIFY_BY, LAST_INITIAL_BAL)
+	values (
 	    #{subAccCode,jdbcType=VARCHAR}, 
 	    #{subAccName,jdbcType=VARCHAR}, 
 	    #{accDate,jdbcType=DATE}, 
@@ -114,104 +117,102 @@
     )
   </insert>
   
-  	<!-- 记账锁行用 -->
-	<select id="selectBySubAcctForUpdate" resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from
-		${tableName} a
-		where SUB_ACC_CODE =
-		#{subAccCode,jdbcType=VARCHAR} for update WAIT 300
-	</select>
+  <!-- 记账锁行用 -->
+  <select id="selectBySubAcctForUpdate" resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" />
+	from
+	${tableName} a
+	where SUB_ACC_CODE =
+	#{subAccCode,jdbcType=VARCHAR} for update WAIT 300
+  </select>
 	
-	<!-- 根据RelSubCode查询 -->
-	<select id="selectByRelSubCode" resultMap="BaseResultMap">
-		select
-		<include refid="Base_Column_List" />
-		from
-		${tableName} a
-		where REL_SUB_CODE =
-		#{relSubCode,jdbcType=VARCHAR}
-	</select>
+  <!-- 根据RelSubCode查询 -->
+  <select id="selectByRelSubCode" resultMap="BaseResultMap">
+	select
+	<include refid="Base_Column_List" />
+	from
+	${tableName} a
+	where REL_SUB_CODE =
+	#{relSubCode,jdbcType=VARCHAR}
+  </select>
 	
-	
-    <!-- 更新余额用 -->
-	<update id="updateAcctBal" parameterType="map">
-		update ${tableName}
-		<set>
-			<if test="curBal != null ">
-				CUR_BAL = #{curBal,jdbcType=DECIMAL},
-			</if>
-			<if test="accDate != null" >
-		        ACC_DATE = #{accDate,jdbcType=DATE},
-		    </if>
-			<if test="availBal != null ">
-				AVAIL_BAL = #{availBal,jdbcType=DECIMAL},
-			</if>
-			<if test="bizFreezeBal != null ">
-				BIZ_FREEZE_BAL = #{bizFreezeBal,jdbcType=DECIMAL},
-			</if>
-			<if test="magFreezeBal != null ">
-				MAG_FREEZE_BAL = #{magFreezeBal,jdbcType=DECIMAL},
-			</if>
-            <if test="payableFreezeBal != null ">
-                PAYABLE_FREEZE_BAL = #{payableFreezeBal,jdbcType=DECIMAL},
-            </if>
-			<if test="initialBal != null ">
-				INITIAL_BAL = #{initialBal,jdbcType=DECIMAL},
-			</if>
-			<if test="debitAmt != null ">
-				DEBIT_AMT = #{debitAmt,jdbcType=DECIMAL},
-			</if>
-			<if test="creditAmt != null ">
-				CREDIT_AMT = #{creditAmt,jdbcType=DECIMAL},
-			</if>
-			<if test="modifyTime != null and modifyTime != ''">
-				MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
-			</if>
-			<if test="modifyBy != null and modifyBy != ''">
-				MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
-			</if>
-			<if test="lastInitialBal != null" >
-		        LAST_INITIAL_BAL = #{lastInitialBal,jdbcType=DECIMAL},
-		    </if>
-		</set>
+  <!-- 更新余额用 -->
+  <update id="updateAcctBal" parameterType="map">
+	update ${tableName}
+	<set>
+		<if test="curBal != null ">
+			CUR_BAL = #{curBal,jdbcType=DECIMAL},
+		</if>
+		<if test="accDate != null" >
+			ACC_DATE = #{accDate,jdbcType=DATE},
+		</if>
+		<if test="availBal != null ">
+			AVAIL_BAL = #{availBal,jdbcType=DECIMAL},
+		</if>
+		<if test="bizFreezeBal != null ">
+			BIZ_FREEZE_BAL = #{bizFreezeBal,jdbcType=DECIMAL},
+		</if>
+		<if test="magFreezeBal != null ">
+			MAG_FREEZE_BAL = #{magFreezeBal,jdbcType=DECIMAL},
+		</if>
+		<if test="payableFreezeBal != null ">
+			PAYABLE_FREEZE_BAL = #{payableFreezeBal,jdbcType=DECIMAL},
+		</if>
+		<if test="initialBal != null ">
+			INITIAL_BAL = #{initialBal,jdbcType=DECIMAL},
+		</if>
+		<if test="debitAmt != null ">
+			DEBIT_AMT = #{debitAmt,jdbcType=DECIMAL},
+		</if>
+		<if test="creditAmt != null ">
+			CREDIT_AMT = #{creditAmt,jdbcType=DECIMAL},
+		</if>
+		<if test="modifyTime != null and modifyTime != ''">
+			MODIFY_TIME = #{modifyTime,jdbcType=VARCHAR},
+		</if>
+		<if test="modifyBy != null and modifyBy != ''">
+			MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+		</if>
+		<if test="lastInitialBal != null" >
+			LAST_INITIAL_BAL = #{lastInitialBal,jdbcType=DECIMAL},
+		</if>
+	</set>
 		where SUB_ACC_CODE = #{subAccCode,jdbcType=VARCHAR}
-	</update>
+  </update>
 	
-	<update id="addBizFreezeBal">
-		update ${tableName} t
+  <update id="addBizFreezeBal">
+	update ${tableName} t
 		<set>
-				BIZ_FREEZE_BAL = BIZ_FREEZE_BAL+#{bizFreezeBal,jdbcType=DECIMAL},
-				<![CDATA[ AVAIL_BAL      = case when cur_bal - biz_freeze_bal - mag_freeze_bal-payable_freeze_bal - #{bizFreezeBal,jdbcType=DECIMAL} < 0 then 0
-				else cur_bal - biz_freeze_bal - mag_freeze_bal-payable_freeze_bal - #{bizFreezeBal,jdbcType=DECIMAL} end ]]>
+			BIZ_FREEZE_BAL = BIZ_FREEZE_BAL+#{bizFreezeBal,jdbcType=DECIMAL},
+			<![CDATA[ AVAIL_BAL      = case when cur_bal - biz_freeze_bal - mag_freeze_bal-payable_freeze_bal - #{bizFreezeBal,jdbcType=DECIMAL} < 0 then 0
+			else cur_bal - biz_freeze_bal - mag_freeze_bal-payable_freeze_bal - #{bizFreezeBal,jdbcType=DECIMAL} end ]]>
 		</set>
-		where SUB_ACC_CODE = #{subAccCode,jdbcType=VARCHAR}
-               and  BIZ_FREEZE_BAL+#{bizFreezeBal,jdbcType=DECIMAL} >=0
-	</update>
+	where SUB_ACC_CODE = #{subAccCode,jdbcType=VARCHAR}
+	and  BIZ_FREEZE_BAL+#{bizFreezeBal,jdbcType=DECIMAL} >=0
+  </update>
 
-    <update id="addMagFreezeBal">
-        update ${tableName} t
+  <update id="addMagFreezeBal">
+	update ${tableName} t
         <set>
             MAG_FREEZE_BAL = MAG_FREEZE_BAL+#{magFreezeBal,jdbcType=DECIMAL},
             <![CDATA[ AVAIL_BAL      = case when cur_bal - biz_freeze_bal - mag_freeze_bal-payable_freeze_bal - #{magFreezeBal,jdbcType=DECIMAL} < 0 then 0
 				else cur_bal - biz_freeze_bal - mag_freeze_bal - payable_freeze_bal - #{magFreezeBal,jdbcType=DECIMAL} end ]]>
         </set>
-        where SUB_ACC_CODE = #{subAccCode,jdbcType=VARCHAR}
-        and  MAG_FREEZE_BAL+#{magFreezeBal,jdbcType=DECIMAL} >=0
-    </update>
+	where SUB_ACC_CODE = #{subAccCode,jdbcType=VARCHAR}
+	and  MAG_FREEZE_BAL+#{magFreezeBal,jdbcType=DECIMAL} >=0
+  </update>
 
-
-    <update id="addPayableFreezeBal">
-		update ${tableName} t
+  <update id="addPayableFreezeBal">
+	update ${tableName} t
 		<set>
-				PAYABLE_FREEZE_BAL = PAYABLE_FREEZE_BAL+#{payableFreezeBal,jdbcType=DECIMAL},
-				<![CDATA[ AVAIL_BAL      = case when cur_bal - biz_freeze_bal - mag_freeze_bal-payable_freeze_bal - #{payableFreezeBal,jdbcType=DECIMAL} < 0 then 0
-				else cur_bal - biz_freeze_bal - mag_freeze_bal - payable_freeze_bal - #{payableFreezeBal,jdbcType=DECIMAL} end ]]>
+			PAYABLE_FREEZE_BAL = PAYABLE_FREEZE_BAL+#{payableFreezeBal,jdbcType=DECIMAL},
+			<![CDATA[ AVAIL_BAL = case when cur_bal - biz_freeze_bal - mag_freeze_bal-payable_freeze_bal - #{payableFreezeBal,jdbcType=DECIMAL} < 0 then 0
+			else cur_bal - biz_freeze_bal - mag_freeze_bal - payable_freeze_bal - #{payableFreezeBal,jdbcType=DECIMAL} end ]]>
 		</set>
-		where SUB_ACC_CODE = #{subAccCode,jdbcType=VARCHAR}
-               and  PAYABLE_FREEZE_BAL+#{payableFreezeBal,jdbcType=DECIMAL} >=0
-               and  cur_bal - biz_freeze_bal - mag_freeze_bal-payable_freeze_bal - #{payableFreezeBal,jdbcType=DECIMAL} >=0
-	</update>
+	where SUB_ACC_CODE = #{subAccCode,jdbcType=VARCHAR}
+	and  PAYABLE_FREEZE_BAL+#{payableFreezeBal,jdbcType=DECIMAL} >=0
+	and  cur_bal - biz_freeze_bal - mag_freeze_bal-payable_freeze_bal - #{payableFreezeBal,jdbcType=DECIMAL} >=0
+  </update>
   
 </mapper>

@@ -7,8 +7,6 @@ import com.somnus.smart.support.mybatis.annotation.MyBatisRepository;
 
 /**
  * 退款核销DAO
- * @author bo.zhang
- *
  */
 @MyBatisRepository
 public interface TrnCusRefundDao {

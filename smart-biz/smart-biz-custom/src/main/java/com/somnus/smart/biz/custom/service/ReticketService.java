@@ -5,9 +5,6 @@ import com.somnus.smart.message.reticket.ReticketRequest;
 
 /**
  * 退票记账业务处理
- * 
- * @author 李太平
- * @version $Id: ReticketService.java, v 0.1 2014-11-25 下午01:45:21 李太平  Exp $
  */
 public interface ReticketService {
     /**

@@ -2,12 +2,6 @@ package com.somnus.smart.support.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- * JsonUtils
- *
- * @author levis
- * @version 1.0 13-9-29
- */
 public class JsonUtils {
 
     private static ObjectMapper objectMapper;

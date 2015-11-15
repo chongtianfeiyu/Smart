@@ -52,6 +52,7 @@
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
     <result column="BANK_COST" property="bankCost" jdbcType="DECIMAL" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     DRAW_ID, SYS_CODE, APP_BATCH_NO, APP_TRAN_NO, PAY_TRAN_NO, SUPPLIER_BILL_NO, PRD_CODE, 
     MER_CODE, MER_NAME, MER_ACC_CODE, MER_ACC_NAME, MER_BIZ_KIND, TRAN_TYPE, CCY_CODE, 
@@ -84,20 +85,21 @@
     from TCOR_TRN_DRAW
     where DRAW_ID = #{drawId,jdbcType=VARCHAR}
   </select>
- 	<select id="getDrawId" resultType="java.lang.String">
-		select
-			'DR'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_DRAW.NEXTVAL
-			from
-			dual
-	</select>
-<insert id="insertInSeq" parameterType="com.somnus.smart.base.domain.TrnDraw" >
-	<selectKey resultType="java.lang.String" keyProperty="drawId"
-			order="BEFORE">
-			select
-			'DR'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_DRAW.NEXTVAL
-			from
-			dual
-		</selectKey>
+  
+  <select id="getDrawId" resultType="java.lang.String">
+	select 
+	'DR'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_DRAW.NEXTVAL 
+	from 
+	dual
+  </select>
+  
+  <insert id="insertInSeq" parameterType="com.somnus.smart.base.domain.TrnDraw" >
+	<selectKey resultType="java.lang.String" keyProperty="drawId" order="BEFORE">
+		select 
+		'DR'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_DRAW.NEXTVAL 
+		from 
+		dual
+	</selectKey>
     insert into TCOR_TRN_DRAW (DRAW_ID, SYS_CODE, APP_BATCH_NO, 
       APP_TRAN_NO, PAY_TRAN_NO, SUPPLIER_BILL_NO, 
       PRD_CODE, MER_CODE, MER_NAME, 
@@ -170,6 +172,7 @@
       #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}
       )
   </insert>
+  
    <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.TrnDraw" >
     update TCOR_TRN_DRAW
     <set >
@@ -321,12 +324,17 @@
   <select id="selectWriteOffConfirm" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    	from TCOR_TRN_DRAW where DRAW_ID = #{drawId,jdbcType=VARCHAR} and STATUS in('03','08') and FINISH_FLAG='0'
+	from TCOR_TRN_DRAW 
+	where DRAW_ID = #{drawId,jdbcType=VARCHAR} 
+	and STATUS in('03','08') and FINISH_FLAG='0'
   </select>
+  
   <select id="selectWriteOffCancel" resultMap="BaseResultMap">
 	 select 
     <include refid="Base_Column_List" />
-    	from TCOR_TRN_DRAW where DRAW_ID = #{drawId,jdbcType=VARCHAR} and STATUS='04' and FINISH_FLAG='0'
+	from TCOR_TRN_DRAW 
+	where DRAW_ID = #{drawId,jdbcType=VARCHAR} 
+	and STATUS='04' and FINISH_FLAG='0'
   </select>
   
 </mapper>

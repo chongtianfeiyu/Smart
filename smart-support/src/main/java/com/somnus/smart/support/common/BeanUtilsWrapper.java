@@ -8,12 +8,6 @@ import org.apache.commons.beanutils.converters.DateConverter;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- * BeanUtilsWrapper
- *
- * @author levis
- * @version 1.0 14-5-7
- */
 public class BeanUtilsWrapper {
     //null converter
     static {

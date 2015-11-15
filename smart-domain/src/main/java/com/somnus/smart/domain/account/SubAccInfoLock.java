@@ -19,9 +19,6 @@ import com.somnus.smart.service.common.CusSubAccInfoUtil;
 
 /**
  * 交易账户锁
- * 
- * @author Administrator
- * @version $Id: SubAccInfoLock.java, v 0.1 2014-10-30 下午03:53:11 Administrator Exp $
  */
 public class SubAccInfoLock {
 

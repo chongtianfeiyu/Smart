@@ -24,9 +24,6 @@ import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 差异补记账接口
- *
- * @author tp.li
- * @version 1.0
  */
 @Component
 @Validated

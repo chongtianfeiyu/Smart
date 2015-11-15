@@ -53,12 +53,6 @@ import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 import com.somnus.smart.support.util.ValidateUtil;
 
-/**
- * 
- * @author IH745
- * @date 2013-10-09
- * 
- */
 @Component
 public class BasBizServiceImpl implements BasBizService {
 

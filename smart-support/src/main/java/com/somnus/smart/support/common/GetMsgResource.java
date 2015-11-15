@@ -10,9 +10,6 @@ import java.util.ResourceBundle;
 
 /**
  * 获取MESSAGE资源文件实例
- *
- * @author: cjliu
- * @version: 2013-09-25
  */
 public class GetMsgResource {
 	/**

@@ -10,9 +10,6 @@ import com.somnus.smart.message.custom.TranFreezeRequest;
 
 /**
  * 冻结解冻业务处理
- * 
- * @author 李太平
- * @version $Id: FreezeService.java, v 0.1 2014-11-25 上午09:35:48 李太平  Exp $
  */
 public interface FreezeService {
     /**

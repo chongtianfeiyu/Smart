@@ -5,9 +5,6 @@ import com.somnus.smart.message.custom.BuckleDrawRequest;
 
 /**
  * 扣划记账业务处理
- * 
- * @author 李太平
- * @version $Id: BuckleDrawService.java, v 0.1 2014-11-24 下午02:29:52 李太平 Exp $
  */
 public interface BuckleDrawService {
 

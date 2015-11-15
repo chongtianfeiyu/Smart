@@ -29,9 +29,6 @@ import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 收单记账业务处理器实现
- * 
- * @author 李太平
- * @version $Id: IncomeServiceImpl.java, v 0.1 2014-11-17 上午08:56:24 李太平 Exp $
  */
 @Component
 public class IncomeServiceImpl implements IncomeService {

@@ -75,6 +75,7 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     ACC_TRAN_NO, SYS_CODE, MACHINE_NO, CHANNEL_NO, TERMINAL_NO,TRAN_CODE, IPS_BILL_NO, APP_TRAN_NO,
     APP_BATCH_NO, CUS_TRAN_NO, CHL_TRAN_NO, PRD_CODE, TRAN_TYPE, INITIATOR_FLG, PAYEE_CODE, 
@@ -103,6 +104,7 @@
     from TCOR_TRN_TRANSACTION_HIS
     where ACC_TRAN_NO = #{accTranNo,jdbcType=VARCHAR}
   </select>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnTransactionHis" >
     insert into TCOR_TRN_TRANSACTION_HIS (ACC_TRAN_NO, SYS_CODE, MACHINE_NO, 
       CHANNEL_NO, TERMINAL_NO,TRAN_CODE, IPS_BILL_NO,
@@ -153,6 +155,7 @@
       #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
       #{modifyBy,jdbcType=VARCHAR})
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.TrnTransactionHis" >
     update TCOR_TRN_TRANSACTION_HIS
     <set >
@@ -372,4 +375,5 @@
     </set>
     where ACC_TRAN_NO = #{accTranNo,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

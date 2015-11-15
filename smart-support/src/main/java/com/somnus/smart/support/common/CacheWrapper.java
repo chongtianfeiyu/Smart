@@ -7,12 +7,6 @@ import net.sf.ehcache.Element;
 
 import org.apache.commons.lang3.StringUtils;
 
-/**
- * CacheWrapper
- *
- * @author: cjliu
- * @version: 2013-09-25
- */
 public class CacheWrapper {
 
 	private  Cache cache;

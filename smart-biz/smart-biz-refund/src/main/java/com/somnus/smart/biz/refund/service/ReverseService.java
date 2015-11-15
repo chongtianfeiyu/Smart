@@ -6,9 +6,6 @@ import com.somnus.smart.message.account.ReverseRequest;
 
 /**
  * 冲正服务
- * 
- * @author Administrator
- * @version $Id: ReserveService.java, v 0.1 2014-10-17 下午04:15:20 Administrator Exp $
  */
 public interface ReverseService {
 

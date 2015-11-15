@@ -1,11 +1,5 @@
 package com.somnus.smart.support.common;
 
-/**
- * Constants
- *
- * @author: levis
- * @version: 2013-09-25
- */
 public class Constants {
 
 	public static final String SESSION_ID = "sessionId";
@@ -24,6 +18,5 @@ public class Constants {
      * 时间日期格式 yyyy-MM-dd HH:mm:ss
      */
     public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
 
 }

@@ -18,10 +18,12 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     ERR_NO,ACC_DATE, ERR_TRAN_NO, IPS_BILL_NO, APP_TRAN_NO, TRAN_TYPE, TRAN_AMT, ERR_KIND, ERR_CODE, 
     ERR_REMARK, STATUS, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY
   </sql>
+  
   <select id="selectUndoCnt" resultType="int" parameterType="map">
 	select
 	count(*)
@@ -64,6 +66,7 @@
 		</trim>
 	</where>
   </select>
+  
   <select id="selectByDiffTraninfo" resultMap="BaseResultMap" parameterType="map">
 	select
 	<include refid="Base_Column_List" />
@@ -106,6 +109,7 @@
 		</trim>
 	</where>
   </select>
+  
   <select id="getDiffTranSequences" resultType="string" >
    select SEQ_DIFF_TRAN_ID.nextVal from dual
   </select>
@@ -134,6 +138,7 @@
       #{status,jdbcType=CHAR}, #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
       #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR})
   </insert>
+  
   <update id="update" parameterType="com.somnus.smart.base.domain.DiffTraninfo" >
     update TCOR_DIFF_TRANINFO
     <set >
@@ -179,4 +184,5 @@
     </set>
     where ERR_NO = #{errNo,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

@@ -26,9 +26,6 @@ import com.somnus.smart.support.util.DateUtil;
 
 /**
  * 扣划记账业务处理实现
- * 
- * @author 李太平
- * @version $Id: BuckleDrawServiceImpl.java, v 0.1 2014-11-24 下午02:30:47 李太平 Exp $
  */
 @Component
 public class BuckleDrawServiceImpl implements BuckleDrawService {

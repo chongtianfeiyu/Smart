@@ -8,11 +8,6 @@ import com.github.miemiedev.mybatis.paginator.domain.PageList;
 import com.somnus.smart.biz.accquery.common.IssuedEntity;
 import com.somnus.smart.support.mybatis.annotation.MyBatisRepository;
 
-/**
- * 下发审批DAO
- * @author bo.zhang
- *
- */
 @MyBatisRepository
 public interface IssuedAccDao {
 	

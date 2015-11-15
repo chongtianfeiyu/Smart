@@ -7,8 +7,6 @@ import com.somnus.smart.message.custom.AddAccountResponse;
 
 /**
  * 差异补记账服务
- * @author tp.li
- *
  */
 public interface AddAccountResource {
 	

@@ -7,9 +7,6 @@ import com.somnus.smart.message.refusepay.RefusePayResponse;
 
 /**
  * 拒付
- * 
- * @author bo.zhang
- *
  */
 public interface RefusePayResource {
 	/**

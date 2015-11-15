@@ -10,9 +10,6 @@ import com.somnus.smart.message.custom.SettlementWriteOffRequest;
 
 /**
  * 结汇记账业务处理
- * 
- * @author 李太平
- * @version $Id: ForeignExchangeService.java, v 0.1 2014-11-24 下午04:57:53 李太平  Exp $
  */
 public interface ForeignExchangeService {
     /**

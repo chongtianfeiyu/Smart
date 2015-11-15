@@ -7,9 +7,6 @@ import com.somnus.smart.message.account.BankDrawRequest;
 
 /**
  * 提现
- *
- * @author IH745
- * @version 1.0 13-10-13
  */
 public interface DrawResource {
 	/**

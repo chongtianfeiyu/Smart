@@ -20,12 +20,6 @@ import com.somnus.smart.service.common.MessageUtil;
 import com.somnus.smart.support.common.JsonUtils;
 import com.somnus.smart.support.exceptions.BizException;
 
-/**
- * 
- * @description: TODO 
- * @author Somnus
- * date 2015年3月6日 下午6:17:24
- */
 @Component
 @Validated
 @Path("/com.somnus.smart.biz.meracc.resource.AccountAllowInOrOutResource")

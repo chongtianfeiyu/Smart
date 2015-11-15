@@ -14,21 +14,24 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     REF_TRAN_NO, ACC_TRAN_NO, CARD_NO, CARD_NO_EX, CARDHOLDER, STATUS, SUBMIT_TIME, CREATE_TIME, 
     CREATE_BY, MODIFY_TIME, MODIFY_BY
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from TCOR_TRN_TRANREFUSE
     where REF_TRAN_NO = #{refTranNo,jdbcType=VARCHAR}
   </select>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnTranrefuse" >
     <selectKey resultType="java.lang.String" keyProperty="refTranNo" order="BEFORE">
-	 select
-	 to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANREFUSE.NEXTVAL
-	 from
+	 select 
+	 to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANREFUSE.NEXTVAL 
+	 from 
 	 dual
 	</selectKey>
     insert into TCOR_TRN_TRANREFUSE (REF_TRAN_NO, ACC_TRAN_NO, CARD_NO, 
@@ -40,6 +43,7 @@
       #{submitTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
       #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR})
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.TrnTranrefuse" >
     update TCOR_TRN_TRANREFUSE
     <set >
@@ -76,4 +80,5 @@
     </set>
     where REF_TRAN_NO = #{refTranNo,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

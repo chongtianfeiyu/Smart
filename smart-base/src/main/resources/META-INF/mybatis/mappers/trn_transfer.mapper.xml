@@ -19,10 +19,12 @@
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
     <result column="BATCH_NO" property="batchNo" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     TRANSFER_ID, ACC_DATE, MER_CODE, MER_NAME, MER_ACC_CODE, CCY_CODE, TRAN_AMOUNT, CUR_BAL, 
     RESERVE_BAL, FREEZE_BAL, STATUS, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY,BATCH_NO
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -80,20 +82,19 @@
   
   <select id="getBatchNo" resultType="java.lang.String">
 	select
-	 to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANSFER.NEXTVAL
+	to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANSFER.NEXTVAL
 	from
 	dual
-</select>
+  </select>
   
   <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnTransfer" >
-  		<selectKey resultType="java.lang.String" keyProperty="transferId"
-			order="BEFORE">
-			select
-			'TR'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANSFER.NEXTVAL
-			from
-			dual
-		</selectKey>
-   insert into TCOR_TRN_TRANSFER (TRANSFER_ID, ACC_DATE, MER_CODE, 
+	<selectKey resultType="java.lang.String" keyProperty="transferId" order="BEFORE">
+		select
+		'TR'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANSFER.NEXTVAL
+		from
+		dual
+	</selectKey>
+	insert into TCOR_TRN_TRANSFER (TRANSFER_ID, ACC_DATE, MER_CODE, 
       MER_NAME, MER_ACC_CODE, CCY_CODE, 
       TRAN_AMOUNT, CUR_BAL, RESERVE_BAL, 
       FREEZE_BAL, STATUS, CREATE_TIME, 
@@ -106,6 +107,7 @@
       #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}, 
       #{batchNo,jdbcType=VARCHAR})
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.TrnTransfer" >
     update TCOR_TRN_TRANSFER
     <set >
@@ -157,4 +159,5 @@
     </set>
     where TRANSFER_ID = #{transferId,jdbcType=VARCHAR} and STATUS in ('0','2')
   </update>
+  
 </mapper>

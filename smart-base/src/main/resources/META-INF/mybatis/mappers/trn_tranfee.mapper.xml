@@ -11,6 +11,7 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -40,6 +41,7 @@
       </foreach>
     </where>
   </sql>
+  
   <sql id="Update_By_Example_Where_Clause" >
     <where >
       <foreach collection="example.oredCriteria" item="criteria" separator="or" >
@@ -69,10 +71,12 @@
       </foreach>
     </where>
   </sql>
+  
   <sql id="Base_Column_List" >
     FEE_TRAN_NO, ACC_TRAN_NO, STATUS, SUBMIT_TIME, CREATE_TIME, CREATE_BY, MODIFY_TIME, 
     MODIFY_BY
   </sql>
+  
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.somnus.smart.base.domain.TcorTrnTranFeeExample" >
     select
     <if test="distinct" >
@@ -87,12 +91,14 @@
       order by ${orderByClause}
     </if>
   </select>
+  
   <delete id="deleteByExample" parameterType="com.somnus.smart.base.domain.TcorTrnTranFeeExample" >
     delete from TCOR_TRN_TRANFEE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.TcorTrnTranFee" >
     insert into TCOR_TRN_TRANFEE (FEE_TRAN_NO, ACC_TRAN_NO, STATUS, 
       SUBMIT_TIME, CREATE_TIME, CREATE_BY, 
@@ -101,6 +107,7 @@
       #{submitTime,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
       #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.somnus.smart.base.domain.TcorTrnTranFee" >
     insert into TCOR_TRN_TRANFEE
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -156,12 +163,14 @@
       </if>
     </trim>
   </insert>
+  
   <select id="countByExample" parameterType="com.somnus.smart.base.domain.TcorTrnTranFeeExample" resultType="java.lang.Integer" >
     select count(*) from TCOR_TRN_TRANFEE
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  
   <update id="updateByExampleSelective" parameterType="map" >
     update TCOR_TRN_TRANFEE
     <set >
@@ -194,6 +203,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  
   <update id="updateByExample" parameterType="map" >
     update TCOR_TRN_TRANFEE
     set FEE_TRAN_NO = #{record.feeTranNo,jdbcType=VARCHAR},
@@ -210,10 +220,10 @@
   </update>
   
   <select id="getFeeTranNo" resultType="java.lang.String">
-		select
-			to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANFEE.NEXTVAL
-			from
-			dual
-	</select>
+	select 
+	to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANFEE.NEXTVAL 
+	from 
+	dual
+  </select>
   
 </mapper>

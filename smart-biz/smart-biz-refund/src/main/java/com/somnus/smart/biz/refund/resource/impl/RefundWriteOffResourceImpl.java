@@ -24,9 +24,6 @@ import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 退款核销记账接口
- * 
- * @author 李太平
- * @version $Id: RefundWriteOffResourceNewImpl.java, v 0.1 2014-11-21 下午01:25:02 李太平 Exp $
  */
 @Component
 @Validated

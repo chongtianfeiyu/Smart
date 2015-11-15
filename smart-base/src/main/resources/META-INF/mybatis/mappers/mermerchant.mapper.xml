@@ -53,6 +53,7 @@
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     MER_ID, MER_CODE, MER_CODE_POS, MER_TYPE, MER_NAME, SHORT_NAME, GW_NAME, OFFICE_ADDR, 
     OFFICIAL_WEBSITE, MER_MAIL, INDUSTRY_L1, INDUSTRY_L2, INDUSTRY_L3, MCC, MER_LEVEL, 
@@ -76,9 +77,11 @@
   </select>
   
   <select id="getMerchantSequences" resultType="string" >
-   select SEQ_MER_MERCHANT_ID.nextVal from dual
+   select 
+   SEQ_MER_MERCHANT_ID.nextVal 
+   from 
+   dual
   </select>
-  
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
     select 
@@ -86,6 +89,7 @@
     from TCIM_MER_MERCHANT
     where MER_ID = #{merId,jdbcType=DECIMAL}
   </select>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.MerMerchant" >
     insert into TCIM_MER_MERCHANT (MER_ID, MER_CODE, MER_CODE_POS, 
       MER_TYPE, MER_NAME, SHORT_NAME, 
@@ -122,6 +126,7 @@
       #{operFlag,jdbcType=VARCHAR}, #{effectDate,jdbcType=VARCHAR}, #{loseEffectDate,jdbcType=VARCHAR}, 
       #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.MerMerchant" >
    update TCIM_MER_MERCHANT
     <set >
@@ -276,193 +281,192 @@
     where MER_CODE = #{merCode,jdbcType=VARCHAR}
   </update>
 
-<insert id="merge" parameterType="com.somnus.smart.base.domain.MerMerchant" >
-  
-MERGE INTO TCIM_MER_MERCHANT  T
-  USING DUAL
-  ON(T.MER_ID = #{merId,jdbcType=DECIMAL})
-WHEN not MATCHED THEN
-insert (MER_ID, MER_CODE, MER_CODE_POS, 
-      MER_TYPE, MER_NAME, SHORT_NAME, 
-      GW_NAME, OFFICE_ADDR, OFFICIAL_WEBSITE, 
-      MER_MAIL, INDUSTRY_L1, INDUSTRY_L2, 
-      INDUSTRY_L3, MCC, MER_LEVEL, 
-      MER_LEVEL_REASON, RISK, RISK_REASON, 
-      NEED_INVOICE, MER_SOURCE, RECOMMEND_DETAIL, 
-      COMPANY_CODE, EMPLOYEE_NO, EMPLOYEE_PHONE, 
-      AGENCY_CODE, MER_COUNTRY, MER_PROVINCE, 
-      MER_CITY, LEGAL_PERSON, LP_CER_TYPE, 
-      LP_CER_NO, LP_CER_VLD_TO, LICENSE_NO, 
-      LICENSE_VLD_TO, MAIN_BIZ, REG_ADDR, 
-      REG_CAPITAL, REAL_CAPITAL, TAX_NO, 
-      TAX_VLD_TO, ORG_CODE, ORG_VLD_TO, 
-      REMARK, VERSION, STATUS, 
-      OPER_FLAG, EFFECT_DATE, LOSE_EFFECT_DATE, 
-      MODIFY_BY, MODIFY_TIME)
-    values (#{merId,jdbcType=DECIMAL}, #{merCode,jdbcType=VARCHAR}, #{merCodePos,jdbcType=VARCHAR}, 
-      #{merType,jdbcType=VARCHAR}, #{merName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
-      #{gwName,jdbcType=VARCHAR}, #{officeAddr,jdbcType=VARCHAR}, #{officialWebsite,jdbcType=VARCHAR}, 
-      #{merMail,jdbcType=VARCHAR}, #{industryL1,jdbcType=VARCHAR}, #{industryL2,jdbcType=VARCHAR}, 
-      #{industryL3,jdbcType=VARCHAR}, #{mcc,jdbcType=VARCHAR}, #{merLevel,jdbcType=DECIMAL}, 
-      #{merLevelReason,jdbcType=VARCHAR}, #{risk,jdbcType=VARCHAR}, #{riskReason,jdbcType=VARCHAR}, 
-      #{needInvoice,jdbcType=DECIMAL}, #{merSource,jdbcType=VARCHAR}, #{recommendDetail,jdbcType=VARCHAR}, 
-      #{companyCode,jdbcType=VARCHAR}, #{employeeNo,jdbcType=VARCHAR}, #{employeePhone,jdbcType=VARCHAR}, 
-      #{agencyCode,jdbcType=VARCHAR}, #{merCountry,jdbcType=VARCHAR}, #{merProvince,jdbcType=VARCHAR}, 
-      #{merCity,jdbcType=VARCHAR}, #{legalPerson,jdbcType=VARCHAR}, #{lpCerType,jdbcType=VARCHAR}, 
-      #{lpCerNo,jdbcType=VARCHAR}, #{lpCerVldTo,jdbcType=VARCHAR}, #{licenseNo,jdbcType=VARCHAR}, 
-      #{licenseVldTo,jdbcType=VARCHAR}, #{mainBiz,jdbcType=VARCHAR}, #{regAddr,jdbcType=VARCHAR}, 
-      #{regCapital,jdbcType=DECIMAL}, #{realCapital,jdbcType=DECIMAL}, #{taxNo,jdbcType=VARCHAR}, 
-      #{taxVldTo,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, #{orgVldTo,jdbcType=VARCHAR}, 
-      #{remark,jdbcType=VARCHAR}, #{version,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, 
-      #{operFlag,jdbcType=VARCHAR}, #{effectDate,jdbcType=VARCHAR}, #{loseEffectDate,jdbcType=VARCHAR}, 
-      #{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
-WHEN MATCHED THEN  UPDATE 
- <set >
-      <if test="merCodePos != null" >
-        MER_CODE_POS = #{merCodePos,jdbcType=VARCHAR},
-      </if>
-      <if test="merType != null" >
-        MER_TYPE = #{merType,jdbcType=VARCHAR},
-      </if>
-      <if test="merName != null" >
-        MER_NAME = #{merName,jdbcType=VARCHAR},
-      </if>
-      <if test="shortName != null" >
-        SHORT_NAME = #{shortName,jdbcType=VARCHAR},
-      </if>
-      <if test="gwName != null" >
-        GW_NAME = #{gwName,jdbcType=VARCHAR},
-      </if>
-      <if test="officeAddr != null" >
-        OFFICE_ADDR = #{officeAddr,jdbcType=VARCHAR},
-      </if>
-      <if test="officialWebsite != null" >
-        OFFICIAL_WEBSITE = #{officialWebsite,jdbcType=VARCHAR},
-      </if>
-      <if test="merMail != null" >
-        MER_MAIL = #{merMail,jdbcType=VARCHAR},
-      </if>
-      <if test="industryL1 != null" >
-        INDUSTRY_L1 = #{industryL1,jdbcType=VARCHAR},
-      </if>
-      <if test="industryL2 != null" >
-        INDUSTRY_L2 = #{industryL2,jdbcType=VARCHAR},
-      </if>
-      <if test="industryL3 != null" >
-        INDUSTRY_L3 = #{industryL3,jdbcType=VARCHAR},
-      </if>
-      <if test="mcc != null" >
-        MCC = #{mcc,jdbcType=VARCHAR},
-      </if>
-      <if test="merLevel != null" >
-        MER_LEVEL = #{merLevel,jdbcType=DECIMAL},
-      </if>
-      <if test="merLevelReason != null" >
-        MER_LEVEL_REASON = #{merLevelReason,jdbcType=VARCHAR},
-      </if>
-      <if test="risk != null" >
-        RISK = #{risk,jdbcType=VARCHAR},
-      </if>
-      <if test="riskReason != null" >
-        RISK_REASON = #{riskReason,jdbcType=VARCHAR},
-      </if>
-      <if test="needInvoice != null" >
-        NEED_INVOICE = #{needInvoice,jdbcType=DECIMAL},
-      </if>
-      <if test="merSource != null" >
-        MER_SOURCE = #{merSource,jdbcType=VARCHAR},
-      </if>
-      <if test="recommendDetail != null" >
-        RECOMMEND_DETAIL = #{recommendDetail,jdbcType=VARCHAR},
-      </if>
-      <if test="companyCode != null" >
-        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
-      </if>
-      <if test="employeeNo != null" >
-        EMPLOYEE_NO = #{employeeNo,jdbcType=VARCHAR},
-      </if>
-      <if test="employeePhone != null" >
-        EMPLOYEE_PHONE = #{employeePhone,jdbcType=VARCHAR},
-      </if>
-      <if test="agencyCode != null" >
-        AGENCY_CODE = #{agencyCode,jdbcType=VARCHAR},
-      </if>
-      <if test="merCountry != null" >
-        MER_COUNTRY = #{merCountry,jdbcType=VARCHAR},
-      </if>
-      <if test="merProvince != null" >
-        MER_PROVINCE = #{merProvince,jdbcType=VARCHAR},
-      </if>
-      <if test="merCity != null" >
-        MER_CITY = #{merCity,jdbcType=VARCHAR},
-      </if>
-      <if test="legalPerson != null" >
-        LEGAL_PERSON = #{legalPerson,jdbcType=VARCHAR},
-      </if>
-      <if test="lpCerType != null" >
-        LP_CER_TYPE = #{lpCerType,jdbcType=VARCHAR},
-      </if>
-      <if test="lpCerNo != null" >
-        LP_CER_NO = #{lpCerNo,jdbcType=VARCHAR},
-      </if>
-      <if test="lpCerVldTo != null" >
-        LP_CER_VLD_TO = #{lpCerVldTo,jdbcType=VARCHAR},
-      </if>
-      <if test="licenseNo != null" >
-        LICENSE_NO = #{licenseNo,jdbcType=VARCHAR},
-      </if>
-      <if test="licenseVldTo != null" >
-        LICENSE_VLD_TO = #{licenseVldTo,jdbcType=VARCHAR},
-      </if>
-      <if test="mainBiz != null" >
-        MAIN_BIZ = #{mainBiz,jdbcType=VARCHAR},
-      </if>
-      <if test="regAddr != null" >
-        REG_ADDR = #{regAddr,jdbcType=VARCHAR},
-      </if>
-      <if test="regCapital != null" >
-        REG_CAPITAL = #{regCapital,jdbcType=DECIMAL},
-      </if>
-      <if test="realCapital != null" >
-        REAL_CAPITAL = #{realCapital,jdbcType=DECIMAL},
-      </if>
-      <if test="taxNo != null" >
-        TAX_NO = #{taxNo,jdbcType=VARCHAR},
-      </if>
-      <if test="taxVldTo != null" >
-        TAX_VLD_TO = #{taxVldTo,jdbcType=VARCHAR},
-      </if>
-      <if test="orgCode != null" >
-        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
-      </if>
-      <if test="orgVldTo != null" >
-        ORG_VLD_TO = #{orgVldTo,jdbcType=VARCHAR},
-      </if>
-      <if test="remark != null" >
-        REMARK = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="version != null" >
-        VERSION = #{version,jdbcType=DECIMAL},
-      </if>
-      <if test="status != null" >
-        STATUS = #{status,jdbcType=VARCHAR},
-      </if>
-      <if test="operFlag != null" >
-        OPER_FLAG = #{operFlag,jdbcType=VARCHAR},
-      </if>
-      <if test="effectDate != null" >
-        EFFECT_DATE = #{effectDate,jdbcType=VARCHAR},
-      </if>
-      <if test="loseEffectDate != null" >
-        LOSE_EFFECT_DATE = #{loseEffectDate,jdbcType=VARCHAR},
-      </if>
-      <if test="modifyBy != null" >
-        MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
-      </if>
-      <if test="modifyTime != null" >
-        MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-</insert>
+  <insert id="merge" parameterType="com.somnus.smart.base.domain.MerMerchant" >
+	MERGE INTO TCIM_MER_MERCHANT  T
+	  USING DUAL
+	  ON(T.MER_ID = #{merId,jdbcType=DECIMAL})
+	WHEN not MATCHED THEN
+	insert (MER_ID, MER_CODE, MER_CODE_POS, 
+		MER_TYPE, MER_NAME, SHORT_NAME, 
+		GW_NAME, OFFICE_ADDR, OFFICIAL_WEBSITE, 
+		MER_MAIL, INDUSTRY_L1, INDUSTRY_L2, 
+		INDUSTRY_L3, MCC, MER_LEVEL, 
+		MER_LEVEL_REASON, RISK, RISK_REASON, 
+		NEED_INVOICE, MER_SOURCE, RECOMMEND_DETAIL, 
+		COMPANY_CODE, EMPLOYEE_NO, EMPLOYEE_PHONE, 
+		AGENCY_CODE, MER_COUNTRY, MER_PROVINCE, 
+		MER_CITY, LEGAL_PERSON, LP_CER_TYPE, 
+		LP_CER_NO, LP_CER_VLD_TO, LICENSE_NO, 
+		LICENSE_VLD_TO, MAIN_BIZ, REG_ADDR, 
+		REG_CAPITAL, REAL_CAPITAL, TAX_NO, 
+		TAX_VLD_TO, ORG_CODE, ORG_VLD_TO, 
+		REMARK, VERSION, STATUS, 
+		OPER_FLAG, EFFECT_DATE, LOSE_EFFECT_DATE, 
+		MODIFY_BY, MODIFY_TIME)
+	values (#{merId,jdbcType=DECIMAL}, #{merCode,jdbcType=VARCHAR}, #{merCodePos,jdbcType=VARCHAR}, 
+		#{merType,jdbcType=VARCHAR}, #{merName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
+		#{gwName,jdbcType=VARCHAR}, #{officeAddr,jdbcType=VARCHAR}, #{officialWebsite,jdbcType=VARCHAR}, 
+		#{merMail,jdbcType=VARCHAR}, #{industryL1,jdbcType=VARCHAR}, #{industryL2,jdbcType=VARCHAR}, 
+		#{industryL3,jdbcType=VARCHAR}, #{mcc,jdbcType=VARCHAR}, #{merLevel,jdbcType=DECIMAL}, 
+		#{merLevelReason,jdbcType=VARCHAR}, #{risk,jdbcType=VARCHAR}, #{riskReason,jdbcType=VARCHAR}, 
+		#{needInvoice,jdbcType=DECIMAL}, #{merSource,jdbcType=VARCHAR}, #{recommendDetail,jdbcType=VARCHAR}, 
+		#{companyCode,jdbcType=VARCHAR}, #{employeeNo,jdbcType=VARCHAR}, #{employeePhone,jdbcType=VARCHAR}, 
+		#{agencyCode,jdbcType=VARCHAR}, #{merCountry,jdbcType=VARCHAR}, #{merProvince,jdbcType=VARCHAR}, 
+		#{merCity,jdbcType=VARCHAR}, #{legalPerson,jdbcType=VARCHAR}, #{lpCerType,jdbcType=VARCHAR}, 
+		#{lpCerNo,jdbcType=VARCHAR}, #{lpCerVldTo,jdbcType=VARCHAR}, #{licenseNo,jdbcType=VARCHAR}, 
+		#{licenseVldTo,jdbcType=VARCHAR}, #{mainBiz,jdbcType=VARCHAR}, #{regAddr,jdbcType=VARCHAR}, 
+		#{regCapital,jdbcType=DECIMAL}, #{realCapital,jdbcType=DECIMAL}, #{taxNo,jdbcType=VARCHAR}, 
+		#{taxVldTo,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, #{orgVldTo,jdbcType=VARCHAR}, 
+		#{remark,jdbcType=VARCHAR}, #{version,jdbcType=DECIMAL}, #{status,jdbcType=VARCHAR}, 
+		#{operFlag,jdbcType=VARCHAR}, #{effectDate,jdbcType=VARCHAR}, #{loseEffectDate,jdbcType=VARCHAR}, 
+		#{modifyBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=TIMESTAMP})
+	WHEN MATCHED THEN  UPDATE 
+	<set >
+	      <if test="merCodePos != null" >
+	        MER_CODE_POS = #{merCodePos,jdbcType=VARCHAR},
+	      </if>
+	      <if test="merType != null" >
+	        MER_TYPE = #{merType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="merName != null" >
+	        MER_NAME = #{merName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="shortName != null" >
+	        SHORT_NAME = #{shortName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="gwName != null" >
+	        GW_NAME = #{gwName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="officeAddr != null" >
+	        OFFICE_ADDR = #{officeAddr,jdbcType=VARCHAR},
+	      </if>
+	      <if test="officialWebsite != null" >
+	        OFFICIAL_WEBSITE = #{officialWebsite,jdbcType=VARCHAR},
+	      </if>
+	      <if test="merMail != null" >
+	        MER_MAIL = #{merMail,jdbcType=VARCHAR},
+	      </if>
+	      <if test="industryL1 != null" >
+	        INDUSTRY_L1 = #{industryL1,jdbcType=VARCHAR},
+	      </if>
+	      <if test="industryL2 != null" >
+	        INDUSTRY_L2 = #{industryL2,jdbcType=VARCHAR},
+	      </if>
+	      <if test="industryL3 != null" >
+	        INDUSTRY_L3 = #{industryL3,jdbcType=VARCHAR},
+	      </if>
+	      <if test="mcc != null" >
+	        MCC = #{mcc,jdbcType=VARCHAR},
+	      </if>
+	      <if test="merLevel != null" >
+	        MER_LEVEL = #{merLevel,jdbcType=DECIMAL},
+	      </if>
+	      <if test="merLevelReason != null" >
+	        MER_LEVEL_REASON = #{merLevelReason,jdbcType=VARCHAR},
+	      </if>
+	      <if test="risk != null" >
+	        RISK = #{risk,jdbcType=VARCHAR},
+	      </if>
+	      <if test="riskReason != null" >
+	        RISK_REASON = #{riskReason,jdbcType=VARCHAR},
+	      </if>
+	      <if test="needInvoice != null" >
+	        NEED_INVOICE = #{needInvoice,jdbcType=DECIMAL},
+	      </if>
+	      <if test="merSource != null" >
+	        MER_SOURCE = #{merSource,jdbcType=VARCHAR},
+	      </if>
+	      <if test="recommendDetail != null" >
+	        RECOMMEND_DETAIL = #{recommendDetail,jdbcType=VARCHAR},
+	      </if>
+	      <if test="companyCode != null" >
+	        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+	      </if>
+	      <if test="employeeNo != null" >
+	        EMPLOYEE_NO = #{employeeNo,jdbcType=VARCHAR},
+	      </if>
+	      <if test="employeePhone != null" >
+	        EMPLOYEE_PHONE = #{employeePhone,jdbcType=VARCHAR},
+	      </if>
+	      <if test="agencyCode != null" >
+	        AGENCY_CODE = #{agencyCode,jdbcType=VARCHAR},
+	      </if>
+	      <if test="merCountry != null" >
+	        MER_COUNTRY = #{merCountry,jdbcType=VARCHAR},
+	      </if>
+	      <if test="merProvince != null" >
+	        MER_PROVINCE = #{merProvince,jdbcType=VARCHAR},
+	      </if>
+	      <if test="merCity != null" >
+	        MER_CITY = #{merCity,jdbcType=VARCHAR},
+	      </if>
+	      <if test="legalPerson != null" >
+	        LEGAL_PERSON = #{legalPerson,jdbcType=VARCHAR},
+	      </if>
+	      <if test="lpCerType != null" >
+	        LP_CER_TYPE = #{lpCerType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="lpCerNo != null" >
+	        LP_CER_NO = #{lpCerNo,jdbcType=VARCHAR},
+	      </if>
+	      <if test="lpCerVldTo != null" >
+	        LP_CER_VLD_TO = #{lpCerVldTo,jdbcType=VARCHAR},
+	      </if>
+	      <if test="licenseNo != null" >
+	        LICENSE_NO = #{licenseNo,jdbcType=VARCHAR},
+	      </if>
+	      <if test="licenseVldTo != null" >
+	        LICENSE_VLD_TO = #{licenseVldTo,jdbcType=VARCHAR},
+	      </if>
+	      <if test="mainBiz != null" >
+	        MAIN_BIZ = #{mainBiz,jdbcType=VARCHAR},
+	      </if>
+	      <if test="regAddr != null" >
+	        REG_ADDR = #{regAddr,jdbcType=VARCHAR},
+	      </if>
+	      <if test="regCapital != null" >
+	        REG_CAPITAL = #{regCapital,jdbcType=DECIMAL},
+	      </if>
+	      <if test="realCapital != null" >
+	        REAL_CAPITAL = #{realCapital,jdbcType=DECIMAL},
+	      </if>
+	      <if test="taxNo != null" >
+	        TAX_NO = #{taxNo,jdbcType=VARCHAR},
+	      </if>
+	      <if test="taxVldTo != null" >
+	        TAX_VLD_TO = #{taxVldTo,jdbcType=VARCHAR},
+	      </if>
+	      <if test="orgCode != null" >
+	        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+	      </if>
+	      <if test="orgVldTo != null" >
+	        ORG_VLD_TO = #{orgVldTo,jdbcType=VARCHAR},
+	      </if>
+	      <if test="remark != null" >
+	        REMARK = #{remark,jdbcType=VARCHAR},
+	      </if>
+	      <if test="version != null" >
+	        VERSION = #{version,jdbcType=DECIMAL},
+	      </if>
+	      <if test="status != null" >
+	        STATUS = #{status,jdbcType=VARCHAR},
+	      </if>
+	      <if test="operFlag != null" >
+	        OPER_FLAG = #{operFlag,jdbcType=VARCHAR},
+	      </if>
+	      <if test="effectDate != null" >
+	        EFFECT_DATE = #{effectDate,jdbcType=VARCHAR},
+	      </if>
+	      <if test="loseEffectDate != null" >
+	        LOSE_EFFECT_DATE = #{loseEffectDate,jdbcType=VARCHAR},
+	      </if>
+	      <if test="modifyBy != null" >
+	        MODIFY_BY = #{modifyBy,jdbcType=VARCHAR},
+	      </if>
+	      <if test="modifyTime != null" >
+	        MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+	      </if>
+	</set>
+  </insert>
 
 </mapper>

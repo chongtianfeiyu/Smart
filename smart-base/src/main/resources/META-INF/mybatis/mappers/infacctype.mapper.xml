@@ -20,6 +20,7 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <resultMap id="AccSubResultMap" type="com.somnus.smart.base.domain.Accsubentity" >
     <result column="ACC_TYPE" property="accType" jdbcType="VARCHAR" />
     <result column="ACC_TYPE_NAME" property="accTypeName" jdbcType="VARCHAR" />
@@ -48,6 +49,7 @@
     <result column="RED_FLAG" property="redFlag" jdbcType="CHAR" />
     <result column="OPEN_ACC_FLAG" property="openAccFlag" jdbcType="CHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     ACC_TYPE, ACC_TYPE_NAME, BASE_FLAG, TEMP_ACCT_FLAG, SUB_CODE, OPEN_ACC_FLAG, ACC_KIND, 
     IS_REAL_BAL, INTERNAL_OPEN_FLAG, ENTERPRISE_OPEN_FLAG, PERSONAL_OPEN_FLAG, ERASE_FLG, 
@@ -81,17 +83,18 @@
     and a.STATUS='1' and b.STATUS='1' and b.SUB_CODE_1ST = a.SUB_CODE
   </select>
   
-  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from TCOR_INF_ACCTYPE
     where ACC_TYPE = #{accType,jdbcType=VARCHAR}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from TCOR_INF_ACCTYPE
     where ACC_TYPE = #{accType,jdbcType=VARCHAR}
   </delete>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.InfAcctype" >
     insert into TCOR_INF_ACCTYPE (ACC_TYPE, ACC_TYPE_NAME, BASE_FLAG, 
       TEMP_ACCT_FLAG, SUB_CODE, OPEN_ACC_FLAG, 
@@ -106,6 +109,7 @@
       #{status,jdbcType=CHAR}, #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
       #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.somnus.smart.base.domain.InfAcctype" >
     insert into TCOR_INF_ACCTYPE
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -215,6 +219,7 @@
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.InfAcctype" >
     update TCOR_INF_ACCTYPE
     <set >
@@ -269,6 +274,7 @@
     </set>
     where ACC_TYPE = #{accType,jdbcType=VARCHAR}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.somnus.smart.base.domain.InfAcctype" >
     update TCOR_INF_ACCTYPE
     set ACC_TYPE_NAME = #{accTypeName,jdbcType=VARCHAR},
@@ -295,4 +301,5 @@
     where a.ACC_TYPE = #{accType,jdbcType=VARCHAR} and a.SUB_CODE = b.SUB_CODE_1ST 
     and a.STATUS='1' and b.STATUS='1'
   </select>
+  
 </mapper>

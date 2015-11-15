@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.somnus.smart.base.dao.TrnAccDetailDao">
-	 <resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.TrnAccDetail" >
+  <resultMap id="BaseResultMap" type="com.somnus.smart.base.domain.TrnAccDetail" >
     <id column="ACC_DETAIL_NO" property="accDetailNo" jdbcType="VARCHAR" />
     <result column="ACC_TRAN_NO" property="accTranNo" jdbcType="VARCHAR" />
     <result column="LED_TRAN_NO" property="ledTranNo" jdbcType="VARCHAR" />
@@ -29,6 +29,7 @@
     <result column="DEBIT_AMT" property="totalExpenditure" jdbcType="DECIMAL" />
     <result column="CREDIT_AMT" property="totalIncome" jdbcType="DECIMAL" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     ACC_DETAIL_NO, ACC_TRAN_NO, LED_TRAN_NO, SUB_INDEX, SUB_CODE, REL_SUB_CODE, CD_FLAG, 
     ACC_CODE, SUB_ACC_CODE, TRAN_AMT, CUR_BAL, APP_TRAN_DATE, ACC_DATE, SYS_CODE, TRAN_TYPE, 
@@ -142,131 +143,118 @@
 	ORDER BY a.acc_detail_no DESC
   </select>
   
-
-	<!-- 验证是否已记账 -->
-	<select id="getBizAccDetailToDo" resultMap="BaseResultMap"
-		parameterType="map">
-		select
-		<include refid="Base_Column_List" />
-		from
-		TCOR_TRN_ACCDETAIL t
-		where t.LED_TRAN_NO =
-		#{ledTranNo,jdbcType=VARCHAR}
-		AND t.SUB_INDEX =
-		#{subIndex,jdbcType=DECIMAL}
-		AND t.CD_FLAG = #{cdFlag,jdbcType=VARCHAR}
+  <!-- 验证是否已记账 -->
+  <select id="getBizAccDetailToDo" resultMap="BaseResultMap" parameterType="map">
+	select
+	<include refid="Base_Column_List" />
+	from
+	TCOR_TRN_ACCDETAIL t
+	where t.LED_TRAN_NO = #{ledTranNo,jdbcType=VARCHAR}
+	AND t.SUB_INDEX = #{subIndex,jdbcType=DECIMAL}
+	AND t.CD_FLAG = #{cdFlag,jdbcType=VARCHAR}
 	</select>
 	
-		<!-- 验证是否已记账 -->
-	<select id="getIntAccDetailToDo" resultMap="BaseResultMap"
-		parameterType="map">
-		select
-		<include refid="Base_Column_List" />
-		from
-		TCOR_TRN_ACCDETAIL_INT t
-		where t.LED_TRAN_NO =
-		#{ledTranNo,jdbcType=VARCHAR}
-		AND t.SUB_INDEX =
-		#{subIndex,jdbcType=DECIMAL}
-		AND t.CD_FLAG = #{cdFlag,jdbcType=VARCHAR}
+  <!-- 验证是否已记账 -->
+  <select id="getIntAccDetailToDo" resultMap="BaseResultMap" parameterType="map">
+	select
+	<include refid="Base_Column_List" />
+	from
+	TCOR_TRN_ACCDETAIL_INT t
+	where t.LED_TRAN_NO = #{ledTranNo,jdbcType=VARCHAR}
+	AND t.SUB_INDEX = #{subIndex,jdbcType=DECIMAL}
+	AND t.CD_FLAG = #{cdFlag,jdbcType=VARCHAR}
 	</select>
 	
-		<!-- 验证是否已记账 -->
-	<select id="getIdvAccDetailToDo" resultMap="BaseResultMap"
-		parameterType="map">
+  <!-- 验证是否已记账 -->
+  <select id="getIdvAccDetailToDo" resultMap="BaseResultMap" parameterType="map">
+	select
+	<include refid="Base_Column_List" />
+	from
+	TCOR_TRN_ACCDETAIL_IDV t
+	where t.LED_TRAN_NO =
+	#{ledTranNo,jdbcType=VARCHAR}
+	AND t.SUB_INDEX =
+	#{subIndex,jdbcType=DECIMAL}
+	AND t.CD_FLAG = #{cdFlag,jdbcType=VARCHAR}
+  </select>
+
+  <insert id="insertBizAccDetail" parameterType="com.somnus.smart.base.domain.TrnAccDetail">
+	<selectKey resultType="java.lang.String" keyProperty="accDetailNo" order="BEFORE">
 		select
-		<include refid="Base_Column_List" />
-		from
-		TCOR_TRN_ACCDETAIL_IDV t
-		where t.LED_TRAN_NO =
-		#{ledTranNo,jdbcType=VARCHAR}
-		AND t.SUB_INDEX =
-		#{subIndex,jdbcType=DECIMAL}
-		AND t.CD_FLAG = #{cdFlag,jdbcType=VARCHAR}
-	</select>
-
-
-	<insert id="insertBizAccDetail" parameterType="com.somnus.smart.base.domain.TrnAccDetail">
-		<selectKey resultType="java.lang.String" keyProperty="accDetailNo"
-			order="BEFORE">
-			select
-			'DT'||to_char(sysdate,'yyyymmdd')|| SEQ_TRN_ACCDETAIL.NEXTVAL
-			from dual
-		</selectKey>
-		insert into TCOR_TRN_ACCDETAIL (ACC_DETAIL_NO, ACC_TRAN_NO, LED_TRAN_NO, 
-	      SUB_INDEX, SUB_CODE, REL_SUB_CODE, 
-	      CD_FLAG, ACC_CODE, SUB_ACC_CODE, 
-	      TRAN_AMT, CUR_BAL, APP_TRAN_DATE, 
-	      ACC_DATE, SYS_CODE, TRAN_TYPE, 
-	      CUS_TRAN_NO, CCY_CODE, IPS_BILL_NO, 
-	      APP_TRAN_NO, TRAN_REMARK, CREATE_TIME, 
-	      CREATE_BY, MODIFY_TIME, MODIFY_BY
-	      )
-	    values (#{accDetailNo,jdbcType=VARCHAR}, #{accTranNo,jdbcType=VARCHAR}, #{ledTranNo,jdbcType=VARCHAR}, 
-	      #{subIndex,jdbcType=DECIMAL}, #{subCode,jdbcType=VARCHAR}, #{relSubCode,jdbcType=VARCHAR}, 
-	      #{cdFlag,jdbcType=CHAR}, #{accCode,jdbcType=VARCHAR}, #{subAccCode,jdbcType=VARCHAR}, 
-	      #{tranAmt,jdbcType=DECIMAL}, #{curBal,jdbcType=DECIMAL}, #{appTranDate,jdbcType=TIMESTAMP}, 
-	      #{accDate,jdbcType=DATE}, #{sysCode,jdbcType=VARCHAR}, #{tranType,jdbcType=VARCHAR}, 
-	      #{cusTranNo,jdbcType=VARCHAR}, #{ccyCode,jdbcType=VARCHAR}, #{ipsBillNo,jdbcType=VARCHAR}, 
-	      #{appTranNo,jdbcType=VARCHAR}, #{tranRemark,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
-	      #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}
-	      )
-	</insert>
+		'DT'||to_char(sysdate,'yyyymmdd')|| SEQ_TRN_ACCDETAIL.NEXTVAL
+		from dual
+	</selectKey>
+	insert into TCOR_TRN_ACCDETAIL (ACC_DETAIL_NO, ACC_TRAN_NO, LED_TRAN_NO, 
+		SUB_INDEX, SUB_CODE, REL_SUB_CODE, 
+		CD_FLAG, ACC_CODE, SUB_ACC_CODE, 
+		TRAN_AMT, CUR_BAL, APP_TRAN_DATE, 
+		ACC_DATE, SYS_CODE, TRAN_TYPE, 
+		CUS_TRAN_NO, CCY_CODE, IPS_BILL_NO, 
+		APP_TRAN_NO, TRAN_REMARK, CREATE_TIME, 
+		CREATE_BY, MODIFY_TIME, MODIFY_BY
+	)
+	values (#{accDetailNo,jdbcType=VARCHAR}, #{accTranNo,jdbcType=VARCHAR}, #{ledTranNo,jdbcType=VARCHAR}, 
+		#{subIndex,jdbcType=DECIMAL}, #{subCode,jdbcType=VARCHAR}, #{relSubCode,jdbcType=VARCHAR}, 
+		#{cdFlag,jdbcType=CHAR}, #{accCode,jdbcType=VARCHAR}, #{subAccCode,jdbcType=VARCHAR}, 
+		#{tranAmt,jdbcType=DECIMAL}, #{curBal,jdbcType=DECIMAL}, #{appTranDate,jdbcType=TIMESTAMP}, 
+		#{accDate,jdbcType=DATE}, #{sysCode,jdbcType=VARCHAR}, #{tranType,jdbcType=VARCHAR}, 
+		#{cusTranNo,jdbcType=VARCHAR}, #{ccyCode,jdbcType=VARCHAR}, #{ipsBillNo,jdbcType=VARCHAR}, 
+		#{appTranNo,jdbcType=VARCHAR}, #{tranRemark,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+		#{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}
+	)
+  </insert>
 	
-	<insert id="insertIdvAccDetail" parameterType="com.somnus.smart.base.domain.TrnAccDetail">
-		<selectKey resultType="java.lang.String" keyProperty="accDetailNo"
-			order="BEFORE">
-			select
-			'DT'||to_char(sysdate,'yyyymmdd')|| SEQ_TRN_ACCDETAIL.NEXTVAL
-			from dual
-		</selectKey>
-		insert into TCOR_TRN_ACCDETAIL_IDV (ACC_DETAIL_NO, ACC_TRAN_NO, LED_TRAN_NO, 
-	      SUB_INDEX, SUB_CODE, REL_SUB_CODE, 
-	      CD_FLAG, ACC_CODE, SUB_ACC_CODE, 
-	      TRAN_AMT, CUR_BAL, APP_TRAN_DATE, 
-	      ACC_DATE, SYS_CODE, TRAN_TYPE, 
-	      CUS_TRAN_NO, CCY_CODE, IPS_BILL_NO, 
-	      APP_TRAN_NO, TRAN_REMARK, CREATE_TIME, 
-	      CREATE_BY, MODIFY_TIME, MODIFY_BY
-	      )
-	    values (#{accDetailNo,jdbcType=VARCHAR}, #{accTranNo,jdbcType=VARCHAR}, #{ledTranNo,jdbcType=VARCHAR}, 
-	      #{subIndex,jdbcType=DECIMAL}, #{subCode,jdbcType=VARCHAR}, #{relSubCode,jdbcType=VARCHAR}, 
-	      #{cdFlag,jdbcType=CHAR}, #{accCode,jdbcType=VARCHAR}, #{subAccCode,jdbcType=VARCHAR}, 
-	      #{tranAmt,jdbcType=DECIMAL}, #{curBal,jdbcType=DECIMAL}, #{appTranDate,jdbcType=TIMESTAMP}, 
-	      #{accDate,jdbcType=DATE}, #{sysCode,jdbcType=VARCHAR}, #{tranType,jdbcType=VARCHAR}, 
-	      #{cusTranNo,jdbcType=VARCHAR}, #{ccyCode,jdbcType=VARCHAR}, #{ipsBillNo,jdbcType=VARCHAR}, 
-	      #{appTranNo,jdbcType=VARCHAR}, #{tranRemark,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
-	      #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}
-	      )
-	</insert>
+  <insert id="insertIdvAccDetail" parameterType="com.somnus.smart.base.domain.TrnAccDetail">
+	<selectKey resultType="java.lang.String" keyProperty="accDetailNo" order="BEFORE">
+		select
+		'DT'||to_char(sysdate,'yyyymmdd')|| SEQ_TRN_ACCDETAIL.NEXTVAL
+		from  
+		dual
+	</selectKey>
+	insert into TCOR_TRN_ACCDETAIL_IDV (ACC_DETAIL_NO, ACC_TRAN_NO, LED_TRAN_NO, 
+		SUB_INDEX, SUB_CODE, REL_SUB_CODE, 
+		CD_FLAG, ACC_CODE, SUB_ACC_CODE, 
+		TRAN_AMT, CUR_BAL, APP_TRAN_DATE, 
+		ACC_DATE, SYS_CODE, TRAN_TYPE, 
+		CUS_TRAN_NO, CCY_CODE, IPS_BILL_NO, 
+		APP_TRAN_NO, TRAN_REMARK, CREATE_TIME, 
+		CREATE_BY, MODIFY_TIME, MODIFY_BY
+	)
+	values (#{accDetailNo,jdbcType=VARCHAR}, #{accTranNo,jdbcType=VARCHAR}, #{ledTranNo,jdbcType=VARCHAR}, 
+		#{subIndex,jdbcType=DECIMAL}, #{subCode,jdbcType=VARCHAR}, #{relSubCode,jdbcType=VARCHAR}, 
+		#{cdFlag,jdbcType=CHAR}, #{accCode,jdbcType=VARCHAR}, #{subAccCode,jdbcType=VARCHAR}, 
+		#{tranAmt,jdbcType=DECIMAL}, #{curBal,jdbcType=DECIMAL}, #{appTranDate,jdbcType=TIMESTAMP}, 
+		#{accDate,jdbcType=DATE}, #{sysCode,jdbcType=VARCHAR}, #{tranType,jdbcType=VARCHAR}, 
+		#{cusTranNo,jdbcType=VARCHAR}, #{ccyCode,jdbcType=VARCHAR}, #{ipsBillNo,jdbcType=VARCHAR}, 
+		#{appTranNo,jdbcType=VARCHAR}, #{tranRemark,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+		#{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}
+	)
+  </insert>
 	
-	<insert id="insertIntAccDetail" parameterType="com.somnus.smart.base.domain.TrnAccDetail">
-		<selectKey resultType="java.lang.String" keyProperty="accDetailNo"
-			order="BEFORE">
-			select
-			'DT'||to_char(sysdate,'yyyymmdd')|| SEQ_TRN_ACCDETAIL.NEXTVAL
-			from dual
-		</selectKey>
-		insert into TCOR_TRN_ACCDETAIL_INT (ACC_DETAIL_NO, ACC_TRAN_NO, LED_TRAN_NO, 
-	      SUB_INDEX, SUB_CODE, REL_SUB_CODE, 
-	      CD_FLAG, ACC_CODE, SUB_ACC_CODE, 
-	      TRAN_AMT, CUR_BAL, APP_TRAN_DATE, 
-	      ACC_DATE, SYS_CODE, TRAN_TYPE, 
-	      CUS_TRAN_NO, CCY_CODE, IPS_BILL_NO, 
-	      APP_TRAN_NO, TRAN_REMARK, CREATE_TIME, 
-	      CREATE_BY, MODIFY_TIME, MODIFY_BY
-	      )
-	    values (#{accDetailNo,jdbcType=VARCHAR}, #{accTranNo,jdbcType=VARCHAR}, #{ledTranNo,jdbcType=VARCHAR}, 
-	      #{subIndex,jdbcType=DECIMAL}, #{subCode,jdbcType=VARCHAR}, #{relSubCode,jdbcType=VARCHAR}, 
-	      #{cdFlag,jdbcType=CHAR}, #{accCode,jdbcType=VARCHAR}, #{subAccCode,jdbcType=VARCHAR}, 
-	      #{tranAmt,jdbcType=DECIMAL}, #{curBal,jdbcType=DECIMAL}, #{appTranDate,jdbcType=TIMESTAMP}, 
-	      #{accDate,jdbcType=DATE}, #{sysCode,jdbcType=VARCHAR}, #{tranType,jdbcType=VARCHAR}, 
-	      #{cusTranNo,jdbcType=VARCHAR}, #{ccyCode,jdbcType=VARCHAR}, #{ipsBillNo,jdbcType=VARCHAR}, 
-	      #{appTranNo,jdbcType=VARCHAR}, #{tranRemark,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
-	      #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}
-	      )
-	</insert>
-
-
+  <insert id="insertIntAccDetail" parameterType="com.somnus.smart.base.domain.TrnAccDetail">
+	<selectKey resultType="java.lang.String" keyProperty="accDetailNo" order="BEFORE">
+		select
+		'DT'||to_char(sysdate,'yyyymmdd')|| SEQ_TRN_ACCDETAIL.NEXTVAL
+		from dual
+	</selectKey>
+	insert into TCOR_TRN_ACCDETAIL_INT (ACC_DETAIL_NO, ACC_TRAN_NO, LED_TRAN_NO, 
+		SUB_INDEX, SUB_CODE, REL_SUB_CODE, 
+		CD_FLAG, ACC_CODE, SUB_ACC_CODE, 
+		TRAN_AMT, CUR_BAL, APP_TRAN_DATE, 
+		ACC_DATE, SYS_CODE, TRAN_TYPE, 
+		CUS_TRAN_NO, CCY_CODE, IPS_BILL_NO, 
+		APP_TRAN_NO, TRAN_REMARK, CREATE_TIME, 
+		CREATE_BY, MODIFY_TIME, MODIFY_BY
+	)
+	values (#{accDetailNo,jdbcType=VARCHAR}, #{accTranNo,jdbcType=VARCHAR}, #{ledTranNo,jdbcType=VARCHAR}, 
+		#{subIndex,jdbcType=DECIMAL}, #{subCode,jdbcType=VARCHAR}, #{relSubCode,jdbcType=VARCHAR}, 
+		#{cdFlag,jdbcType=CHAR}, #{accCode,jdbcType=VARCHAR}, #{subAccCode,jdbcType=VARCHAR}, 
+		#{tranAmt,jdbcType=DECIMAL}, #{curBal,jdbcType=DECIMAL}, #{appTranDate,jdbcType=TIMESTAMP}, 
+		#{accDate,jdbcType=DATE}, #{sysCode,jdbcType=VARCHAR}, #{tranType,jdbcType=VARCHAR}, 
+		#{cusTranNo,jdbcType=VARCHAR}, #{ccyCode,jdbcType=VARCHAR}, #{ipsBillNo,jdbcType=VARCHAR}, 
+		#{appTranNo,jdbcType=VARCHAR}, #{tranRemark,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, 
+		#{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}
+	)
+  </insert>
 
 </mapper>

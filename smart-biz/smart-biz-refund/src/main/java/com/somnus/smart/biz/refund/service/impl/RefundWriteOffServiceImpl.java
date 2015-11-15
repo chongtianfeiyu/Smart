@@ -20,9 +20,6 @@ import com.somnus.smart.support.util.DateUtil;
 
 /**
  * 退款核销服务
- * 
- * @author Administrator
- * 
  */
 @Service
 public class RefundWriteOffServiceImpl implements RefundWriteOffService {

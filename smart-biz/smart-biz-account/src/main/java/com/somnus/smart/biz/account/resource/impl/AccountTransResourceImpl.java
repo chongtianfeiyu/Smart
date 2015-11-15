@@ -25,9 +25,6 @@ import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 账户转账记账接口
- * 
- * @author 李太平
- * @version $Id: AccountTransResourceNewImpl.java, v 0.1 2014-11-28 下午02:14:02 李太平  Exp $
  */
 @Component
 @Validated

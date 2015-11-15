@@ -11,8 +11,6 @@ import org.springframework.cache.ehcache.EhCacheCacheManager;
 
 /**
  * 缓存管理器
- * 
- * @author cjliu
  */
 public class CacheManagerUtil {
 

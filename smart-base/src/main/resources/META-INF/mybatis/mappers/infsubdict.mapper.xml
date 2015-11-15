@@ -23,21 +23,25 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     SUB_CODE_1ST, SUB_NAME_1ST, SUB_LEN_1ST, SUB_CODE_2ST, SUB_LEN_2ST, SUB_CODE_3RD, 
     SUB_LEN_3RD, SUB_CODE_4TH, SUB_LEN_4TH, SUB_TYPE, SUB_LEAF_LEVER, BAL_CTRL_DIR, BAL_ZERO_FLAG, 
     RED_FLAG, OPEN_ACC_FLAG, STATUS, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from TCOR_INF_SUBDICT
     where SUB_CODE_1ST = #{subCode1st,jdbcType=VARCHAR}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from TCOR_INF_SUBDICT
     where SUB_CODE_1ST = #{subCode1st,jdbcType=VARCHAR}
   </delete>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.InfSubdict" >
     insert into TCOR_INF_SUBDICT (SUB_CODE_1ST, SUB_NAME_1ST, SUB_LEN_1ST, 
       SUB_CODE_2ST, SUB_LEN_2ST, SUB_CODE_3RD, 
@@ -54,6 +58,7 @@
       #{status,jdbcType=CHAR}, #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
       #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.somnus.smart.base.domain.InfSubdict" >
     insert into TCOR_INF_SUBDICT
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -181,6 +186,7 @@
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.InfSubdict" >
     update TCOR_INF_SUBDICT
     <set >
@@ -244,6 +250,7 @@
     </set>
     where SUB_CODE_1ST = #{subCode1st,jdbcType=VARCHAR}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.somnus.smart.base.domain.InfSubdict" >
     update TCOR_INF_SUBDICT
     set SUB_NAME_1ST = #{subName1st,jdbcType=VARCHAR},
@@ -267,4 +274,5 @@
       MODIFY_BY = #{modifyBy,jdbcType=VARCHAR}
     where SUB_CODE_1ST = #{subCode1st,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

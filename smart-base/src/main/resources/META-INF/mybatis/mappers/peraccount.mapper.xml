@@ -22,6 +22,7 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP"/>
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     ACCT_CODE,ACCT_NAME,USER_ID,EMAIL,MOBILE,BANK_CODE,BANK_NAME,
 	BANK_ACCT_NO,BANK_ACCT_NAME,CCY_CODE,"LEVEL",ACC_STATUS,FUND_STATUS,

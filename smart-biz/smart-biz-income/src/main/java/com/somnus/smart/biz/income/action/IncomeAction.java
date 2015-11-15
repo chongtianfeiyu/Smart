@@ -14,9 +14,6 @@ import com.somnus.smart.support.jms.AbstractJmsReceiveTemplate;
 
 /**
  * 收单交易异步记账处理
- * 
- * @author 李太平
- * @version $Id: IncomeActionNew.java, v 0.1 2014-11-17 上午08:50:00 李太平 Exp $
  */
 public class IncomeAction extends AbstractJmsReceiveTemplate {
 

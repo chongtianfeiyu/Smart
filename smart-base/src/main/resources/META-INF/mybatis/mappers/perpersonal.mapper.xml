@@ -22,21 +22,25 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     USER_ACC_CODE, USER_ACC_NAME, USER_EMAIL, DRAW_CASE_NO, ACC_STATUS, FROZE_FLAG, ACTION_FLAG, 
     TRN_PASSWORD, OPEN_DATE, OPEN_BY, RESV1, RESV2, RESV3, RESV4, RESV5, CREATE_TIME, 
     CREATE_BY, MODIFY_TIME, MODIFY_BY
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from TCOR_PER_PERSONAL
     where USER_ACC_CODE = #{userAccCode,jdbcType=VARCHAR}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from TCOR_PER_PERSONAL
     where USER_ACC_CODE = #{userAccCode,jdbcType=VARCHAR}
   </delete>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.PerPersonal" >
     insert into TCOR_PER_PERSONAL (USER_ACC_CODE, USER_ACC_NAME, USER_EMAIL, 
       DRAW_CASE_NO, ACC_STATUS, FROZE_FLAG, 
@@ -53,6 +57,7 @@
       #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
       #{modifyBy,jdbcType=VARCHAR})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.somnus.smart.base.domain.PerPersonal" >
     insert into TCOR_PER_PERSONAL
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -174,6 +179,7 @@
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.PerPersonal" >
     update TCOR_PER_PERSONAL
     <set >
@@ -234,6 +240,7 @@
     </set>
     where USER_ACC_CODE = #{userAccCode,jdbcType=VARCHAR}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.somnus.smart.base.domain.PerPersonal" >
     update TCOR_PER_PERSONAL
     set USER_ACC_NAME = #{userAccName,jdbcType=VARCHAR},
@@ -256,4 +263,5 @@
       MODIFY_BY = #{modifyBy,jdbcType=VARCHAR}
     where USER_ACC_CODE = #{userAccCode,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

@@ -28,12 +28,14 @@
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
     <result column="BIZ_TYPE" property="bizType" jdbcType="CHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     REF_TRAN_NO, ACC_TRAN_NO, ORI_APP_TRAN_NO, ORI_MER_BILL_NO, ORI_TRAN_AMT, ORI_BILL_DATE, 
     ORI_SUPPLIER_BILL_NO, ORI_REFRENCE_NO, ORI_AUTH_NO, REFUND_AMT, CHANNEL_CODE, CARD_NO, 
     CARD_NO_EX, CARDHOLDER, APP_REFUND_DATE, BILL_REMARK, REFUND_ARG, REF_TYPE, 
     STATUS, SUBMIT_TIME, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY, BIZ_TYPE
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -48,16 +50,14 @@
     where ACC_TRAN_NO = #{accTranNo,jdbcType=VARCHAR}
   </select>
   
-  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnTranRefund" >
-    	<selectKey resultType="java.lang.String" keyProperty="refTranNo"
-			order="BEFORE">
-			select
-			to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANREFUND.NEXTVAL
-			from
-			dual
-		</selectKey>
-		insert into TCOR_TRN_TRANREFUND (REF_TRAN_NO, ACC_TRAN_NO, ORI_APP_TRAN_NO, 
+	<selectKey resultType="java.lang.String" keyProperty="refTranNo" order="BEFORE">
+		select 
+		to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANREFUND.NEXTVAL 
+		from 
+		dual
+	</selectKey>
+	insert into TCOR_TRN_TRANREFUND (REF_TRAN_NO, ACC_TRAN_NO, ORI_APP_TRAN_NO, 
       ORI_MER_BILL_NO, ORI_TRAN_AMT, ORI_BILL_DATE, 
       ORI_SUPPLIER_BILL_NO, ORI_REFRENCE_NO, ORI_AUTH_NO, 
       REFUND_AMT, CHANNEL_CODE, CARD_NO, 
@@ -156,4 +156,5 @@
     </set>
     where REF_TRAN_NO = #{refTranNo,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

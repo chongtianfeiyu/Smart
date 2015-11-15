@@ -7,9 +7,6 @@ import java.util.Date;
 
 /**
  * 2015年日历生成
- * 
- * @author 武少通
- * @version $Id: DayListCreator.java, v 0.1 2014-12-30 下午05:49:27 李太平 Exp $
  */
 public class DayListCreator {
 

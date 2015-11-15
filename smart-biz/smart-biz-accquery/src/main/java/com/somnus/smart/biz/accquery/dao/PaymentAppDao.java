@@ -6,11 +6,6 @@ import com.somnus.smart.message.accquery.QueryPayAppOrder;
 import com.somnus.smart.message.accquery.QueryPayAppRequest;
 import com.somnus.smart.support.mybatis.annotation.MyBatisRepository;
 
-/**
- * 拒付审批DAO
- * @author bo.zhang
- *
- */
 @MyBatisRepository
 public interface PaymentAppDao {
 	

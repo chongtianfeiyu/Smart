@@ -7,7 +7,6 @@ import com.somnus.smart.support.mybatis.annotation.MyBatisRepository;
 
 /**
  * 出款核销DAO
- * @author bo.zhang
  *
  */
 @MyBatisRepository

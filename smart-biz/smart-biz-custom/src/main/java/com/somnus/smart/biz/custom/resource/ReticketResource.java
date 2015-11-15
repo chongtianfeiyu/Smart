@@ -7,8 +7,6 @@ import com.somnus.smart.message.reticket.ReticketResponse;
 
 /**
  * 退票服务
- * @author bo.zhang
- *
  */
 public interface ReticketResource {
 	

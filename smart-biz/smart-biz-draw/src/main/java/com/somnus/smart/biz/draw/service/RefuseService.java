@@ -8,9 +8,6 @@ import com.somnus.smart.message.refusepay.RefusePayRequest;
 
 /**
  * 拒付服务
- * 
- * @author Administrator
- * 
  */
 public interface RefuseService {
 

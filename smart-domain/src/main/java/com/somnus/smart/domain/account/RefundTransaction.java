@@ -11,9 +11,6 @@ import com.somnus.smart.domain.DomainModel;
 
 /**
  * 退款交易流水
- * 
- * @author 李太平
- * @version $Id: RefundTransaction.java, v 0.1 2014-11-18 下午03:38:30 李太平 Exp $
  */
 public class RefundTransaction extends TrnRefund implements DomainModel<RefundTransaction, TrnRefund> {
 

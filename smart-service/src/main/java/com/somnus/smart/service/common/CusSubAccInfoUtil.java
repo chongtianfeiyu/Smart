@@ -4,9 +4,6 @@ import com.somnus.smart.service.common.enums.AccountType;
 
 /**
  * 余额工具类
- * 
- * @author 李太平
- * @version $Id: CusSubAccInfoUtil.java, v 0.1 2015-2-9 下午02:24:03 李太平 Exp $
  */
 public class CusSubAccInfoUtil {
 

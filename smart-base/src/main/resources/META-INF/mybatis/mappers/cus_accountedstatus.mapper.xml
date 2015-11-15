@@ -11,20 +11,23 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
-    MER_ACC_CODE, IN_ACC_STATUS, DRAW_LEVER, DRAW_TIME, CREATE_TIME, CREATE_BY, MODIFY_TIME, 
-    MODIFY_BY
+    MER_ACC_CODE, IN_ACC_STATUS, DRAW_LEVER, DRAW_TIME, CREATE_TIME, CREATE_BY, MODIFY_TIME,MODIFY_BY
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from TCOR_CUS_ACCOUNTED_STATUS
     where MER_ACC_CODE = #{merAccCode,jdbcType=VARCHAR}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from TCOR_CUS_ACCOUNTED_STATUS
     where MER_ACC_CODE = #{merAccCode,jdbcType=VARCHAR}
   </delete>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.CusAccountedStatus" >
     insert into TCOR_CUS_ACCOUNTED_STATUS (MER_ACC_CODE, IN_ACC_STATUS, DRAW_LEVER, 
       DRAW_TIME, CREATE_TIME, CREATE_BY, 
@@ -33,6 +36,7 @@
       #{drawTime,jdbcType=DATE}, #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, 
       #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.somnus.smart.base.domain.CusAccountedStatus" >
     insert into TCOR_CUS_ACCOUNTED_STATUS
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -88,6 +92,7 @@
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.CusAccountedStatus" >
     update TCOR_CUS_ACCOUNTED_STATUS
     <set >
@@ -115,4 +120,5 @@
     </set>
     where MER_ACC_CODE = #{merAccCode,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

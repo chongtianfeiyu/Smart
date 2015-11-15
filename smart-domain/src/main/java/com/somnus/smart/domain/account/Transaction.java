@@ -11,9 +11,6 @@ import com.somnus.smart.domain.DomainModel;
 
 /**
  * 交易流水
- * 
- * @author Administrator
- * @version $Id: Transaction.java, v 0.1 2014-10-29 下午04:43:37 Administrator Exp $
  */
 public class Transaction extends TrnTransaction implements DomainModel<Transaction, TrnTransaction> {
 

@@ -10,13 +10,6 @@ import com.somnus.smart.support.exceptions.BizException;
 import com.somnus.smart.support.holder.ApplicationContextHolder;
 import com.somnus.smart.support.util.ValidateUtil;
 
-/**
- * @className:CheckUtil
- * @Description:校验类
- * @author shellshen modify by Somnus
- * @date:2012-8-16下午2:14:03
- * 
- */
 public class CheckUtil {
 	/**
 	 * @Title:mustEmpty

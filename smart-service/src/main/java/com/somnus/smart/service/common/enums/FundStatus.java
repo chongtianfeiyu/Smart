@@ -2,9 +2,6 @@ package com.somnus.smart.service.common.enums;
 
 /**
  * 个人账户出入款状态
- * 
- * @author 李太平
- * @version $Id: AccountType.java, v 0.1 2015-2-5 下午03:30:01 李太平 Exp $
  */
 public enum FundStatus {
 

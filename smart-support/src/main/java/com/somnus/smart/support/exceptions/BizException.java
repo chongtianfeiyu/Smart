@@ -1,11 +1,5 @@
 package com.somnus.smart.support.exceptions;
 
-/**
- * BizException
- *
- * @author levis
- * @version 1.0 2013-4-17
- */
 public class BizException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	private String errorCode;

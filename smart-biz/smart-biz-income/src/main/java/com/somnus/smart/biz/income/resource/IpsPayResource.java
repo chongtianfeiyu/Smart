@@ -7,9 +7,6 @@ import com.somnus.smart.message.account.IpsPayRequest;
 
 /**
  * isp账户支付记账
- *
- * @author IH745
- * @version 1.0 13-10-15
  */
 public interface IpsPayResource {
 	/**

@@ -4,8 +4,6 @@ import com.somnus.smart.base.domain.CusSubaccinfo;
 
 /**
  * 开内部账户
- * @author bo.zhang
- *
  */
 public interface MeracctInnerService {
 	

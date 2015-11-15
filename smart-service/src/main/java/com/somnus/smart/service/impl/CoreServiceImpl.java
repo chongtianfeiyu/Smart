@@ -11,13 +11,6 @@ import com.somnus.smart.service.common.CusSubAccInfoUtil;
 import com.somnus.smart.service.common.enums.AccountType;
 import com.somnus.smart.support.exceptions.BizException;
 
-/**
- * 余额变更
- * 
- * @author IH745
- * @date 2013-10-08
- * 
- */
 @Component
 public class CoreServiceImpl implements CoreService {
 

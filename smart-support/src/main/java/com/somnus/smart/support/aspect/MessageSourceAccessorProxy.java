@@ -13,9 +13,6 @@ import org.springframework.context.support.MessageSourceAccessor;
 
 /**
  * MessageSourceAccessor由于没有默认构造，手工做代理
- *
- * @author Somnus
- * @version 1.0 2013-4-16
  */
 public class MessageSourceAccessorProxy {
 	

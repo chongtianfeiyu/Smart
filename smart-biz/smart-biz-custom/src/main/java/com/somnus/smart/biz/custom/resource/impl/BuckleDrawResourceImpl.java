@@ -29,9 +29,6 @@ import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 扣划记账接口
- * 
- * @author 李太平
- * @version $Id: BuckleDrawResourceNewImpl.java, v 0.1 2014-11-24 下午02:25:32 李太平 Exp $
  */
 @Component
 @Validated

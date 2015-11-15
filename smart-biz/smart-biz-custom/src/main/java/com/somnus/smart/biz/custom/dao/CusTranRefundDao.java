@@ -4,7 +4,6 @@ import com.somnus.smart.support.mybatis.annotation.MyBatisRepository;
 
 /**
  * 交易流水关联退款流水附属表
- * @author bo.zhang
  *
  */
 @MyBatisRepository

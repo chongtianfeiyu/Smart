@@ -2,9 +2,6 @@ package com.somnus.smart.service.common;
 
 /**
  * 收支明细工具类
- * 
- * @author 李太平
- * @version $Id: AccDetailUtil.java, v 0.1 2015-2-9 下午02:23:44 李太平  Exp $
  */
 public class AccDetailUtil {
     /** 商户收支明细表 */

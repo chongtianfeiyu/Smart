@@ -28,9 +28,6 @@ import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 出款服务实现
- * 
- * @author 李太平
- * @version $Id: DrawServiceImpl.java, v 0.1 2015-4-1 下午05:04:55 李太平  Exp $
  */
 @Component
 public class DrawServiceImpl implements DrawService {

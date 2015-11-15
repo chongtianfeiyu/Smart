@@ -12,9 +12,10 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
-    SUB_CODE, SUB_NAME, SUB_CODE_1ST, SUB_NAME_1ST, STATUS, CREATE_TIME, CREATE_BY, MODIFY_TIME, 
-    MODIFY_BY
+    SUB_CODE, SUB_NAME, SUB_CODE_1ST, SUB_NAME_1ST, 
+    STATUS, CREATE_TIME, CREATE_BY, MODIFY_TIME,MODIFY_BY
   </sql>
   
   <select id="selectByParams" resultMap="BaseResultMap" parameterType="com.somnus.smart.message.master.SubManageQueryRequest" >
@@ -42,6 +43,7 @@
     from TCOR_CFG_SUBDICT
     where SUB_CODE = #{subCode,jdbcType=VARCHAR}
   </select>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.CfgSubdict" >
     insert into TCOR_CFG_SUBDICT (SUB_CODE, SUB_NAME, SUB_CODE_1ST, 
       SUB_NAME_1ST, STATUS, CREATE_TIME, 
@@ -52,6 +54,7 @@
       #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, #{modifyBy,jdbcType=VARCHAR}
       )
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.CfgSubdict" >
     update TCOR_CFG_SUBDICT
     <set >
@@ -82,4 +85,5 @@
     </set>
     where SUB_CODE = #{subCode,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.somnus.smart.service;
 
 import java.math.BigDecimal;
@@ -9,9 +6,6 @@ import com.somnus.smart.service.common.enums.AccountType;
 
 /**
  * 余额变更处理service
- * 
- * @author IH745
- * 
  */
 public interface CoreService {
 

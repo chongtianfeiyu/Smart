@@ -33,7 +33,6 @@ import com.somnus.smart.service.common.Constants;
 import com.somnus.smart.service.common.MessageUtil;
 import com.somnus.smart.support.exceptions.BizException;
 
-
 /**
  * 
  * @description: 账户查询接口

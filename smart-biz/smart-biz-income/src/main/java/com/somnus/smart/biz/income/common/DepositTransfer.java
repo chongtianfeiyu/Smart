@@ -7,11 +7,6 @@ import com.somnus.smart.message.account.DepositRequest;
 import com.somnus.smart.service.common.BasConstants;
 import com.somnus.smart.service.common.CommonTransfer;
 
-/** 
- * @description: TODO 
- * @author Somnus
- * date 2015年2月27日 上午11:45:20  
- */
 public class DepositTransfer extends CommonTransfer {
 	/**
      * 报文转换为实体

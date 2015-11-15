@@ -11,9 +11,6 @@ import ch.qos.logback.core.joran.spi.JoranException;
 import ch.qos.logback.core.util.StatusPrinter;
 /**
  * 加载logback.xml配置文件
- * 
- * @author 李太平
- * @version $Id: LogBackConfigLoader.java, v 0.1 2015-1-12 下午06:11:58 李太平  Exp $
  */
 public class LogBackConfigLoader {
 

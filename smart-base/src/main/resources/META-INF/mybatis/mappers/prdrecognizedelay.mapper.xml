@@ -16,6 +16,7 @@
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     DELAY_ID, SYSTEM_CODE, BASIC_PRD_CODE, MER_LEVEL, RECOGNIZE_DELAY, REMARK, VERSION, 
     STATUS, OPER_FLAG, EFFECT_DATE, LOSE_EFFECT_DATE, MODIFY_BY, MODIFY_TIME
@@ -36,10 +37,10 @@
   </select>
   
   <insert id="merge" parameterType="com.somnus.smart.base.domain.PrdRecognizeDelay" >
-     MERGE INTO TCIM_PRD_RECOGNIZE_DELAY  T
-  USING DUAL
-  ON(T.DELAY_ID = #{delayId,jdbcType=DECIMAL})
-  WHEN not MATCHED THEN
+	MERGE INTO TCIM_PRD_RECOGNIZE_DELAY  T
+	USING DUAL
+	ON(T.DELAY_ID = #{delayId,jdbcType=DECIMAL})
+	WHEN not MATCHED THEN
     insert (DELAY_ID, SYSTEM_CODE, BASIC_PRD_CODE, 
       MER_LEVEL, RECOGNIZE_DELAY, REMARK, 
       VERSION, STATUS, OPER_FLAG, 
@@ -81,4 +82,5 @@
       </if>
     </set>
   </insert>
+  
 </mapper>

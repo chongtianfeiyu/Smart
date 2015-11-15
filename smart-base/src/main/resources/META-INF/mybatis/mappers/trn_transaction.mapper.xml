@@ -74,10 +74,10 @@
     <result column="REFUNDED_AMT" property="refundedAmt" jdbcType="DECIMAL" />
     <result column="DISHONORED_AMT" property="dishonoredAmt" jdbcType="DECIMAL" />
     <result column="RETURNED_DEPOSIT_AMT" property="returnedDepositAmt" jdbcType="DECIMAL" />
-   </resultMap>
+  </resultMap>
    
-    <select id="selectCusFifOrders" resultMap="BaseResultMap" parameterType="com.somnus.smart.message.accquery.QueryCusFifRequest">
-		select
+  <select id="selectCusFifOrders" resultMap="BaseResultMap" parameterType="com.somnus.smart.message.accquery.QueryCusFifRequest">
+	select
 		a.ACC_TRAN_NO,a.SYS_CODE,a.MACHINE_NO,a.CHANNEL_NO,a.TERMINAL_NO,a.IPS_BILL_NO,a.APP_TRAN_NO,a.APP_BATCH_NO,
 		a.CUS_TRAN_NO,a.CHL_TRAN_NO,a.PRD_CODE,b.TRAN_TYPE_NAME as TRAN_TYPE,a.INITIATOR_FLG,a.PAYEE_CODE,a.PAYEE_ACC_CODE,a.PAYEE_TYPE,
 		a.PAYEE_REL_SUB_CODE,a.PAYER_CODE,a.PAYER_ACC_CODE,a.PAYER_TYPE,a.PAYER_REL_SUB_CODE,a.SUPPLIER_CODE,a.CHANNEL_CODE,
@@ -86,78 +86,72 @@
 		a.ACC_DATE,a.IS_DEPOSIT,a.SECURITY_DEPOSIT,a.DEPOSIT_REFUND_DATE,a.DEPOSIT_STATUS,a.RETURNED_DEPOSIT_AMT,a.REFUNDED_AMT,
 		a.DISHONORED_AMT,a.EST_ACC_TIME,a.ACC_MODE,a.ACC_STATUS,a.STATUS,a.BLN_MODE,a.BLN_STATUS,a.CAN_BLN_DATE,a.BLN_DATE,a.ERR_MSG,
 		a.VOUCHER_NO,a.ORI_APP_TRAN_NO,a.TRAN_REMARK,a.RESV1,a.RESV2,a.RESV3,a.RESV4,a.RESV5,a.CREATE_TIME,a.CREATE_BY,a.MODIFY_TIME,a.MODIFY_BY
-		from
-		TCOR_TRN_TRANSACTION a left join TCOR_INF_TRANTYPE b on a.TRAN_TYPE=b.TRAN_TYPE
-		where 
-		a.STATUS in('0','3','4') and
-		a.BLN_STATUS = '0' and
-		a.ACC_STATUS = '1' and
-		a.PAYEE_ACC_CODE =#{merAccCode} and 
-		a.CCY_CODE =#{ccyCode}
-		<![CDATA[
-			and a.ACC_DATE >= to_date(#{accDateBegin},'yyyy-mm-dd')
-			and a.ACC_DATE <= to_date(#{accDateEnd},'yyyy-mm-dd')
-		]]>
-	</select>
+	from
+	TCOR_TRN_TRANSACTION a left join TCOR_INF_TRANTYPE b on a.TRAN_TYPE=b.TRAN_TYPE
+	where  a.STATUS in('0','3','4') 
+	and a.BLN_STATUS = '0' 
+	and a.ACC_STATUS = '1' 
+	and a.PAYEE_ACC_CODE =#{merAccCode} 
+	and  a.CCY_CODE =#{ccyCode}
+	<![CDATA[
+	and a.ACC_DATE >= to_date(#{accDateBegin},'yyyy-mm-dd')
+	and a.ACC_DATE <= to_date(#{accDateEnd},'yyyy-mm-dd')
+	]]>
+  </select>
 	
-	<select id="selectCusFifTotalAmts" resultType="java.math.BigDecimal" parameterType="com.somnus.smart.message.accquery.QueryCusFifRequest">
-		select 
-		SUM(ORD_AMT)
-		from
-		TCOR_TRN_TRANSACTION
-		where 
-		STATUS in('0','3','4') and
-		BLN_STATUS = '0' and
-		ACC_STATUS = '1' and
-		PAYEE_ACC_CODE =#{merAccCode} and
-		CCY_CODE =#{ccyCode}
-		<![CDATA[
-			and ACC_DATE >= to_date(#{accDateBegin},'yyyy-mm-dd')
-			and ACC_DATE <= to_date(#{accDateEnd},'yyyy-mm-dd')
-		]]>
-	</select>
+  <select id="selectCusFifTotalAmts" resultType="java.math.BigDecimal" parameterType="com.somnus.smart.message.accquery.QueryCusFifRequest">
+	select  SUM(ORD_AMT)
+	from
+	TCOR_TRN_TRANSACTION
+	where  STATUS in('0','3','4') 
+	and BLN_STATUS = '0' 
+	and ACC_STATUS = '1' 
+	and PAYEE_ACC_CODE =#{merAccCode} 
+	and CCY_CODE =#{ccyCode}
+	<![CDATA[
+	and ACC_DATE >= to_date(#{accDateBegin},'yyyy-mm-dd')
+	and ACC_DATE <= to_date(#{accDateEnd},'yyyy-mm-dd')
+	]]>
+  </select>
    
-   
-	<select id="selectByAppTranNo" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List" />
-		from
-		TCOR_TRN_TRANSACTION
-		where APP_TRAN_NO =#{appTranNo,jdbcType=VARCHAR}
-	</select>
-	<select id="selectSuccessTranByAppTranNo" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List" />
-		from
-		TCOR_TRN_TRANSACTION
-		where APP_TRAN_NO =#{appTranNo,jdbcType=VARCHAR}
-		and ACC_STATUS = '1'
-	</select>
+  <select id="selectByAppTranNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+	select
+	<include refid="Base_Column_List" />
+	from
+	TCOR_TRN_TRANSACTION
+	where APP_TRAN_NO =#{appTranNo,jdbcType=VARCHAR}
+  </select>
 	
-	<select id="selectByOrgAppTranNoAndTranCode" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List" />
-		from
-		TCOR_TRN_TRANSACTION
-		where ORI_APP_TRAN_NO =#{oriAppTranNo,jdbcType=VARCHAR}
-		<if test="tranCode != null and tranCode != '' ">
+  <select id="selectSuccessTranByAppTranNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+	select
+	<include refid="Base_Column_List" />
+	from
+	TCOR_TRN_TRANSACTION
+	where APP_TRAN_NO =#{appTranNo,jdbcType=VARCHAR}
+	and ACC_STATUS = '1'
+  </select>
+	
+  <select id="selectByOrgAppTranNoAndTranCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+	select
+	<include refid="Base_Column_List" />
+	from
+	TCOR_TRN_TRANSACTION
+	where ORI_APP_TRAN_NO =#{oriAppTranNo,jdbcType=VARCHAR}
+	<if test="tranCode != null and tranCode != '' ">
 		and TRAN_CODE=#{tranCode,jdbcType=VARCHAR}
-		</if>
-		and ACC_STATUS = '1'
-	</select>
+	</if>
+	and ACC_STATUS = '1'
+  </select>
 	
-	<select id="selectByAccTranNo" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List" />
-		from
-		TCOR_TRN_TRANSACTION
-		where ACC_TRAN_NO
-		=#{accTranNo,jdbcType=VARCHAR}
-	</select>
+  <select id="selectByAccTranNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+	select
+	<include refid="Base_Column_List" />
+	from
+	TCOR_TRN_TRANSACTION
+	where ACC_TRAN_NO =#{accTranNo,jdbcType=VARCHAR}
+  </select>
 
-	<sql id="Base_Column_List" >
+  <sql id="Base_Column_List" >
     ACC_TRAN_NO, SYS_CODE, MACHINE_NO, CHANNEL_NO, TERMINAL_NO,TRAN_CODE, IPS_BILL_NO, APP_TRAN_NO,
     APP_BATCH_NO, CUS_TRAN_NO, CHL_TRAN_NO, PRD_CODE, TRAN_TYPE, INITIATOR_FLG, PAYEE_CODE, 
     PAYEE_ACC_CODE, PAYEE_TYPE, PAYEE_REL_SUB_CODE, PAYER_CODE, PAYER_ACC_CODE, PAYER_TYPE, 
@@ -169,8 +163,9 @@
     STATUS, BLN_MODE, BLN_STATUS, CAN_BLN_DATE, BLN_DATE, ERR_MSG, VOUCHER_NO, ORI_APP_TRAN_NO, 
     TRAN_REMARK, RESV1, RESV2, RESV3, RESV4, RESV5, CREATE_TIME, CREATE_BY, MODIFY_TIME, 
     MODIFY_BY
-  	</sql>
-	<sql id="where_condition">
+  </sql>
+  
+  <sql id="where_condition">
 		<where>
 			<trim prefix="(" suffix=")" prefixOverrides="and | AND">
 				<if test="ipsBillNo != null and ipsBillNo != '' ">
@@ -208,35 +203,90 @@
 				</if>
 			</trim>
 		</where>
-	</sql>
-	<select id="selectByTranNoForUpdate" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List" />
-		from TCOR_TRN_TRANSACTION
-		where ACC_TRAN_NO =
-		#{accTranNo,jdbcType=VARCHAR}
-		for update
-	</select>
+  </sql>
+  
+  <select id="selectByTranNoForUpdate" resultMap="BaseResultMap" parameterType="java.lang.String">
+	select
+	<include refid="Base_Column_List" />
+	from TCOR_TRN_TRANSACTION
+	where ACC_TRAN_NO =
+	#{accTranNo,jdbcType=VARCHAR}
+	for update
+  </select>
 
+  <select id="select" resultMap="BaseResultMap" parameterType="com.somnus.smart.base.domain.TrnTransaction">
+	select
+	<include refid="Base_Column_List" />
+	from TCOR_TRN_TRANSACTION
+	<include refid="where_condition" />
+ </select>
 
-
-	<select id="select" resultMap="BaseResultMap"
-		parameterType="com.somnus.smart.base.domain.TrnTransaction">
-		select
-		<include refid="Base_Column_List" />
-		from TCOR_TRN_TRANSACTION
-		<include refid="where_condition" />
-	</select>
-
-	<select id="getAccTranNo" resultType="java.lang.String">
+  <select id="getAccTranNo" resultType="java.lang.String">
+	select
+	'AC'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANSACTION.NEXTVAL
+	from
+	dual
+  </select>
+  
+  <insert id="insertNoSerq" parameterType="com.somnus.smart.base.domain.TrnTransaction">
+	insert into TCOR_TRN_TRANSACTION (ACC_TRAN_NO, SYS_CODE, MACHINE_NO, 
+      CHANNEL_NO, TERMINAL_NO,TRAN_CODE, IPS_BILL_NO,
+      APP_TRAN_NO, APP_BATCH_NO, CUS_TRAN_NO, 
+      CHL_TRAN_NO, PRD_CODE, TRAN_TYPE, 
+      INITIATOR_FLG, PAYEE_CODE, PAYEE_ACC_CODE, 
+      PAYEE_TYPE, PAYEE_REL_SUB_CODE, PAYER_CODE, 
+      PAYER_ACC_CODE, PAYER_TYPE, PAYER_REL_SUB_CODE, 
+      SUPPLIER_CODE, CHANNEL_CODE, CCY_CODE, 
+      TRAN_AMT, ORD_AMT, IS_FEE, 
+      FEE_AMT, FEE_TYPE, FEE_RATE, 
+      FEE_FLAG, FEE_STL_MODE, THIRD_ACC_CODE, 
+      REFUND_FEE_BK, BANK_ACC_CODE, BANK_COST, 
+      BANK_FEE_TYPE, BANK_FEE_RATE, APP_TRAN_DATE, 
+      SUBMIT_TIME, FINNISH_TIME, ACC_DATE, 
+      IS_DEPOSIT, SECURITY_DEPOSIT, DEPOSIT_REFUND_DATE, 
+      DEPOSIT_STATUS, RETURNED_DEPOSIT_AMT, REFUNDED_AMT, 
+      DISHONORED_AMT, EST_ACC_TIME, ACC_MODE, 
+      ACC_STATUS,FROZEN_FLAG, STATUS, BLN_MODE,
+      BLN_STATUS, CAN_BLN_DATE, BLN_DATE, 
+      ERR_MSG, VOUCHER_NO, ORI_APP_TRAN_NO, 
+      TRAN_REMARK, RESV1, RESV2, 
+      RESV3, RESV4, RESV5, 
+      CREATE_TIME, CREATE_BY, MODIFY_TIME, 
+      MODIFY_BY)
+    values (#{accTranNo,jdbcType=VARCHAR}, #{sysCode,jdbcType=VARCHAR}, #{machineNo,jdbcType=VARCHAR}, 
+      #{channelNo,jdbcType=VARCHAR}, #{terminalNo,jdbcType=VARCHAR},#{tranCode,jdbcType=VARCHAR}, #{ipsBillNo,jdbcType=VARCHAR},
+      #{appTranNo,jdbcType=VARCHAR}, #{appBatchNo,jdbcType=VARCHAR}, #{cusTranNo,jdbcType=VARCHAR}, 
+      #{chlTranNo,jdbcType=VARCHAR}, #{prdCode,jdbcType=VARCHAR}, #{tranType,jdbcType=VARCHAR}, 
+      #{initiatorFlg,jdbcType=CHAR}, #{payeeCode,jdbcType=VARCHAR}, #{payeeAccCode,jdbcType=VARCHAR}, 
+      #{payeeType,jdbcType=CHAR}, #{payeeRelSubCode,jdbcType=VARCHAR}, #{payerCode,jdbcType=VARCHAR}, 
+      #{payerAccCode,jdbcType=VARCHAR}, #{payerType,jdbcType=CHAR}, #{payerRelSubCode,jdbcType=VARCHAR}, 
+      #{supplierCode,jdbcType=VARCHAR}, #{channelCode,jdbcType=VARCHAR}, #{ccyCode,jdbcType=VARCHAR}, 
+      #{tranAmt,jdbcType=DECIMAL}, #{ordAmt,jdbcType=DECIMAL}, #{isFee,jdbcType=CHAR}, 
+      #{feeAmt,jdbcType=DECIMAL}, #{feeType,jdbcType=CHAR}, #{feeRate,jdbcType=DECIMAL}, 
+      #{feeFlag,jdbcType=CHAR}, #{feeStlMode,jdbcType=CHAR}, #{thirdAccCode,jdbcType=VARCHAR}, 
+      #{refundFeeBk,jdbcType=CHAR}, #{bankAccCode,jdbcType=VARCHAR}, #{bankCost,jdbcType=DECIMAL}, 
+      #{bankFeeType,jdbcType=CHAR}, #{bankFeeRate,jdbcType=DECIMAL}, #{appTranDate,jdbcType=TIMESTAMP}, 
+      #{submitTime,jdbcType=TIMESTAMP}, #{finnishTime,jdbcType=TIMESTAMP}, #{accDate,jdbcType=DATE}, 
+      #{isDeposit,jdbcType=CHAR}, #{securityDeposit,jdbcType=DECIMAL}, #{depositRefundDate,jdbcType=DATE}, 
+      #{depositStatus,jdbcType=CHAR}, #{returnedDepositAmt,jdbcType=DECIMAL}, #{refundedAmt,jdbcType=DECIMAL}, 
+      #{dishonoredAmt,jdbcType=DECIMAL}, #{estAccTime,jdbcType=DATE}, #{accMode,jdbcType=CHAR}, 
+      #{accStatus,jdbcType=CHAR},#{frozenFlag,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{blnMode,jdbcType=CHAR},
+      #{blnStatus,jdbcType=CHAR}, #{canBlnDate,jdbcType=DATE}, #{blnDate,jdbcType=DATE}, 
+      #{errMsg,jdbcType=VARCHAR}, #{voucherNo,jdbcType=VARCHAR}, #{oriAppTranNo,jdbcType=VARCHAR}, 
+      #{tranRemark,jdbcType=VARCHAR}, #{resv1,jdbcType=VARCHAR}, #{resv2,jdbcType=VARCHAR}, 
+      #{resv3,jdbcType=VARCHAR}, #{resv4,jdbcType=VARCHAR}, #{resv5,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
+      #{modifyBy,jdbcType=VARCHAR})
+  </insert>
+ 
+  <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnTransaction">
+	<selectKey resultType="java.lang.String" keyProperty="accTranNo" order="BEFORE">
 		select
 		'AC'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANSACTION.NEXTVAL
 		from
 		dual
-	</select>
-	<insert id="insertNoSerq" parameterType="com.somnus.smart.base.domain.TrnTransaction">
-		 insert into TCOR_TRN_TRANSACTION (ACC_TRAN_NO, SYS_CODE, MACHINE_NO, 
+	</selectKey>
+	insert into TCOR_TRN_TRANSACTION (ACC_TRAN_NO, SYS_CODE, MACHINE_NO, 
       CHANNEL_NO, TERMINAL_NO,TRAN_CODE, IPS_BILL_NO,
       APP_TRAN_NO, APP_BATCH_NO, CUS_TRAN_NO, 
       CHL_TRAN_NO, PRD_CODE, TRAN_TYPE, 
@@ -284,67 +334,10 @@
       #{resv3,jdbcType=VARCHAR}, #{resv4,jdbcType=VARCHAR}, #{resv5,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
       #{modifyBy,jdbcType=VARCHAR})
-	</insert>
-	<insert id="insert" parameterType="com.somnus.smart.base.domain.TrnTransaction">
-		<selectKey resultType="java.lang.String" keyProperty="accTranNo"
-			order="BEFORE">
-			select
-			'AC'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANSACTION.NEXTVAL
-			from
-			dual
-		</selectKey>
-		 insert into TCOR_TRN_TRANSACTION (ACC_TRAN_NO, SYS_CODE, MACHINE_NO, 
-      CHANNEL_NO, TERMINAL_NO,TRAN_CODE, IPS_BILL_NO,
-      APP_TRAN_NO, APP_BATCH_NO, CUS_TRAN_NO, 
-      CHL_TRAN_NO, PRD_CODE, TRAN_TYPE, 
-      INITIATOR_FLG, PAYEE_CODE, PAYEE_ACC_CODE, 
-      PAYEE_TYPE, PAYEE_REL_SUB_CODE, PAYER_CODE, 
-      PAYER_ACC_CODE, PAYER_TYPE, PAYER_REL_SUB_CODE, 
-      SUPPLIER_CODE, CHANNEL_CODE, CCY_CODE, 
-      TRAN_AMT, ORD_AMT, IS_FEE, 
-      FEE_AMT, FEE_TYPE, FEE_RATE, 
-      FEE_FLAG, FEE_STL_MODE, THIRD_ACC_CODE, 
-      REFUND_FEE_BK, BANK_ACC_CODE, BANK_COST, 
-      BANK_FEE_TYPE, BANK_FEE_RATE, APP_TRAN_DATE, 
-      SUBMIT_TIME, FINNISH_TIME, ACC_DATE, 
-      IS_DEPOSIT, SECURITY_DEPOSIT, DEPOSIT_REFUND_DATE, 
-      DEPOSIT_STATUS, RETURNED_DEPOSIT_AMT, REFUNDED_AMT, 
-      DISHONORED_AMT, EST_ACC_TIME, ACC_MODE, 
-      ACC_STATUS,FROZEN_FLAG, STATUS, BLN_MODE,
-      BLN_STATUS, CAN_BLN_DATE, BLN_DATE, 
-      ERR_MSG, VOUCHER_NO, ORI_APP_TRAN_NO, 
-      TRAN_REMARK, RESV1, RESV2, 
-      RESV3, RESV4, RESV5, 
-      CREATE_TIME, CREATE_BY, MODIFY_TIME, 
-      MODIFY_BY)
-    values (#{accTranNo,jdbcType=VARCHAR}, #{sysCode,jdbcType=VARCHAR}, #{machineNo,jdbcType=VARCHAR}, 
-      #{channelNo,jdbcType=VARCHAR}, #{terminalNo,jdbcType=VARCHAR},#{tranCode,jdbcType=VARCHAR}, #{ipsBillNo,jdbcType=VARCHAR},
-      #{appTranNo,jdbcType=VARCHAR}, #{appBatchNo,jdbcType=VARCHAR}, #{cusTranNo,jdbcType=VARCHAR}, 
-      #{chlTranNo,jdbcType=VARCHAR}, #{prdCode,jdbcType=VARCHAR}, #{tranType,jdbcType=VARCHAR}, 
-      #{initiatorFlg,jdbcType=CHAR}, #{payeeCode,jdbcType=VARCHAR}, #{payeeAccCode,jdbcType=VARCHAR}, 
-      #{payeeType,jdbcType=CHAR}, #{payeeRelSubCode,jdbcType=VARCHAR}, #{payerCode,jdbcType=VARCHAR}, 
-      #{payerAccCode,jdbcType=VARCHAR}, #{payerType,jdbcType=CHAR}, #{payerRelSubCode,jdbcType=VARCHAR}, 
-      #{supplierCode,jdbcType=VARCHAR}, #{channelCode,jdbcType=VARCHAR}, #{ccyCode,jdbcType=VARCHAR}, 
-      #{tranAmt,jdbcType=DECIMAL}, #{ordAmt,jdbcType=DECIMAL}, #{isFee,jdbcType=CHAR}, 
-      #{feeAmt,jdbcType=DECIMAL}, #{feeType,jdbcType=CHAR}, #{feeRate,jdbcType=DECIMAL}, 
-      #{feeFlag,jdbcType=CHAR}, #{feeStlMode,jdbcType=CHAR}, #{thirdAccCode,jdbcType=VARCHAR}, 
-      #{refundFeeBk,jdbcType=CHAR}, #{bankAccCode,jdbcType=VARCHAR}, #{bankCost,jdbcType=DECIMAL}, 
-      #{bankFeeType,jdbcType=CHAR}, #{bankFeeRate,jdbcType=DECIMAL}, #{appTranDate,jdbcType=TIMESTAMP}, 
-      #{submitTime,jdbcType=TIMESTAMP}, #{finnishTime,jdbcType=TIMESTAMP}, #{accDate,jdbcType=DATE}, 
-      #{isDeposit,jdbcType=CHAR}, #{securityDeposit,jdbcType=DECIMAL}, #{depositRefundDate,jdbcType=DATE}, 
-      #{depositStatus,jdbcType=CHAR}, #{returnedDepositAmt,jdbcType=DECIMAL}, #{refundedAmt,jdbcType=DECIMAL}, 
-      #{dishonoredAmt,jdbcType=DECIMAL}, #{estAccTime,jdbcType=DATE}, #{accMode,jdbcType=CHAR}, 
-      #{accStatus,jdbcType=CHAR},#{frozenFlag,jdbcType=CHAR}, #{status,jdbcType=CHAR}, #{blnMode,jdbcType=CHAR},
-      #{blnStatus,jdbcType=CHAR}, #{canBlnDate,jdbcType=DATE}, #{blnDate,jdbcType=DATE}, 
-      #{errMsg,jdbcType=VARCHAR}, #{voucherNo,jdbcType=VARCHAR}, #{oriAppTranNo,jdbcType=VARCHAR}, 
-      #{tranRemark,jdbcType=VARCHAR}, #{resv1,jdbcType=VARCHAR}, #{resv2,jdbcType=VARCHAR}, 
-      #{resv3,jdbcType=VARCHAR}, #{resv4,jdbcType=VARCHAR}, #{resv5,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
-      #{modifyBy,jdbcType=VARCHAR})
-	</insert>
+  </insert>
 
-	<update id="update" parameterType="com.somnus.smart.base.domain.TrnTransaction">
-		update TCOR_TRN_TRANSACTION
+ <update id="update" parameterType="com.somnus.smart.base.domain.TrnTransaction">
+	update TCOR_TRN_TRANSACTION
     <set >
       <if test="sysCode != null" >
         SYS_CODE = #{sysCode,jdbcType=VARCHAR},
@@ -534,11 +527,12 @@
       </if>
     </set>
     where ACC_TRAN_NO = #{accTranNo,jdbcType=VARCHAR}
-	     <if test="status != null and status=='1' and blnStatus != null" >
-	       AND BLN_STATUS = #{blnStatus,jdbcType=CHAR}
-	     </if>
-	     <if test="blnStatus != null and blnStatus=='1'" >
-	        AND STATUS ='0'
-	     </if>
-	</update>
+	<if test="status != null and status=='1' and blnStatus != null" >
+		AND BLN_STATUS = #{blnStatus,jdbcType=CHAR}
+	</if>
+	<if test="blnStatus != null and blnStatus=='1'" >
+		AND STATUS ='0'
+	</if>
+  </update>
+  
 </mapper>

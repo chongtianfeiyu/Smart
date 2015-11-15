@@ -15,9 +15,6 @@ import com.somnus.smart.support.util.SessionUtil;
 
 /**
  * 日志处理过滤器
- *
- * @author Somnus
- * @version 1.0 2012-11-15
  */
 public class LoggingProcessFilter extends OncePerRequestFilter {
 

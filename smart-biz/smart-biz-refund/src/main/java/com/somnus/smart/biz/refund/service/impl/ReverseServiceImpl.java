@@ -26,9 +26,6 @@ import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 冲正服务实现
- * 
- * @author 李太平
- * @version $Id: ReverseServiceImpl.java, v 0.1 2014-11-20 下午03:58:24 李太平 Exp $
  */
 @Component
 public class ReverseServiceImpl implements ReverseService {

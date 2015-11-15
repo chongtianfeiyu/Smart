@@ -35,9 +35,6 @@ import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 银行卡收单、撤销冲正、isp账户支付记账
- * 
- * @author 李太平
- * @version $Id: IncomeResourceNewImpl.java, v 0.1 2014-11-20 下午02:21:42 李太平  Exp $
  */
 @Component
 @Validated

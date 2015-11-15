@@ -10,9 +10,6 @@ import com.somnus.smart.message.account.IpsPayRequest;
 
 /**
  * 收单记账业务处理器
- * 
- * @author 李太平
- * @version $Id: IncomeService.java, v 0.1 2014-11-17 上午08:56:08 李太平  Exp $
  */
 public interface IncomeService {
 

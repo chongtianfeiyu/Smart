@@ -14,5 +14,4 @@ public class EntryCodeConstant {
 		EntryCodeConstant.entryCodeMap = entryCodeMap;
 	}
 	
-	
 }

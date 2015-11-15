@@ -5,13 +5,6 @@ package com.somnus.smart.support.common;
 
 /**
  * 300xxx 系统错误 301xxx 报文错误 302xxx 日间交易异常 303xxx 日终异常
- * 
- * @Title: ErrorCode
- * @Package: com.somnus.smart.support.common
- * @Description: 错误信息编码合集
- * @author: cjliu
- * @date: 2012-9-14下午2:03:01
- * @version: 1.0
  */
 public class MsgCodeList {
 	/**

@@ -9,8 +9,6 @@ import com.somnus.smart.message.custom.TranFreezeRequest;
 
 /**
  * 冻结
- * @author IH745
- *
  */
 public interface FreezeResource {
 	

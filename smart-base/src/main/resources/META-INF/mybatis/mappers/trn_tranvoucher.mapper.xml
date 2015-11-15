@@ -25,26 +25,28 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     VOU_TRAN_NO, ACC_TRAN_NO, SUB_CODE_1ST, SUB_INDEX_1ST, CD_FLAG_1ST, TRAN_AMT_1ST, 
     SUB_CODE_2ND, SUB_INDEX_2ND, CD_FLAG_2ND, TRAN_AMT_2ND, SUB_CODE_3RD, SUB_INDEX_3RD, 
     CD_FLAG_3RD, TRAN_AMT_3RD, SUB_CODE_4TH, SUB_INDEX_4TH, CD_FLAG_4TH, TRAN_AMT_4TH, 
     CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY
   </sql>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
     from TCOR_TRN_TRANVOUCHER
     where VOU_TRAN_NO = #{vouTranNo,jdbcType=VARCHAR}
   </select>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnTranVoucher" >
-    <selectKey resultType="java.lang.String" keyProperty="vouTranNo"
-			order="BEFORE">
-			select
-			to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANVOUCHER.NEXTVAL
-			from
-			dual
-		</selectKey>
+	<selectKey resultType="java.lang.String" keyProperty="vouTranNo" order="BEFORE">
+		select
+		to_char(sysdate,'yyyymmdd')||SEQ_TRN_TRANVOUCHER.NEXTVAL
+		from
+		dual
+	</selectKey>
     insert into TCOR_TRN_TRANVOUCHER (VOU_TRAN_NO, ACC_TRAN_NO, SUB_CODE_1ST, 
       SUB_INDEX_1ST, CD_FLAG_1ST, TRAN_AMT_1ST, 
       SUB_CODE_2ND, SUB_INDEX_2ND, CD_FLAG_2ND, 
@@ -62,6 +64,7 @@
       #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
       #{modifyBy,jdbcType=VARCHAR})
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.TrnTranVoucher" >
     update TCOR_TRN_TRANVOUCHER
     <set >
@@ -131,4 +134,5 @@
     </set>
     where VOU_TRAN_NO = #{vouTranNo,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

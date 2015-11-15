@@ -18,9 +18,6 @@ import com.somnus.smart.support.jms.AbstractJmsReceiveTemplate;
 
 /**
  * 账户核心记账
- * 
- * @author IH745
- * @version 1.0 13-10-11
  */
 public class ProtocolDrawAction extends AbstractJmsReceiveTemplate {
 

@@ -8,9 +8,6 @@ import com.somnus.smart.message.account.AccountTransRequest;
 
 /**
  * 账户记账业务处理
- * 
- * @author 李太平
- * @version $Id: AccountService.java, v 0.1 2014-11-28 下午01:55:40 李太平 Exp $
  */
 public interface AccountService {
 	/**

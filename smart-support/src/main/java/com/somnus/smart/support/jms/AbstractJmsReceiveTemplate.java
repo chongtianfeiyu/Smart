@@ -8,12 +8,6 @@ import org.springframework.jms.listener.adapter.MessageListenerAdapter;
 import com.somnus.smart.support.common.Constants;
 import com.somnus.smart.support.util.SessionUtil;
 
-/**
- * AbstractJmsReceiveTemplate
- *
- * @author: Fred
- * @version: 13-4-10下午3:19
- */
 public abstract class AbstractJmsReceiveTemplate extends MessageListenerAdapter {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());

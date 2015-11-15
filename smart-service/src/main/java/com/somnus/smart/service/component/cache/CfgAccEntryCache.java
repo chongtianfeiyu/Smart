@@ -8,12 +8,6 @@ import com.somnus.smart.base.dao.CfgAccEntryDao;
 import com.somnus.smart.base.domain.CfgAccEntry;
 import com.somnus.smart.service.common.CacheConstants;
 
-/**
- * CfgAccEntryCache
- *
- * @author IH745
- * @version 1.0 13-10-9
- */
 @Component
 public class CfgAccEntryCache {
 

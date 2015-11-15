@@ -5,9 +5,6 @@ import com.somnus.smart.message.account.BatchIpsDrawRequest;
 
 /**
  *转账
- *
- * @author IH745
- * @version 1.0 13-10-18
  */
 public interface BatchIpsDrawService {
 

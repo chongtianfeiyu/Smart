@@ -34,9 +34,6 @@ import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 账户余额冻结、解冻接口
- * 
- * @author 李太平
- * @version $Id: FreezeResourceNewImpl.java, v 0.1 2014-11-25 上午09:26:33 李太平 Exp $
  */
 @Component
 @Validated

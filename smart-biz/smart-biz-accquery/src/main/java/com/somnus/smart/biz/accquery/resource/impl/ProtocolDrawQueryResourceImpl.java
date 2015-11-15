@@ -22,12 +22,6 @@ import com.somnus.smart.service.common.Constants;
 import com.somnus.smart.service.common.MessageUtil;
 import com.somnus.smart.support.exceptions.BizException;
 
-/**
- * 
- * @description: TODO 
- * @author Somnus
- * date 2015年3月6日 下午6:14:43
- */
 @Component
 @Validated
 @Path("/com.somnus.smart.biz.accquery.resource.ProtocolDrawQueryResource")

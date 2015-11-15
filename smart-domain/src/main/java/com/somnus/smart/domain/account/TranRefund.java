@@ -11,9 +11,6 @@ import com.somnus.smart.domain.DomainModel;
 
 /**
  * 出款附属
- * 
- * @author 李太平
- * @version $Id: TranRefund.java, v 0.1 2014-11-18 下午04:32:52 李太平 Exp $
  */
 public class TranRefund extends TrnTranRefund implements DomainModel<TranRefund, TrnTranRefund> {
 

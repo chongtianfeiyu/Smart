@@ -28,9 +28,6 @@ import com.somnus.smart.domain.account.TransferTransaction;
 
 /**
  * 领域对象初始化
- * 
- * @author Administrator
- * @version $Id: DomainInitializer.java, v 0.1 2014-10-29 下午03:52:42 Administrator Exp $
  */
 public class DomainInitializer implements InitializingBean, ApplicationContextAware {
 

@@ -27,9 +27,6 @@ import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 提现记账接口
- * 
- * @author Administrator
- * @version $Id: DrawResourceNewImpl.java, v 0.1 2014-11-13 下午01:40:36 Administrator Exp $
  */
 @Component
 @Validated

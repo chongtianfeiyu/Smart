@@ -15,16 +15,15 @@
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
 
-	<select id="getWorkDay" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select a.DAY_ID,a.CUT_CODE,a.CORE_DATE,a.L_CORE_DATE,a.BL_CORE_DATE,a.N_CORE_DATE,
-			a.YEAR_END_DATE,a.CREATE_TIME,a.CREATE_BY,a.MODIFY_TIME,a.MODIFY_BY
-		from TCOR_DAY_SYSTEM a
-			where a.CUT_CODE = #{cutCode} 
-	</select>
+  <select id="getWorkDay" resultMap="BaseResultMap" parameterType="java.lang.String">
+	select a.DAY_ID,a.CUT_CODE,a.CORE_DATE,a.L_CORE_DATE,a.BL_CORE_DATE,a.N_CORE_DATE,
+		a.YEAR_END_DATE,a.CREATE_TIME,a.CREATE_BY,a.MODIFY_TIME,a.MODIFY_BY
+	from TCOR_DAY_SYSTEM a
+	where a.CUT_CODE = #{cutCode} 
+  </select>
 	
-	
-	<select id="getDaySystem" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select * from TCOR_DAY_SYSTEM where CUT_CODE=#{cutCode}
-	</select>
+  <select id="getDaySystem" resultMap="BaseResultMap" parameterType="java.lang.String">
+	select * from TCOR_DAY_SYSTEM where CUT_CODE=#{cutCode}
+  </select>
 	
 </mapper>

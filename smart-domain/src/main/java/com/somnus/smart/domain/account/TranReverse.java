@@ -11,9 +11,6 @@ import com.somnus.smart.domain.DomainModel;
 
 /**
  * 冲正附属
- * 
- * @author Administrator
- * @version $Id: Ledgerdetail.java, v 0.1 2014-10-29 下午04:44:14 Administrator Exp $
  */
 public class TranReverse extends TrnTranReverse implements DomainModel<TranReverse, TrnTranReverse> {
 

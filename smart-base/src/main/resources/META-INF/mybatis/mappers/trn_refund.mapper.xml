@@ -59,6 +59,7 @@
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
     <result column="PAYEE_BANK_CODE" property="payeeBankCode" jdbcType="VARCHAR" />
  </resultMap>
+ 
   <sql id="Base_Column_List" >
     REFUND_ID, SYS_CODE, BILL_NO, MER_BILL_NO, APP_TRAN_NO, PAY_TRAN_NO, PRD_CODE, MER_CODE, 
     MER_NAME, MER_ACC_CODE, MER_ACC_NAME, MER_BIZ_KIND, TRAN_TYPE, CCY_CODE, TRAN_AMOUNT, 
@@ -84,14 +85,14 @@
     from TCOR_TRN_REFUND
     where REFUND_ID = #{refundId,jdbcType=VARCHAR}
   </select>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnRefund" >
-   		<selectKey resultType="java.lang.String" keyProperty="refundId"
-			order="BEFORE">
-			select
-			'RF'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_REFUND.NEXTVAL
-			from
-			dual
-		</selectKey>
+	<selectKey resultType="java.lang.String" keyProperty="refundId" order="BEFORE">
+		select 
+		'RF'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_REFUND.NEXTVAL 
+		from 
+		dual
+	</selectKey>
     insert into TCOR_TRN_REFUND (REFUND_ID, SYS_CODE, BILL_NO, 
       MER_BILL_NO, APP_TRAN_NO, PAY_TRAN_NO, 
       PRD_CODE, MER_CODE, MER_NAME, 
@@ -131,6 +132,7 @@
       #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
       #{modifyBy,jdbcType=VARCHAR}, #{payeeBankCode,jdbcType=VARCHAR})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.somnus.smart.base.domain.TrnRefund" >
     insert into TCOR_TRN_REFUND
     <trim prefix="(" suffix=")" suffixOverrides="," >
@@ -474,6 +476,7 @@
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.TrnRefund" >
       update TCOR_TRN_REFUND
     <set >
@@ -649,11 +652,19 @@
    <select id="selectWriteOffConfirm" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    	from TCOR_TRN_REFUND where REFUND_ID = #{refundId,jdbcType=VARCHAR} and STATUS in('03','08') and FINISH_FLAG='0'
+	from TCOR_TRN_REFUND 
+	where REFUND_ID = #{refundId,jdbcType=VARCHAR} 
+	and STATUS in('03','08') 
+	and FINISH_FLAG='0'
   </select>
+  
   <select id="selectWriteOffCancel" resultMap="BaseResultMap">
-	 select 
+	select 
     <include refid="Base_Column_List" />
-    	from TCOR_TRN_REFUND where REFUND_ID = #{refundId,jdbcType=VARCHAR} and STATUS='04' and FINISH_FLAG='0'
+	from TCOR_TRN_REFUND 
+	where REFUND_ID = #{refundId,jdbcType=VARCHAR} 
+	and STATUS='04' 
+	and FINISH_FLAG='0'
   </select>
+  
 </mapper>

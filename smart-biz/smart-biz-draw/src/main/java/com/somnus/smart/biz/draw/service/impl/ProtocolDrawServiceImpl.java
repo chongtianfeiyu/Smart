@@ -38,10 +38,6 @@ import com.somnus.smart.support.util.DateUtil;
 
 /**
  * 协议出款实现
- * 
- * @author 李太平
- * @version $Id: ProtocolDrawServiceImpl.java, v 0.1 2015-4-1 下午12:51:28 李太平 Exp
- *          $
  */
 @Component
 public class ProtocolDrawServiceImpl implements ProtocolDrawService {

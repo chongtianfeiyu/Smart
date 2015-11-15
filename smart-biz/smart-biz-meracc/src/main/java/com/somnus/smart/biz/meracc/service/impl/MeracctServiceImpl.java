@@ -49,9 +49,6 @@ import com.somnus.smart.support.util.DateUtil;
 
 /**
  * 商户开户接口
- * 
- * @author 李太平
- * @version $Id: MeracctServiceImpl.java, v 0.1 2015-4-3 下午04:17:13 李太平 Exp $
  */
 @Service
 public class MeracctServiceImpl implements MeracctService {

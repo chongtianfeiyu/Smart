@@ -5,7 +5,6 @@ import java.util.Date;
 
 import org.springframework.beans.BeanUtils;
 
-import com.somnus.smart.base.domain.TrnTransaction;
 import com.somnus.smart.domain.account.Transaction;
 import com.somnus.smart.message.account.IncomeRequest;
 import com.somnus.smart.message.account.IpsPayRequest;

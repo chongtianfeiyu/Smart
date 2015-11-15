@@ -5,11 +5,6 @@ import com.somnus.smart.message.accquery.ProtocolDrawQueryResponse;
 import com.somnus.smart.message.accquery.ProtocolTransferQueryRequest;
 import com.somnus.smart.message.accquery.ProtocolTransferQueryResponse;
 
-/**
- * 查询接口
- * @author IH745
- *
- */
 public interface ProtocolDrawQueryService {
 	
 	/**

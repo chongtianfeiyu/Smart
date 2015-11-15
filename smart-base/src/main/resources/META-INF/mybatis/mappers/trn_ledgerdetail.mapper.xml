@@ -59,7 +59,7 @@
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
 
-	 <sql id="Base_Column_List" >
+  <sql id="Base_Column_List" >
     LED_TRAN_NO, ACC_ENTRY_CODE, ACC_TRAN_NO, ACC_ENTRY_TYPE, ACC_CODE_1ST, SUB_ACC_CODE_1ST, 
     FIR_SUB_CODE_1ST, REL_SUB_CODE_1ST, SUB_INDEX_1ST, SEQ_NO_1ST, SUB_TYPE_1ST, CD_FLAG_1ST, 
     TRAN_AMT_1ST, ACC_CODE_2ND, SUB_ACC_CODE_2ND, SUB_CODE_2ND, REL_SUB_CODE_2ND, SUB_INDEX_2ND, 
@@ -70,24 +70,25 @@
     ACC_STATUS, ACC_DATE, IPS_BILL_NO, APP_TRAN_NO, TRAN_TYPE, SYS_CODE, CUS_TRAN_NO, 
     TRAN_REMARK, CREATE_TIME, CREATE_BY, MODIFY_TIME, MODIFY_BY
   </sql>
-	<sql id="whereCondition">
-		<where>
-			<trim prefix="(" suffix=")" prefixOverrides="and | AND">
-				<if test="ledTranNo != null and ledTranNo != '' ">
-					and LED_TRAN_NO = #{ledTranNo,jdbcType=VARCHAR}
-				</if>
-				<if test="accTranNo != null and accTranNo != '' ">
-					and ACC_TRAN_NO = #{accTranNo,jdbcType=VARCHAR}
-				</if>
-				<if test="accStatus != null and accStatus != '' ">
-					and ACC_STATUS = #{accStatus,jdbcType=CHAR}
-				</if>
-			</trim>
-		</where>
-	</sql>
+  
+  <sql id="whereCondition">
+	<where>
+		<trim prefix="(" suffix=")" prefixOverrides="and | AND">
+			<if test="ledTranNo != null and ledTranNo != '' ">
+				and LED_TRAN_NO = #{ledTranNo,jdbcType=VARCHAR}
+			</if>
+			<if test="accTranNo != null and accTranNo != '' ">
+				and ACC_TRAN_NO = #{accTranNo,jdbcType=VARCHAR}
+			</if>
+			<if test="accStatus != null and accStatus != '' ">
+				and ACC_STATUS = #{accStatus,jdbcType=CHAR}
+			</if>
+		</trim>
+	</where>
+  </sql>
 
-	<update id="update" parameterType="com.somnus.smart.base.domain.TrnLedgerDetail">
-		update TCOR_TRN_LEDGERDETAIL
+  <update id="update" parameterType="com.somnus.smart.base.domain.TrnLedgerDetail">
+	update TCOR_TRN_LEDGERDETAIL
 		<set>
 			<if test="accDate != null">
 				ACC_DATE = #{accDate,jdbcType=VARCHAR},
@@ -103,32 +104,30 @@
 			</if>
 		</set>
 		where LED_TRAN_NO = #{ledTranNo,jdbcType=VARCHAR}
-	</update>
+  </update>
 
-	<select id="select" resultMap="BaseResultMap"
-		parameterType="com.somnus.smart.base.domain.TrnLedgerDetail">
-		select
-		<include refid="Base_Column_List" />
-		from TCOR_TRN_LEDGERDETAIL
-		<include refid="whereCondition" />
-	</select>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.somnus.smart.base.domain.TrnLedgerDetail">
+	select
+	<include refid="Base_Column_List" />
+	from TCOR_TRN_LEDGERDETAIL
+	<include refid="whereCondition" />
+  </select>
 	
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-	    select 
-	    <include refid="Base_Column_List" />
-	    from TCOR_TRN_LEDGERDETAIL
-	    where LED_TRAN_NO = #{ledTranNo,jdbcType=VARCHAR}
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+	select 
+	<include refid="Base_Column_List" />
+	from TCOR_TRN_LEDGERDETAIL
+	where LED_TRAN_NO = #{ledTranNo,jdbcType=VARCHAR}
   </select>
 
-	<insert id="insert" parameterType="com.somnus.smart.base.domain.TrnLedgerDetail">
-		<selectKey resultType="java.lang.String" keyProperty="ledTranNo"
-			order="BEFORE">
-			select
-			'NC'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_LEDGERDETAIL.NEXTVAL
-			from
-			dual
-		</selectKey>
-		  insert into TCOR_TRN_LEDGERDETAIL (LED_TRAN_NO, ACC_ENTRY_CODE, ACC_TRAN_NO, 
+  <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnLedgerDetail">
+	<selectKey resultType="java.lang.String" keyProperty="ledTranNo" order="BEFORE">
+		select 
+		'NC'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_LEDGERDETAIL.NEXTVAL 
+		from 
+		dual
+	</selectKey>
+	insert into TCOR_TRN_LEDGERDETAIL (LED_TRAN_NO, ACC_ENTRY_CODE, ACC_TRAN_NO, 
       ACC_ENTRY_TYPE, ACC_CODE_1ST, SUB_ACC_CODE_1ST, 
       FIR_SUB_CODE_1ST, REL_SUB_CODE_1ST, SUB_INDEX_1ST, 
       SEQ_NO_1ST, SUB_TYPE_1ST, CD_FLAG_1ST, 
@@ -166,6 +165,6 @@
       #{sysCode,jdbcType=VARCHAR}, #{cusTranNo,jdbcType=VARCHAR}, #{tranRemark,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
       #{modifyBy,jdbcType=VARCHAR})
-	</insert>
+  </insert>
 
 </mapper>

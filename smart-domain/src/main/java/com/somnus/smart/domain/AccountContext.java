@@ -7,9 +7,6 @@ import com.somnus.smart.domain.account.SubAccInfo;
 
 /**
  * 记账上下文
- * 
- * @author Administrator
- * @version $Id: AccountContext.java, v 0.1 2014-11-3 上午11:09:26 Administrator Exp $
  */
 public class AccountContext {
     /** 是否多笔台账记账 */

@@ -23,9 +23,6 @@ import com.somnus.smart.support.util.DateUtil;
 
 /**
  * 记账
- * 
- * @author 李太平
- * @version $Id: Account.java, v 0.1 2014-11-17 下午01:34:44 李太平 Exp $
  */
 public class Account {
 	/** Logger */

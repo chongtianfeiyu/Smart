@@ -19,11 +19,13 @@
     <result column="MODIFY_TIME" property="modifyTime" jdbcType="VARCHAR" />
     <result column="MODIFY_BY" property="modifyBy" jdbcType="VARCHAR" />
   </resultMap>
+  
   <sql id="Base_Column_List" >
     FREEZE_NO, APP_TRAN_NO, MER_ACC_CODE, CCY_CODE, TRAN_AMT, THAW_AMT, FREEZE_TYPE, 
     INITIAL_FREEZE_TYPE, BIZ_TYPE, STATUS, VOUCHER_NO, TRAN_REMARK, CREATE_TIME, CREATE_BY, 
     MODIFY_TIME, MODIFY_BY
   </sql>
+  
   <select id="select" resultMap="BaseResultMap" parameterType="com.somnus.smart.base.domain.TrnFreeze" >
     select 
     <include refid="Base_Column_List" />
@@ -60,14 +62,14 @@
 	      </trim>
       </where>
   </select>
+  
   <insert id="insert" parameterType="com.somnus.smart.base.domain.TrnFreeze" >
-    <selectKey resultType="java.lang.String" keyProperty="freezeNo"
-			order="BEFORE">
-			select
-			'FR'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_FREEZE.NEXTVAL
-			from
-			dual
-		</selectKey>
+	<selectKey resultType="java.lang.String" keyProperty="freezeNo" order="BEFORE">
+		select 
+		'FR'||to_char(sysdate,'yyyymmdd')||SEQ_TRN_FREEZE.NEXTVAL 
+		from 
+		dual
+	</selectKey>
     insert into TCOR_TRN_FREEZE (FREEZE_NO, APP_TRAN_NO, MER_ACC_CODE, 
       CCY_CODE, TRAN_AMT, THAW_AMT, 
       FREEZE_TYPE, INITIAL_FREEZE_TYPE, BIZ_TYPE, 
@@ -81,6 +83,7 @@
       #{createTime,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{modifyTime,jdbcType=VARCHAR}, 
       #{modifyBy,jdbcType=VARCHAR})
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.somnus.smart.base.domain.TrnFreeze" >
     update TCOR_TRN_FREEZE
     <set >
@@ -132,4 +135,5 @@
     </set>
     where FREEZE_NO = #{freezeNo,jdbcType=VARCHAR}
   </update>
+  
 </mapper>

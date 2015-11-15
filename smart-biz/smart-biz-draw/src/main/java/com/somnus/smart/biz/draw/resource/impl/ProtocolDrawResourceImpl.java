@@ -30,9 +30,6 @@ import com.somnus.smart.support.util.ValidateUtil;
 
 /**
  * 协议划款记账接口
- * 
- * @author 李太平
- * @version $Id: ProtocolDrawResourceNewImpl.java, v 0.1 2014-11-26 下午01:40:50 李太平 Exp $
  */
 @Component
 @Validated

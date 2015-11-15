@@ -8,12 +8,6 @@ import com.somnus.smart.base.dao.InfAcctypeDao;
 import com.somnus.smart.base.domain.InfAcctype;
 import com.somnus.smart.service.common.CacheConstants;
 
-/**
- * InfAccTypeCache
- *
- * @author IH745
- * @version 1.0 13-10-9
- */
 @Component
 public class InfAccTypeCache {
 

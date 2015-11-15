@@ -26,10 +26,6 @@ import com.somnus.smart.support.util.ValidateUtil;
 
 /**
  * 台账
- * 
- * @author Administrator
- * @version $Id: Ledgerdetail.java, v 0.1 2014-10-29 下午04:44:14 Administrator
- *          Exp $
  */
 public class LedgerDetail extends TrnLedgerDetail implements
 		DomainModel<LedgerDetail, TrnLedgerDetail> {

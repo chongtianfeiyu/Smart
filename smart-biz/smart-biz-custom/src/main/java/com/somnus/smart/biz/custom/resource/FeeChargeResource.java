@@ -7,8 +7,6 @@ import com.somnus.smart.message.custom.FeeChargeRequest;
 
 /**
  * 费用收取记账服务
- * @author bo.zhang
- *
  */
 public interface FeeChargeResource {
 	

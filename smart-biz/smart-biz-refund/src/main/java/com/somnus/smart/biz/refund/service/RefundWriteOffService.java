@@ -5,9 +5,6 @@ import com.somnus.smart.message.writeoff.RefundWriteOffRequest;
 
 /**
  * 核销接口
- * 
- * @author IH745
- * 
  */
 public interface RefundWriteOffService {
 

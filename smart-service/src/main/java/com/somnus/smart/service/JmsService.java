@@ -5,11 +5,6 @@ package com.somnus.smart.service;
 
 import com.somnus.smart.base.domain.TrnTransaction;
 
-/**
- * @author IH745
- * @date 2013-10-11
- * 
- */
 public interface JmsService {
 
 	/**

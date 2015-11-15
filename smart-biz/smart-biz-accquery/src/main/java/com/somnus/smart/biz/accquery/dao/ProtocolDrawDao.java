@@ -8,12 +8,6 @@ import com.somnus.smart.message.accquery.ProtocolTransferOrder;
 import com.somnus.smart.message.accquery.ProtocolTransferQueryRequest;
 import com.somnus.smart.support.mybatis.annotation.MyBatisRepository;
 
-/**
- * 协议出款查询
- * 
- * @author IH745
- * 
- */
 @MyBatisRepository
 public interface ProtocolDrawDao {
 

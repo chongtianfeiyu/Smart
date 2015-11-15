@@ -33,9 +33,6 @@ import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 结汇记账接口
- * 
- * @author 李太平
- * @version $Id: ForeignExchangeResourceNewImpl.java, v 0.1 2014-11-24 下午05:28:49 李太平  Exp $
  */
 @Component
 @Validated

@@ -1,7 +1,5 @@
 package com.somnus.smart.biz.custom.common;
 
-import java.util.Date;
-
 import org.springframework.beans.BeanUtils;
 
 import com.somnus.smart.domain.account.TranVoucher;

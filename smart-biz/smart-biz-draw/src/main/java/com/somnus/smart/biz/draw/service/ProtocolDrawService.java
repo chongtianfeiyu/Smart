@@ -10,9 +10,6 @@ import com.somnus.smart.message.account.ProtocolDrawRequest;
 
 /**
  *协议出款
- *
- * @author IH745
- * @version 1.0 13-10-18
  */
 public interface ProtocolDrawService {
 

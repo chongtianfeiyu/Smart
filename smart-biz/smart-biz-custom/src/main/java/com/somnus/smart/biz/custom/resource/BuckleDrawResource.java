@@ -8,8 +8,6 @@ import com.somnus.smart.message.custom.BuckleDrawRequest;
 
 /**
  * 扣划
- *
- * @author IH745
  */
 public interface BuckleDrawResource {
 	
