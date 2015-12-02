@@ -3,7 +3,9 @@ package com.somnus.smart.biz.custom.service.impl;
 import javax.annotation.Resource;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somnus.smart.biz.custom.common.CusConstants;
@@ -16,16 +18,20 @@ import com.somnus.smart.domain.account.Transaction;
 import com.somnus.smart.message.reticket.ReticketRequest;
 import com.somnus.smart.service.BasBizService;
 import com.somnus.smart.service.common.CommonTransfer;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 退票记账业务处理实现
  */
-@Component
+@Service
 public class ReticketServiceImpl implements ReticketService {
 
     @Resource
-    private BasBizService basBizService;
+    private BasBizService 			basBizService;
+    
+    @Autowired
+    private MessageSourceAccessor 	msa;
 
     @Override
     public Transaction createTransaction(ReticketRequest request) {
@@ -45,7 +51,7 @@ public class ReticketServiceImpl implements ReticketService {
     public void drawReticketSynAccount(Transaction trntransaction,String oriAppTranNo) throws Exception {
         DrawTransaction draw = DrawTransaction.queryDrawFlagByApp(oriAppTranNo);//根据交易流水号查询已销账出款流水记录
         if (draw == null) {
-            throw new BizException("原交易不存在无法退票!");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302039, new Object[] {}));
         }
         trntransaction.setSupplierCode(draw.getPayerBankCode());//机构号
         trntransaction.setBankAccCode(draw.getIpsAccount());//通道对应银行收款账号
@@ -67,7 +73,7 @@ public class ReticketServiceImpl implements ReticketService {
     public void refundReticketSysAccount(Transaction trntransaction, String oriAppTranNo,String entryKey) throws Exception {
         RefundTransaction refundTransaction = RefundTransaction.queryRefundFlagByApp(oriAppTranNo);//根据交易流水号查询已销账退款流水记录
         if (refundTransaction == null) {
-            throw new BizException("原交易不存在无法退票!");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302039, new Object[] {}));
         }
         trntransaction.setSupplierCode(refundTransaction.getPayerBankCode());//机构号
         trntransaction.setBankAccCode(refundTransaction.getIpsAccount());//通道对应银行收款账号

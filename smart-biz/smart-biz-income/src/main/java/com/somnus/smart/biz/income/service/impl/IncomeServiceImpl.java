@@ -7,7 +7,9 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somnus.smart.base.domain.MerBasicPrdCfg;
@@ -25,16 +27,20 @@ import com.somnus.smart.message.account.IpsPayRequest;
 import com.somnus.smart.service.BasBizService;
 import com.somnus.smart.service.common.BasConstants;
 import com.somnus.smart.service.common.enums.AccountType;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 收单记账业务处理器实现
  */
-@Component
+@Service
 public class IncomeServiceImpl implements IncomeService {
 
     @Resource
-    private BasBizService basBizService;
+    private BasBizService 			basBizService;
+    
+    @Autowired
+    private MessageSourceAccessor 	msa;
 
     @Override
     public Transaction createTransaction(IncomeRequest incomeRequest) throws Exception {
@@ -132,20 +138,23 @@ public class IncomeServiceImpl implements IncomeService {
     public void checkMerAccAndMerSub(String payeeCode, String payeeAccCode, String supplierCode, String bankAccCode) {
         boolean merAccountIsExist = basBizService.checkMerAccountIsExist(payeeCode, payeeAccCode);
         if (!merAccountIsExist) {
-            throw new BizException(payeeAccCode + "商户账户信息不存在!");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_307002, 
+            		new Object[] {payeeAccCode}));
         }
         //校验应收银行科目
         boolean bandAccCodeIsExist = basBizService.checkCusSubaccinfoIsExits(AccountType.INT,
         		BasConstants.REL_SUB_CODE_BANK + supplierCode + bankAccCode);
         if (!bandAccCodeIsExist) {
-            throw new BizException(payeeAccCode + "应收银行未开户!");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302049, 
+            		new Object[] {payeeAccCode}));
         }
 
         //校验流动资金科目
         boolean merSubAccCodeIsExist = basBizService.checkCusSubaccinfoIsExits(AccountType.BIZ,
         		BasConstants.REL_SUB_CODE_FREE + payeeAccCode);
         if (!merSubAccCodeIsExist) {
-            throw new BizException(payeeAccCode + "商户交易账户未开户!");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302050, 
+            		new Object[] {payeeAccCode}));
         }
     }
     
@@ -154,25 +163,28 @@ public class IncomeServiceImpl implements IncomeService {
     		String bankAccCode,String feeWay, String thirdAccCode) {
         boolean perAccountIsExist = basBizService.checkPerAccountIsExist(payeeAccCode);
         if (!perAccountIsExist) {
-            throw new BizException(payeeAccCode + "个人账户信息不存在!");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302051, 
+            		new Object[] {payeeAccCode}));
         }
         //校验应收银行科目
         boolean bandAccCodeIsExist = basBizService.checkCusSubaccinfoIsExits(AccountType.INT,
         		BasConstants.REL_SUB_CODE_BANK + supplierCode + bankAccCode);
         if (!bandAccCodeIsExist) {
-            throw new BizException(payeeAccCode + "应收银行未开户!");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302049, 
+            		new Object[] {payeeAccCode}));
         }
 
         //校验流动资金科目
         boolean perSubAccCodeIsExist = basBizService.checkCusSubaccinfoIsExits(AccountType.IDV,
         		BasConstants.REL_SUB_CODE_FREE + payeeAccCode);
         if (!perSubAccCodeIsExist) {
-            throw new BizException(payeeAccCode + "个人交易账户未开户!");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302052, 
+            		new Object[] {payeeAccCode}));
         }
         //手续费收取方式为第三方时校验第三方账号
         if (BasConstants.FEE_FLAG_THD.equals(feeWay)) {
             if (StringUtils.isBlank(thirdAccCode)) {
-                throw new BizException("手续费收取方式为第三方时,第三方手续费账号不能为空!");
+                throw new BizException(msa.getMessage(MsgCodeList.ERROR_302040, new Object[] {}));
             }
             basBizService.accountExists(thirdAccCode);
         }
@@ -189,7 +201,7 @@ public class IncomeServiceImpl implements IncomeService {
     public void checkFee(String feeStlMode, String sysCode, String feeWay, String thirdAccCode) throws Exception {
         //如果是POSP撤销冲正，手续费承担方必须是收款方
         if (BasConstants.POST_SYS_CODE.equals(sysCode) && !BasConstants.FEE_FLAG_REC.equals(feeWay)) {
-            throw new BizException("POSP收单交易手续费承担方必须为收款方!");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302053, new Object[] {}));
         }
         //非POS撤销冲正
         else {
@@ -201,7 +213,7 @@ public class IncomeServiceImpl implements IncomeService {
                 //手续费收取方式为第三方时校验第三方账号
                 if (BasConstants.FEE_FLAG_THD.equals(feeWay)) {
                     if (StringUtils.isBlank(thirdAccCode)) {
-                        throw new BizException("手续费收取方式为第三方时,第三方手续费账号不能为空!");
+                        throw new BizException(msa.getMessage(MsgCodeList.ERROR_302040, new Object[] {}));
                     }
                     basBizService.accountExists(thirdAccCode);
                 }
@@ -214,7 +226,7 @@ public class IncomeServiceImpl implements IncomeService {
     public void incomeSynAccount(Transaction transaction, String entryKey, Date accDate, boolean checkRed) 
     		throws Exception {
         if (transaction == null) {
-            throw new BizException("交易流水不能为空！");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302019, new Object[] {}));
         }
         Account account = Account.getInstance();
         account.synAccount(transaction, entryKey, accDate, checkRed, null);
@@ -225,7 +237,7 @@ public class IncomeServiceImpl implements IncomeService {
     public void depositSynAccount(Transaction transaction, String entryKey, Date accDate, boolean checkRed) 
     		throws Exception {
         if (transaction == null) {
-            throw new BizException("交易流水不能为空！");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302019, new Object[] {}));
         }
         Account account = Account.getInstance();
         account.synAccount(transaction, entryKey, accDate, checkRed, null);
@@ -235,7 +247,7 @@ public class IncomeServiceImpl implements IncomeService {
     public void ipsPayAccount(Transaction transaction, String entryKey, Date accDate, boolean checkRed) 
     		throws Exception {
         if (transaction == null) {
-            throw new BizException("交易流水不能为空！");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302019, new Object[] {}));
         }
         Account account = Account.getInstance();
         account.ipsPayAccount(transaction, entryKey, accDate, checkRed);
@@ -245,7 +257,7 @@ public class IncomeServiceImpl implements IncomeService {
     public void incomeAsynAccount(Transaction transaction, String entryKey, Date accDate, boolean checkRed) 
     		throws Exception {
         if (transaction == null) {
-            throw new BizException("交易流水不能为空！");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302019, new Object[] {}));
         }
         Account account = Account.getInstance();
         account.asynAccount(transaction, entryKey, accDate, checkRed);
@@ -259,7 +271,7 @@ public class IncomeServiceImpl implements IncomeService {
         //2、手續費如果是第三方承擔手续费校验第三方账户是否存在
         if(depositRequest.getFeeWay().equals(BasConstants.FEE_FLAG_THD)){
         	if (StringUtils.isBlank(depositRequest.getThdAccCode())) {
-                throw new BizException("手续费收取方式为第三方时,第三方手续费账号不能为空!");
+                throw new BizException(msa.getMessage(MsgCodeList.ERROR_302040, new Object[] {}));
             }
         	basBizService.accountExists(depositRequest.getThdAccCode());
         }

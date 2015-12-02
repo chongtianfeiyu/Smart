@@ -3,6 +3,7 @@ package com.somnus.smart.biz.custom.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,27 +15,33 @@ import com.somnus.smart.domain.account.LedgerDetail;
 import com.somnus.smart.domain.account.Transaction;
 import com.somnus.smart.service.BasBizService;
 import com.somnus.smart.service.common.BasConstants;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 import com.somnus.smart.support.util.DateUtil;
 
 @Service
 public class AddAccountServiceImpl implements AddAccountService {
 
-    private transient Logger                       log = LoggerFactory.getLogger(this.getClass());
+    private transient Logger		log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private BasBizService                          basBizService;
+    private BasBizService 			basBizService;
+    
+    @Autowired
+    private MessageSourceAccessor 	msa;
 
     @Override
     @Transactional
     public void addAccount(String errNo) throws Exception {
         if (errNo == null || "".equals(errNo.trim())) {
-            throw new BizException("errNo为空！");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302026, 
+            		new Object[] { }));
         }
         DiffTraninfo diffTraninfo = basBizService.selectDiffTraninfoByPrimaryKey(errNo);
         
         if(diffTraninfo==null){
-            throw new BizException("差异不存在！");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302027, 
+            		new Object[] { }));
         }
         log.info(">>>> 错误流水: {}开始", new Object[] { diffTraninfo.getErrTranNo() });
         if(BasConstants.DIFF_TRANINFO_STATUS_YES.equals(diffTraninfo.getStatus())){
@@ -56,7 +63,8 @@ public class AddAccountServiceImpl implements AddAccountService {
                     account.addAccount(transaction, BasConstants.ENTRY_KEY_INCOME_PRE + transaction.getBlnMode()
                                 + transaction.getFeeFlag() + transaction.getFeeStlMode(), transaction.getAccDate(), false, callBack);
                 } else {
-                    throw new BizException("记账流水:" + diffTraninfo.getErrTranNo() + "不存在");
+                    throw new BizException(msa.getMessage(MsgCodeList.ERROR_302028, 
+                    		new Object[] {diffTraninfo.getErrTranNo() }));
                 }
             } else if (BasConstants.DIFF_TRANINFO_ERR_KIND_LEDGER.equals(diffTraninfo.getErrKind())) {
                 LedgerDetail ledgerDetail = LedgerDetail.getInstance();
@@ -66,7 +74,8 @@ public class AddAccountServiceImpl implements AddAccountService {
                     Account account=Account.getInstance();
                     account.addAccount(false, ledgerDetail);
                 } else {
-                    throw new BizException("台账:" + diffTraninfo.getErrTranNo() + "不存在");
+                    throw new BizException(msa.getMessage(MsgCodeList.ERROR_302029, 
+                    		new Object[] {diffTraninfo.getErrTranNo() }));
                 }
             }
             diffTraninfo.setStatus(BasConstants.DIFF_TRANINFO_STATUS_YES);

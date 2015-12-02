@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somnus.smart.biz.custom.common.CustomTransfer;
@@ -18,7 +18,7 @@ import com.somnus.smart.message.custom.SettlementExchangeRequest;
 import com.somnus.smart.message.custom.SettlementWriteOffRequest;
 import com.somnus.smart.service.BasBizService;
 
-@Component
+@Service
 public class ForeignExchangeServiceImpl implements ForeignExchangeService {
 
     @Resource

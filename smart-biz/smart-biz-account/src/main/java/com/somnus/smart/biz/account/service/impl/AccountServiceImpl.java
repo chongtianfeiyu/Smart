@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somnus.smart.biz.account.common.AccountTransfer;
@@ -16,13 +17,17 @@ import com.somnus.smart.service.BasBizService;
 import com.somnus.smart.service.common.AccountConstants;
 import com.somnus.smart.service.common.DrawConstants;
 import com.somnus.smart.service.common.enums.AccountType;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 
-@Component
+@Service
 public class AccountServiceImpl implements AccountService {
 	/** basBizService */
 	@Autowired
 	private BasBizService basBizService;
+	
+	@Autowired
+    private MessageSourceAccessor msa;
 
 	@Override
 	public Transaction createTransaction(AccountTransRequest request) {
@@ -39,7 +44,7 @@ public class AccountServiceImpl implements AccountService {
 	public void accountSysAccount(Transaction transaction, String entryKey,
 			Date accDate, boolean checkRed) throws Exception {
 		if (transaction == null) {
-			throw new Exception("交易流水不能为空！");
+			throw new BizException(msa.getMessage(MsgCodeList.ERROR_302019, new Object[] {}));
 		}
 		Account account = Account.getInstance();
 		account.ipsPayAccount(transaction, entryKey, accDate, checkRed);
@@ -65,7 +70,8 @@ public class AccountServiceImpl implements AccountService {
 				AccountConstants.REL_SUB_CODE_FREE + payerAccCode,
 				payerAccCode, ccyCode);
 		if (availableBal.compareTo(tranAmt) < 0) {
-			throw new BizException(payerAccCode + "账户余额不足");
+			throw new BizException(msa.getMessage(MsgCodeList.ERROR_304001, 
+					new Object[] { payerAccCode}));
 		}
 	}
 }

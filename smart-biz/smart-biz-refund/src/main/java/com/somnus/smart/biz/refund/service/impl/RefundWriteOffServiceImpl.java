@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import com.somnus.smart.domain.account.RefundTransaction;
 import com.somnus.smart.domain.account.Transaction;
 import com.somnus.smart.message.writeoff.RefundWriteOffRequest;
 import com.somnus.smart.service.BasBizService;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 import com.somnus.smart.support.util.DateUtil;
 
@@ -25,7 +27,10 @@ import com.somnus.smart.support.util.DateUtil;
 public class RefundWriteOffServiceImpl implements RefundWriteOffService {
 
     @Autowired
-    private BasBizService     basbizService;
+    private BasBizService     		basbizService;
+    
+    @Autowired
+    private MessageSourceAccessor 	msa;
 
     @Transactional
     @Override
@@ -36,21 +41,23 @@ public class RefundWriteOffServiceImpl implements RefundWriteOffService {
         } else if (RefundConstants.WRITEOFF_TYPE_FAIL.equals(request.getWriteOffType())) {//退款撤销核销
 
         } else {
-            throw new BizException("核销类型不正确");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302057, new Object[] {}));
         }
     }
     @Transactional
     public void refundedWriteOffAccount(RefundWriteOffRequest request) throws Exception {
         final RefundTransaction refundTransaction = RefundTransaction.selectWriteOffConfirm(request.getRefundId());
         if (null == refundTransaction) {
-            throw new BizException(request.getRefundId() + "对应的退款信息不存在或无法做核销");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302057, 
+            		new Object[] {request.getRefundId()}));
         }
         //获取entryKey
         String entryKey = getEntryKey(refundTransaction.getBizType(), refundTransaction.getRefType());
         //获取原交易
         Transaction oriTrnTransaction = Transaction.selectByAppTranNo(refundTransaction.getOriAppTranNo());
         if (oriTrnTransaction == null) {
-            throw new BizException(request.getRefundId() + "对应的退款原交易信息不存在或无法做核销");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302057, 
+            		new Object[] {request.getRefundId()}));
         }
         //创建退款核心交易流水
         Transaction transaction = createTransaction(refundTransaction, oriTrnTransaction);

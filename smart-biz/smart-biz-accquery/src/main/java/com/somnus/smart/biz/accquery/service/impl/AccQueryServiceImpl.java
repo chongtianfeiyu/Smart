@@ -82,13 +82,15 @@ public class AccQueryServiceImpl implements AccQueryService {
     @Override
     public CussubQueryResponse queryCusCurBal(CussubQueryRequest request) {
         if (request == null) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "CussubQueryRequest" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "CussubQueryRequest" }));
         }
         CusSubaccinfo subaccinfo = cusSubAccInfoDao.selectFloatingCusBal(
         		CusSubAccInfoUtil.getTableByAccCodeLength(request.getMerAccCode().length()), 
         		request.getMerAccCode(), Constants.ACC_TYPE_82);
         if (subaccinfo == null) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_505002, new Object[] { request.getMerAccCode() }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_505002, 
+            		new Object[] { request.getMerAccCode() }));
         }
         CussubQueryResponse response = new CussubQueryResponse();//返回查询结果
         response.setMerAccCode(subaccinfo.getMerAccCode());//商户账户号
@@ -108,7 +110,8 @@ public class AccQueryServiceImpl implements AccQueryService {
         PageList<IssuedEntity> pagelist = issuedAccDao.selectIssuedAccDetail(entity, 
         		new PageBounds(request.getPageNum(), request.getPageSize()));
         if (pagelist == null) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_505002, new Object[] { request.getBatchNo() }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_505002, 
+            		new Object[] { request.getBatchNo() }));
         }
         int total = pagelist.getPaginator().getTotalCount();//总记录数
         IssuedAccDetailQueryResponse response = new IssuedAccDetailQueryResponse();
@@ -126,7 +129,8 @@ public class AccQueryServiceImpl implements AccQueryService {
     @Override
     public IssuedAccQueryResponse queryIssuedAcc(IssuedAccQueryRequest request) {
         if (request == null) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "IssuedAccQueryRequest" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "IssuedAccQueryRequest" }));
         }
         IssuedEntity entity = new IssuedEntity();
         entity.setPayerCode(request.getMerCode());//商户号
@@ -135,7 +139,8 @@ public class AccQueryServiceImpl implements AccQueryService {
         		new PageBounds(request.getPageNum(), request.getPageSize()));
         BigDecimal totalAmt = issuedAccDao.selectIssuedAccToalAmt(entity);//查询总批次金额
         if (pagelist == null) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_505002, new Object[] { request.getMerCode() }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_505002, 
+            		new Object[] { request.getMerCode() }));
         }
         int total = pagelist.getPaginator().getTotalCount();//总记录数
         IssuedAccQueryResponse response = new IssuedAccQueryResponse();
@@ -197,11 +202,14 @@ public class AccQueryServiceImpl implements AccQueryService {
     @Override
     public QueryCusSubResponse queryCusSubAccInfo(QueryCusSubAccRequest request) throws Exception {
         if (request == null) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "QueryCusSubAccRequest" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "QueryCusSubAccRequest" }));
         } else if (StringUtils.isBlank(request.getMerAccCode())) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "merAccCode" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "merAccCode" }));
         } else if (StringUtils.isBlank(request.getCcyCode())) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "ccyCode" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "ccyCode" }));
         }
         List<CusSubaccinfo> results = cusSubAccInfoDao.selectCusSubOrders(
         		CusSubAccInfoUtil.getTableByAccCodeLength(request.getMerAccCode().length()),
@@ -223,13 +231,17 @@ public class AccQueryServiceImpl implements AccQueryService {
     @Override
     public QueryAccDetailResponse queryAccDetail(QueryAccDetailRequest request) throws Exception {
         if (request == null) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "QueryAccDetailRequest" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "QueryAccDetailRequest" }));
         } else if (StringUtils.isBlank(request.getMerAccCode())) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "merAccCode" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "merAccCode" }));
         } else if (StringUtils.isBlank(request.getCcyCode())) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "ccyCode" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "ccyCode" }));
         } else if (StringUtils.isBlank(request.getAccType())) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "accType" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "accType" }));
         }
         PageList<TrnAccDetail> pagelist=null;
         if(request.getMerAccCode().length()==MERCHANT_ACC_CODE_LENGTH){
@@ -276,11 +288,14 @@ public class AccQueryServiceImpl implements AccQueryService {
     @Override
     public QueryCusFifResponse queryCusFif(QueryCusFifRequest request) throws Exception {
         if (request == null) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "QueryCusFifRequest" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "QueryCusFifRequest" }));
         } else if (StringUtils.isBlank(request.getMerAccCode())) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "merAccCode" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "merAccCode" }));
         } else if (StringUtils.isBlank(request.getCcyCode())) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "ccyCode" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "ccyCode" }));
         }
         PageList<TrnTransaction> pagelist = trnTransactionDao
             .selectCusFifOrders(new PageBounds(request.getPageNum(), request.getPageSize()), request);
@@ -310,7 +325,8 @@ public class AccQueryServiceImpl implements AccQueryService {
     @Override
     public QueryPayAppResponse queryPaymentApp(QueryPayAppRequest request) throws Exception {
         if (request == null) {
-            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, new Object[] { "QueryPayAppRequest" }));
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302001, 
+            		new Object[] { "QueryPayAppRequest" }));
         }
         PageList<QueryPayAppOrder> pagelist = paymentAppDao.selectPayAppOrders(
         		new PageBounds(request.getPageNum(), request.getPageSize()), request);

@@ -6,7 +6,8 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somnus.smart.base.dao.TcorTrnTranFeeDao;
@@ -22,20 +23,24 @@ import com.somnus.smart.service.BasBizService;
 import com.somnus.smart.service.CoreService;
 import com.somnus.smart.service.common.BasConstants;
 import com.somnus.smart.service.common.enums.AccountType;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 import com.somnus.smart.support.util.DateUtil;
 
-@Component
+@Service
 public class FeeChargeServiceImpl implements FeeChargeService {
 
     @Resource
-    private TcorTrnTranFeeDao tcorTrnTranFeeDao;
+    private TcorTrnTranFeeDao 		tcorTrnTranFeeDao;
 
     @Resource
-    private BasBizService     basBizService;
+    private BasBizService     		basBizService;
 
     @Autowired
-    private CoreService       coreService;
+    private CoreService       		coreService;
+    
+    @Autowired
+    private MessageSourceAccessor 	msa;
 
     @Override
     public void createTrnFree(TrnTransaction trnTransaction, String status) {
@@ -74,7 +79,8 @@ public class FeeChargeServiceImpl implements FeeChargeService {
         BigDecimal availableBal = basBizService.getAvailableBal(AccountType.BIZ,BasConstants.REL_SUB_CODE_FREE + payerAccCode, payerAccCode, ccyCode);
 
         if (availableBal.compareTo(tranAmt) < 0) {
-            throw new BizException(payerAccCode + "账户余额不足");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_304001, 
+            		new Object[] {payerAccCode}));
         }
     }
 
@@ -93,7 +99,7 @@ public class FeeChargeServiceImpl implements FeeChargeService {
     @Transactional
     public void feeChargeSynAccount(Transaction transaction, Date accDate, boolean checkRed, String entryKeyFeeCharge) throws Exception {
         if (transaction == null) {
-            throw new BizException("记账流水不能为空");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302032, new Object[] {}));
         }
         Account account = Account.getInstance();
         AccountCallBack callBack = new AccountCallBack() {
@@ -111,7 +117,7 @@ public class FeeChargeServiceImpl implements FeeChargeService {
     public Transaction unFeeChargeSynAccount(final Transaction transaction, Date accDate, boolean checkRed, String entryKeyUnfeeCharge)
                                                                                                                                        throws Exception {
         if (transaction == null) {
-            throw new BizException("记账流水不能为空");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302032, new Object[] {}));
         }
         Account account = Account.getInstance();
         AccountCallBack callBack = new AccountCallBack() {

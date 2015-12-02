@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somnus.smart.biz.custom.common.CustomTransfer;
@@ -21,20 +23,24 @@ import com.somnus.smart.service.BasBizService;
 import com.somnus.smart.service.CoreService;
 import com.somnus.smart.service.common.BasConstants;
 import com.somnus.smart.service.common.enums.AccountType;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 import com.somnus.smart.support.util.DateUtil;
 
 /**
  * 扣划记账业务处理实现
  */
-@Component
+@Service
 public class BuckleDrawServiceImpl implements BuckleDrawService {
 
     @Resource
-    private BasBizService basBizService;
+    private BasBizService 			basBizService;
 
     @Resource
-    private CoreService   coreService;
+    private CoreService   			coreService;
+    
+    @Autowired
+    private MessageSourceAccessor 	msa;
 
     @Override
     public Transaction createTransaction(BuckleDrawRequest request) {
@@ -56,13 +62,15 @@ public class BuckleDrawServiceImpl implements BuckleDrawService {
             freezeTransaction.setVoucherNo(request.getVoucherNo());
             List<FreezeTransaction> queryTrnFreezeList = FreezeTransaction.select(freezeTransaction);
             if (queryTrnFreezeList == null || queryTrnFreezeList.isEmpty()) {
-                throw new BizException("扣划对应冻结交易不存在");
+                throw new BizException(msa.getMessage(MsgCodeList.ERROR_302030, 
+                		new Object[] { }));
             }
              freezeTransaction = queryTrnFreezeList.get(0);
             //解冻金额校验
             if (request.getTranAmt().compareTo(freezeTransaction.getTranAmt().subtract(freezeTransaction.getThawAmt())) > 0) {
-                throw new BizException("解冻金额" + request.getTranAmt() + "大于可解冻金额"
-                                       + freezeTransaction.getTranAmt().subtract(freezeTransaction.getThawAmt()));
+                throw new BizException(msa.getMessage(MsgCodeList.ERROR_302031, 
+                		new Object[] {request.getTranAmt(),
+                		freezeTransaction.getTranAmt().subtract(freezeTransaction.getThawAmt())}));
             }
             //解冻冻结金额
             coreService.subtractMagFreezeBal(AccountType.BIZ,subAccCode, transaction.getTranAmt());
@@ -79,7 +87,8 @@ public class BuckleDrawServiceImpl implements BuckleDrawService {
                 request.getPayerAccCode(), request.getCcyCode());
             //余额不足则失败
             if (availableBal.compareTo(request.getTranAmt()) < 0) {
-                throw new BizException(request.getPayerAccCode() + "账户余额不足");
+                throw new BizException(msa.getMessage(MsgCodeList.ERROR_304001, 
+                		new Object[] {request.getPayerAccCode()}));
             }
             //扣划记账处理
             buckDrawAccountDo(transaction,ReticketConstants.ENTRY_KEY_BUCKLE);

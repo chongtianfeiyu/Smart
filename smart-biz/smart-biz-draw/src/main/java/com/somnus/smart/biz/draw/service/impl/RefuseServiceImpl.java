@@ -7,7 +7,8 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somnus.smart.base.dao.TrnDrawDao;
@@ -28,44 +29,48 @@ import com.somnus.smart.service.CoreService;
 import com.somnus.smart.service.common.BasConstants;
 import com.somnus.smart.service.common.DrawConstants;
 import com.somnus.smart.service.common.enums.AccountType;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 import com.somnus.smart.support.util.DateUtil;
 
-@Component
+@Service
 public class RefuseServiceImpl implements RefuseService {
 
     protected static Logger log = LoggerFactory.getLogger(RefuseServiceImpl.class);
 
     @Autowired
-    private TrnDrawDao      trnDrawDao;
+    private TrnDrawDao      		trnDrawDao;
 
     @Autowired
-    private CoreService     coreService;
+    private CoreService     		coreService;
 
     @Autowired
-    private BasBizService   basBizService;
+    private BasBizService   		basBizService;
+    
+    @Autowired
+    private MessageSourceAccessor 	msa;
 
     @Override
     public void checkOriTransaction(Transaction oriTransaction, String refKind, BigDecimal tranAmt) {
         //原交易不能为已拒付
         if (BasConstants.STATUS_REFUSE.equals(oriTransaction.getStatus())) {
-            throw new BizException("原交易已拒付，不能再次拒付");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302043, new Object[] {}));
         } else if (BasConstants.STATUS_REFUND_PART.equals(oriTransaction.getStatus()) && BasConstants.REF_KIND_ALL.equals(refKind)) {//原交易为部分拒付不能全额退款
-            throw new BizException("原交易已部分拒付，不能进行全部拒付");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302044, new Object[] {}));
         }
         //原交易未入账，不允许部分拒付
         if (BasConstants.REF_KIND_PART.equals(refKind) && BasConstants.BLN_STATUS_NOTENTER.equals(oriTransaction.getBlnStatus())) {
-            throw new BizException("原交易未入账，不允许部分拒付");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302045, new Object[] {}));
         }
         //原交易已退款，不能再次拒付
         if (BasConstants.STATUS_REFUND.equals(oriTransaction.getStatus())) {
-            throw new BizException("原交易已退款，不能再次拒付");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302046, new Object[] {}));
         }
 
         //原交易未入账，拒付金额大于原订单金额，不允许拒付
         if (BasConstants.BLN_STATUS_NOTENTER.equals(oriTransaction.getBlnStatus()) && BasConstants.FEE_FLAG_PAY.equals(oriTransaction.getFeeFlag())
             && tranAmt.compareTo(oriTransaction.getOrdAmt()) > 0) {
-            throw new BizException("原交易未入账，拒付金额大于原订单金额，不允许拒付");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302047, new Object[] {}));
         }
     }
 
@@ -106,7 +111,7 @@ public class RefuseServiceImpl implements RefuseService {
         else if (BasConstants.BLN_STATUS_NOTENTER.equals(oriTransaction.getBlnStatus())) {
             unEnterRefuse(oriTransaction, transaction, tranRefuse);
         } else {
-            throw new BizException("原交易入账状态不可拒付");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302048, new Object[] {}));
         }
     }
 
@@ -157,7 +162,7 @@ public class RefuseServiceImpl implements RefuseService {
         CusSubaccinfo cusSubaccinfo = basBizService.getCusSubaccinfo(AccountType.BIZ,BasConstants.REL_SUB_CODE_FREE + payerAccCode, payerAccCode, ccyCode);
         if (cusSubaccinfo == null) {
             log.error("relSubCode:" + BasConstants.REL_SUB_CODE_FREE + payerAccCode + " CcyCode:" + ccyCode);
-            throw new BizException("账户余额信息不存在");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302041, new Object[] {}));
         }
         subAccCode = cusSubaccinfo.getSubAccCode();
         BigDecimal availBal = cusSubaccinfo.getCurBal().subtract(cusSubaccinfo.getBizFreezeBal()).subtract(cusSubaccinfo.getMagFreezeBal())

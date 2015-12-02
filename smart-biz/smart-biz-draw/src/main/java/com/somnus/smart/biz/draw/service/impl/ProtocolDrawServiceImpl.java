@@ -9,7 +9,8 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somnus.smart.base.dao.CusAccountedStatusDao;
@@ -33,33 +34,36 @@ import com.somnus.smart.service.BasBizService;
 import com.somnus.smart.service.common.BasConstants;
 import com.somnus.smart.service.common.CusSubAccInfoUtil;
 import com.somnus.smart.service.common.DrawConstants;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 import com.somnus.smart.support.util.DateUtil;
 
 /**
  * 协议出款实现
  */
-@Component
+@Service
 public class ProtocolDrawServiceImpl implements ProtocolDrawService {
 
-	protected static Logger log = LoggerFactory
-			.getLogger(DrawResourceImpl.class);
+	protected static Logger log = LoggerFactory.getLogger(DrawResourceImpl.class);
 	/** merAccountDao */
 	@Autowired
-	private MerAccountDao merAccountDao;
+	private MerAccountDao 			merAccountDao;
 
 	/** cusSubAccInfoDao */
 	@Autowired
-	private CusSubAccInfoDao cusSubAccInfoDao;
+	private CusSubAccInfoDao 		cusSubAccInfoDao;
 	/** basBizService */
 	@Resource
-	private BasBizService basBizService;
+	private BasBizService 			basBizService;
 	/** cusAccountedStatusDao */
 	@Autowired
-	private CusAccountedStatusDao cusAccountedStatusDao;
+	private CusAccountedStatusDao 	cusAccountedStatusDao;
 	/** trnTransferDao */
 	@Autowired
-	private TrnTransferDao trnTransferDao;
+	private TrnTransferDao 			trnTransferDao;
+	
+	@Autowired
+    private MessageSourceAccessor 	msa;
 
 	@Override
 	@Transactional
@@ -73,7 +77,7 @@ public class ProtocolDrawServiceImpl implements ProtocolDrawService {
 			log.error("relSubCode:" + DrawConstants.REL_SUB_CODE_FREE
 					+ trnTransfer.getMerAccCode() + " CcyCode:"
 					+ trnTransfer.getCcyCode());
-			throw new BizException("账户余额信息不存在");
+			throw new BizException(msa.getMessage(MsgCodeList.ERROR_302041, new Object[] {}));
 		}
 		updateCusAccountedStatus(trnTransfer);
 
@@ -122,7 +126,7 @@ public class ProtocolDrawServiceImpl implements ProtocolDrawService {
 		}
 		int upCount = trnTransferDao.updateByPrimaryKeySelective(trnTransfer);
 		if (upCount != 1) {
-			throw new BizException("更新划款信息表失败");
+			throw new BizException(msa.getMessage(MsgCodeList.ERROR_302042, new Object[] {}));
 		}
 		if (!continueFlag) {
 			return;
@@ -171,7 +175,7 @@ public class ProtocolDrawServiceImpl implements ProtocolDrawService {
 			log.error("relSubCode:" + DrawConstants.REL_SUB_CODE_FREE
 					+ merAccount.getAcctCode() + " CcyCode:"
 					+ merAccount.getCurrency());
-			throw new BizException("账户余额信息不存在");
+			throw new BizException(msa.getMessage(MsgCodeList.ERROR_302041, new Object[] {}));
 		}
 		CusAccountedStatus cusAccountedStatus = new CusAccountedStatus();
 		cusAccountedStatus.setMerAccCode(merAccount.getAcctCode());

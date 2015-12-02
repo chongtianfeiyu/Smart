@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somnus.smart.base.domain.CusSubaccinfo;
@@ -18,14 +20,18 @@ import com.somnus.smart.message.custom.TranFreezeRequest;
 import com.somnus.smart.service.BasBizService;
 import com.somnus.smart.service.common.BasConstants;
 import com.somnus.smart.service.common.enums.AccountType;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 import com.somnus.smart.support.util.DateUtil;
 
-@Component
+@Service
 public class FreezeServiceImpl implements FreezeService {
 
     @Resource
-    private BasBizService basbizService;
+    private BasBizService 			basbizService;
+    
+    @Autowired
+    private MessageSourceAccessor 	msa;
 
     @Override
     public FreezeTransaction createFreezeTransaction(AccountFreezeRequest request) {
@@ -65,11 +71,12 @@ public class FreezeServiceImpl implements FreezeService {
             //检查余额是否足额
             BigDecimal availBal = cusSubaccinfo.getAvailBal();
             if (availBal.compareTo(freezeTransaction.getTranAmt()) < 0) {
-                throw new BizException(freezeTransaction.getMerAccCode() + "账户余额不足");
+                throw new BizException(msa.getMessage(MsgCodeList.ERROR_304001, 
+                		new Object[] {freezeTransaction.getMerAccCode()}));
             }
             SubAccInfo.addPayableFreezeBal(cusSubaccinfo.getSubAccCode(), freezeTransaction.getTranAmt());
         } else {
-            throw new BizException("业务类型不正确");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302033, new Object[] {}));
         }
     }
 
@@ -93,7 +100,7 @@ public class FreezeServiceImpl implements FreezeService {
         } else if (BasConstants.FREEZE_BIZ_TYPE_PAYABLE.equals(freezeTransaction.getBizType())) {//下发解冻
             SubAccInfo.subtracPayableFreezeBal(cusSubaccinfo.getSubAccCode(), freezeTransaction.getTranAmt());
         } else {
-            throw new BizException("业务类型不正确");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302033, new Object[] {}));
         }
     }
 
@@ -108,7 +115,7 @@ public class FreezeServiceImpl implements FreezeService {
                 ReticketConstants.REL_SUB_CODE_FREE.concat(freezeTransaction.getMerAccCode()), freezeTransaction.getMerAccCode(),
                 freezeTransaction.getCcyCode());
             if (cusSubaccinfo == null) {
-                throw new BizException("流动资金账户为空！");
+                throw new BizException(msa.getMessage(MsgCodeList.ERROR_302034, new Object[] {}));
             }
             // 增加业务冻结金额
             SubAccInfo.addBizFreezeBal(cusSubaccinfo.getSubAccCode(), freezeTransaction.getTranAmt());
@@ -130,7 +137,7 @@ public class FreezeServiceImpl implements FreezeService {
         if(ReticketConstants.FREEZE_TYPE_CUR.equals(freezeTransaction.getFreezeType())){
             CusSubaccinfo cusSubaccinfo = basbizService.getCusSubaccinfo(AccountType.BIZ,ReticketConstants.REL_SUB_CODE_FREE.concat(freezeTransaction.getMerAccCode()), freezeTransaction.getMerAccCode(), freezeTransaction.getCcyCode());
             if(cusSubaccinfo == null){
-                throw new BizException("流动资金账户为空！");
+                throw new BizException(msa.getMessage(MsgCodeList.ERROR_302033, new Object[] {}));
             }
             SubAccInfo.subtractBizFreezeBal(cusSubaccinfo.getSubAccCode(), freezeTransaction.getTranAmt());
         }
@@ -143,16 +150,16 @@ public class FreezeServiceImpl implements FreezeService {
     @Override
     public void checkTransaction(Transaction transaction) {
         if (transaction == null) {
-            throw new BizException("冻结交易不存在！");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302035, new Object[] {}));
         }
         if (BasConstants.FROZEN_YES.equals(transaction.getFrozenFlag())) {
-            throw new BizException("该交易已被冻结，请不要重复发起冻结操作");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302036, new Object[] {}));
         }
         if (BasConstants.STATUS_REFUND.equals(transaction.getStatus())) {
-            throw new BizException("该交易已退款， 不能做冻结操作");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302037, new Object[] {}));
         }
         if (BasConstants.STATUS_REFUSE.equals(transaction.getStatus())) {
-            throw new BizException("该交易已拒付， 不能做冻结操作");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302038, new Object[] {}));
         }
     }
 
@@ -168,7 +175,6 @@ public class FreezeServiceImpl implements FreezeService {
         freezeTransaction.setStatus(ReticketConstants.FREEZE_STATUS_FREEZE);
         freezeTransaction.setMerAccCode(transaction.getPayeeAccCode());
         freezeTransaction.setVoucherNo(request.getAppTranNo());
-        //trnFreeze.setTranAmt(trnTransaction.getTranAmt().subtract(trnTransaction.getFeeAmt()));
         //冻结订单金额
         freezeTransaction.setTranAmt(transaction.getOrdAmt());
         freezeTransaction.setModifyBy(freezeTransaction.getCreateBy());

@@ -5,7 +5,8 @@ import java.math.BigDecimal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somnus.smart.base.domain.CusSubaccinfo;
@@ -22,21 +23,25 @@ import com.somnus.smart.service.BasBizService;
 import com.somnus.smart.service.CoreService;
 import com.somnus.smart.service.common.BasConstants;
 import com.somnus.smart.service.common.enums.AccountType;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 冲正服务实现
  */
-@Component
+@Service
 public class ReverseServiceImpl implements ReverseService {
 
-    protected static Logger log = LoggerFactory.getLogger(ReverseServiceImpl.class);
+    protected static Logger 		log = LoggerFactory.getLogger(ReverseServiceImpl.class);
     /** coreService */
     @Autowired
-    private CoreService     coreService;
+    private CoreService     		coreService;
     /** basBizService */
     @Autowired
-    private BasBizService   basBizService;
+    private BasBizService   		basBizService;
+    
+    @Autowired
+    private MessageSourceAccessor 	msa;
 
     @Override
     @Transactional
@@ -61,7 +66,7 @@ public class ReverseServiceImpl implements ReverseService {
             reverseAccount(oriTransaction, trntransaction, tranReverse, entryKey);
             return tranReverse;
         } else {
-            throw new BizException("原交易入账状态不可冲正");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302054, new Object[] {}));
         }
     }
 
@@ -122,7 +127,7 @@ public class ReverseServiceImpl implements ReverseService {
             request.getPayeeAccCode(), request.getCcyCode());
         if (cusSubaccinfo == null) {
             log.error("relSubCode:" + BasConstants.REL_SUB_CODE_FREE + request.getPayeeAccCode() + " CcyCode:" + request.getCcyCode());
-            throw new BizException("账户余额信息不存在");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302041, new Object[] {}));
         }
         subAccCode = cusSubaccinfo.getSubAccCode();
         BigDecimal availBal = cusSubaccinfo.getCurBal().subtract(cusSubaccinfo.getBizFreezeBal()).subtract(cusSubaccinfo.getMagFreezeBal())
@@ -148,7 +153,8 @@ public class ReverseServiceImpl implements ReverseService {
         boolean isDraw = basBizService.isAccAllowOut(BasConstants.BIZ_KIND_CUS, transaction.getPayeeCode(), transaction.getPayeeAccCode());
         if (!isDraw) {
             log.warn("商户" + transaction.getPayeeCode() + "出款关闭,无法冲正,交易信息");
-            throw new BizException("商户" + transaction.getPayeeCode() + "出款关闭,无法冲正,交易信息");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302055, 
+            		new Object[] {transaction.getPayeeCode()}));
         }
         //设置冲正记账附属流水状态为"已冲正"
         tranReverse.setStatus(ReverseConstants.REVERSE_STATUS_REVERSEED);
@@ -159,7 +165,7 @@ public class ReverseServiceImpl implements ReverseService {
 
             //原交易如果沒有缴纳保证金,直接抛异常返回记账失败
             if (BasConstants.DEPOSIT_STATUS_NOTGATHER.equals(oriTransaction.getDepositStatus())) {
-                throw new BizException("原交易为保证金交易，未交纳保证金，不能做冲正交易！");
+                throw new BizException(msa.getMessage(MsgCodeList.ERROR_302056, new Object[] {}));
             }
             //原交易已经缴纳保证金
             else if (BasConstants.DEPOSIT_STATUS_GATHERED.equals(oriTransaction.getDepositStatus())) {

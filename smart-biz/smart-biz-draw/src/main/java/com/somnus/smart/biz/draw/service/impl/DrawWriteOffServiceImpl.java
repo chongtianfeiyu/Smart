@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +21,10 @@ import com.somnus.smart.support.util.DateUtil;
 public class DrawWriteOffServiceImpl implements DrawWriteOffService {
 
     @Autowired
-    private BasBizService  basbizService;
+    private BasBizService  			basbizService;
+    
+    @Autowired
+    private MessageSourceAccessor 	msa;
 
 
     @Override

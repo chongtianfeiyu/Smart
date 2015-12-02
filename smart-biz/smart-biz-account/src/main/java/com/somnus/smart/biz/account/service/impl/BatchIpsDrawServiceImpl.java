@@ -10,7 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somnus.smart.base.dao.TrnTranIssuedDao;
@@ -25,33 +26,35 @@ import com.somnus.smart.message.account.BatchIpsDrawRequest;
 import com.somnus.smart.message.account.BatchIpsDrawRequest.Order;
 import com.somnus.smart.service.BasBizService;
 import com.somnus.smart.service.common.AccountConstants;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 
-@Component
+@Service
 public class BatchIpsDrawServiceImpl implements BatchIpsDrawService {
 
     protected static Logger  log = LoggerFactory.getLogger(BatchIpsDrawServiceImpl.class);
 
     @Resource
-    private BasBizService    basBizService;
+    private BasBizService    		basBizService;
 
     @Resource
-    private AccountService   accountService;
+    private AccountService   		accountService;
 
     @Autowired
-    private TrnTranIssuedDao trnTranIssuedDao;
+    private TrnTranIssuedDao 		trnTranIssuedDao;
 
-
+    @Autowired
+    private MessageSourceAccessor 	msa;
 
     @Override
     public void checkAccountRequest(BatchIpsDrawRequest request) throws Exception {
         // 记账请求参数校验
         if (request.getOrders() == null) {
-            throw new BizException("下发明细不能为空");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302020, new Object[] {}));
         }
         if (request.getBatchCount() != request.getOrders().size()) {
             log.error("下发总笔数:" + request.getBatchCount() + "明细总笔数:" + request.getOrders().size());
-            throw new BizException("下发总笔数不等于明细总笔数");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302021, new Object[] {}));
         }
         BigDecimal orderAmts = new BigDecimal(0);
         BigDecimal feeAmts = new BigDecimal(0);
@@ -63,21 +66,21 @@ public class BatchIpsDrawServiceImpl implements BatchIpsDrawService {
         }
         if (orderAmts.compareTo(request.getBatchAmt()) != 0) {
             log.error("下发订单总额:" + request.getBatchAmt() + "明细总额:" + orderAmts);
-            throw new BizException("下发订单总额不等于明细订单总额");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302022, new Object[] {}));
         }
         if (feeAmts.compareTo(request.getTotalFeeAmt()) != 0) {
             log.error("下发手续费总额:" + request.getTotalFeeAmt() + "明细手续费总额:" + feeAmts);
-            throw new BizException("下发手续费总额不等于明细手续费总额");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_302023, new Object[] {}));
         }
         if (AccountConstants.FEE_FLAG_PAY.equals(request.getFeeWay())) {
             if (tranAmts.compareTo(orderAmts.add(feeAmts)) != 0) {
                 log.error("下发交易总额:" + tranAmts + "下发订单总额:" + orderAmts + "明细手续费总额:" + feeAmts);
-                throw new BizException("明细交易总额不等于明细手续费与订单总额之和");
+                throw new BizException(msa.getMessage(MsgCodeList.ERROR_302024, new Object[] {}));
             }
         } else {
             if (tranAmts.compareTo(orderAmts) != 0) {
                 log.error("下发交易总额:" + request.getTotalFeeAmt() + "明细订单总额:" + feeAmts);
-                throw new BizException("明细交易总额不等于明细订单总额");
+                throw new BizException(msa.getMessage(MsgCodeList.ERROR_302025, new Object[] {}));
             }
         }
     }

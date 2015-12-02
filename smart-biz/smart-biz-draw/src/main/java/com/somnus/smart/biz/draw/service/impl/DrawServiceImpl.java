@@ -6,7 +6,9 @@ import java.util.Date;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.somnus.smart.base.domain.MerAccount;
@@ -24,16 +26,20 @@ import com.somnus.smart.service.BasBizService;
 import com.somnus.smart.service.common.BasConstants;
 import com.somnus.smart.service.common.DrawConstants;
 import com.somnus.smart.service.common.enums.AccountType;
+import com.somnus.smart.support.common.MsgCodeList;
 import com.somnus.smart.support.exceptions.BizException;
 
 /**
  * 出款服务实现
  */
-@Component
+@Service
 public class DrawServiceImpl implements DrawService {
 	/** basBizService */
     @Resource
-    private BasBizService basBizService;
+    private BasBizService 			basBizService;
+    
+    @Autowired
+    private MessageSourceAccessor 	msa;
 
     @Override
     public void checkMerCanDraw(String payerType, String payerCode, String payerAccCode, String ccyCode, BigDecimal orderAmt,String feeWay,String thdAccCode) {
@@ -49,12 +55,13 @@ public class DrawServiceImpl implements DrawService {
         BigDecimal availableBal = basBizService.getAvailableBal(AccountType.getByCode(accountType),DrawConstants.REL_SUB_CODE_FREE + payerAccCode, payerAccCode, ccyCode);
         //如果可用余额小于订单金额
         if (availableBal.compareTo(orderAmt) < 0) {
-            throw new BizException("账户余额不足");
+            throw new BizException(msa.getMessage(MsgCodeList.ERROR_304001, 
+            		new Object[] {payerAccCode}));
         }
         //手續費如果是第三方承擔手续费校验第三方账户是否存在
         if(feeWay.equals(BasConstants.FEE_FLAG_THD)){
         	if (StringUtils.isBlank(thdAccCode)) {
-                throw new BizException("手续费收取方式为第三方时,第三方手续费账号不能为空!");
+                throw new BizException(msa.getMessage(MsgCodeList.ERROR_302040, new Object[] {}));
             }
         	basBizService.accountExists(thdAccCode);
         }
@@ -112,7 +119,7 @@ public class DrawServiceImpl implements DrawService {
     public void drawSynAccount(Transaction transaction, String entryKey, Date accDate, boolean checkRed, final TranDraw tranDraw,
                             final DrawTransaction drawTransaction) throws Exception {
         if (transaction == null || tranDraw == null || drawTransaction == null || entryKey == null) {
-            throw new Exception("交易流水、账务日期、entryKey、出款附属流水、出款交易流水不能为空！");
+            throw new BizException("交易流水、账务日期、entryKey、出款附属流水、出款交易流水不能为空！");
         }
         //出款记账回调
         AccountCallBack drawAccountCallBack = new AccountCallBack() {

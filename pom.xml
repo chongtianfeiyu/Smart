@@ -111,10 +111,10 @@
         <repo.distribution.snapshot.id>snapshots</repo.distribution.snapshot.id>
         <repo.distribution.snapshot.url>http://localhost:8081/nexus/content/repositories/snapshots/</repo.distribution.snapshot.url>
         <!-- SCM -->
-        <scm.trunk>scm:git:git@github.com:love-somnus/Smile.git</scm.trunk>
-        <scm.tags>scm:git:git@github.com:love-somnus/Smile.git</scm.tags>
-        <scm.branches>scm:git:git@github.com:love-somnus/Smile.git</scm.branches>
-		<scm.url>scm:git:git@github.com:love-somnus/Smile.git</scm.url>
+        <scm.trunk>scm:git:git@github.com:love-somnus/Smart.git</scm.trunk>
+        <scm.tags>scm:git:git@github.com:love-somnus/Smart.git</scm.tags>
+        <scm.branches>scm:git:git@github.com:love-somnus/Smart.git</scm.branches>
+		<scm.url>scm:git:git@github.com:love-somnus/Smart.git</scm.url>
     </properties>
 
     <dependencies>
