@@ -8,8 +8,6 @@ import com.somnus.smart.message.voucher.VoucherEnterResponse;
 
 /**
  * 凭证记账
- * @author Administrator
- *
  */
 public interface VoucherResource {
 	/**

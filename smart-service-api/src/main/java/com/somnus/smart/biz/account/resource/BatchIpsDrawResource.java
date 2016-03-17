@@ -7,7 +7,6 @@ import com.somnus.smart.message.account.BatchIpsDrawRequest;
 
 /**
  *下发
- *
  * @author IH745
  * @version 1.0 13-10-15
  */

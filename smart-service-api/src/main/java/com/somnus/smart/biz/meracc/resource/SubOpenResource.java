@@ -7,8 +7,6 @@ import com.somnus.smart.message.meracct.SubOpenRequest;
 
 /**
  * 内部科目开户服务
- * @author bo.zhang
- *
  */
 public interface SubOpenResource {
 	

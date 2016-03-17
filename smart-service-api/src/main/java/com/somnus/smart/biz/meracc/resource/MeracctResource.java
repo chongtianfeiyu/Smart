@@ -12,8 +12,6 @@ import com.somnus.smart.message.meracct.SpeAccountRequest;
 
 /**
  * 开户服务
- * @author bo.zhang
- *
  */
 public interface MeracctResource {
 	

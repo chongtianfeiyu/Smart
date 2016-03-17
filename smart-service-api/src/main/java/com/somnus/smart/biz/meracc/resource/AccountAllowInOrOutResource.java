@@ -7,8 +7,6 @@ import com.somnus.smart.message.meracct.AccountAllowInOrOutRequest;
 
 /**
  * 账户出入款状态设置
- * @author IH745
- *
  */
 public interface AccountAllowInOrOutResource {
 	

@@ -1,6 +1,5 @@
 package com.somnus.smart.message;
 
-
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**

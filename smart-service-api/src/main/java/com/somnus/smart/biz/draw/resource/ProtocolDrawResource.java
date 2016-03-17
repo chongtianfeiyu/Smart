@@ -7,9 +7,6 @@ import com.somnus.smart.message.account.ProtocolDrawResponse;
 
 /**
  *	协议出款
- *
- * @author IH745
- * @version 1.0 13-10-13
  */
 public interface ProtocolDrawResource {
 	/**

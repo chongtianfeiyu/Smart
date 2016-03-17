@@ -24,7 +24,7 @@ public class BuckleDrawRequest extends Message {
     private String tranCode;
     /** 基础产品代码 */
 	private String prdCode;
-	/** 订单号 */
+	/** isp订单号 */
 	private String ipsBillNo;
 	/** 应用交易流水号 */
 	@NotEmpty
@@ -36,7 +36,7 @@ public class BuckleDrawRequest extends Message {
 	@NotEmpty
 	private String payerCode;
 	@NotEmpty
-	/** 付款方类型0： 个人  1： 商户  2 : ISP */
+	/** 付款方类型0： 个人  1： 商户  2 : IPS */
 	private String payerType;
 	/** 付款方账号 */
 	@NotEmpty

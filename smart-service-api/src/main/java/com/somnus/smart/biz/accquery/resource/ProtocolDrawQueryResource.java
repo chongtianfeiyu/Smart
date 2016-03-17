@@ -7,15 +7,7 @@ import com.somnus.smart.message.accquery.ProtocolDrawQueryResponse;
 import com.somnus.smart.message.accquery.ProtocolTransferQueryRequest;
 import com.somnus.smart.message.accquery.ProtocolTransferQueryResponse;
 
-/**
- * 
- * @author IH745
- * 2013-10-22
- *
- */
 public interface ProtocolDrawQueryResource {
-
-	
 	
 	/**
 	 * 协议出款查询

@@ -17,11 +17,6 @@ import com.somnus.smart.message.accquery.QueryCusSubResponse;
 import com.somnus.smart.message.accquery.QueryPayAppRequest;
 import com.somnus.smart.message.accquery.QueryPayAppResponse;
 
-/**
- * 查询接口
- * @author bo.zhang
- *
- */
 public interface AccQueryResource {
 
 	/**

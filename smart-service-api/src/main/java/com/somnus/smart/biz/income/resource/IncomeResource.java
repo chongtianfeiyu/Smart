@@ -10,9 +10,6 @@ import com.somnus.smart.message.account.IpsPayRequest;
 
 /**
  * 账户核心收单
- *
- * @author 李太平
- * @version 1.0 13-10-9
  */
 public interface IncomeResource {
 	/**
@@ -37,7 +34,7 @@ public interface IncomeResource {
     public AccountResponse cancelReverse(@Valid CancelReverseRequest cancelReverseRequest);
     
     /**
-     * 账户支付
+     * isp账户支付
      * 
      * @param request
      * @return

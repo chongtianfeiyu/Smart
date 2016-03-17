@@ -10,8 +10,6 @@ import com.somnus.smart.message.custom.SettlementWriteOffRequest;
 
 /**
  * 结/购汇服务
- * @author bo.zhang
- *
  */
 public interface ForeignExchangeResource {
 	

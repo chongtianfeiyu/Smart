@@ -26,7 +26,7 @@ public class CancelReverseRequest extends Message {
 	@NotEmpty
 	private String prdCode;
 	
-	/** 订单号 */
+	/** isp订单号 */
 	private String ipsBillNo;
     
     /** 应用交易流水号 */
