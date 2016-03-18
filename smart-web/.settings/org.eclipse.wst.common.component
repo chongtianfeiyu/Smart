@@ -13,9 +13,6 @@
         <dependent-module archiveName="smart-support-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-support/smart-support">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="rest-core-3.2.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/rest-core/rest-core">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="smart-domain-8.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/smart-domain/smart-domain">
             <dependency-type>uses</dependency-type>
         </dependent-module>
