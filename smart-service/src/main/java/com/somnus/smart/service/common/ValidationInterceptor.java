@@ -60,12 +60,13 @@ public class ValidationInterceptor {
         if(throwable instanceof ValidationException){
             if(throwable instanceof MethodConstraintViolationException){
                 for (ConstraintViolation constraintViolation : ((MethodConstraintViolationException)throwable).getConstraintViolations()) {
-                    String path=constraintViolation.getPropertyPath().toString();
-                    int index=  path.indexOf('.');
+                    /*IncomeResourceImpl#bankIncome(arg0).feeWay*/
+                	String path = constraintViolation.getPropertyPath().toString();
+                    int index = path.indexOf('.');
                     if(index>0){
-                        index=index+1;
+                        index = index+1;
                     }else{
-                        index=0;
+                        index = 0;
                     }
                     message.setRepCode("112211");
                     message.setRepMsg(path.substring(index).concat(" ").concat(constraintViolation.getMessage()));
