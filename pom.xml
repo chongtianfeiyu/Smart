@@ -107,9 +107,9 @@
         <repo.public.url>http://maven.wozsz.com:88/content/groups/public/</repo.public.url>
         <repo.public.plugin.url>http://maven.wozsz.com:88/content/groups/public/</repo.public.plugin.url>
         <repo.distribution.release.id>releases</repo.distribution.release.id>
-        <repo.distribution.release.url>http://maven.wozsz.com:88/content/repositories/releases/</repo.distribution.release.url>
+        <repo.distribution.release.url>http://maven.wozsz.com/content/repositories/releases/</repo.distribution.release.url>
         <repo.distribution.snapshot.id>snapshots</repo.distribution.snapshot.id>
-        <repo.distribution.snapshot.url>http://maven.wozsz.com:88/content/repositories/snapshots/</repo.distribution.snapshot.url>
+        <repo.distribution.snapshot.url>http://maven.wozsz.com/content/repositories/snapshots/</repo.distribution.snapshot.url>
         <!-- SCM -->
         <scm.trunk>scm:git:git@github.com:love-somnus/Smart.git</scm.trunk>
         <scm.tags>scm:git:git@github.com:love-somnus/Smart.git</scm.tags>
