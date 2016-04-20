@@ -1,3 +1,7 @@
+<!-- 级别包括：TRACE、DEBUG、INFO、WARN和ERROR，定义于ch.qos.logback.classic.Level类。
+程序会打印高于或等于所设置级别的日志，设置的日志等级越高，打印出来的日志就越少。
+如果设置级别为INFO，则优先级高于等于INFO级别（如：INFO、 WARN、ERROR）的日志信息将可以被输出,小于该级别的如DEBUG将不会被输出 
+为确保所有logger都能够最终继承一个级别，根logger总是有级别，默认情况下，这个级别是DEBUG。-->
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="pattern"
@@ -9,26 +13,34 @@
         </layout>
     </appender>
 
+	<!-- additivity的作用在于 children-logger是否使用 rootLogger配置的appender进行输出。-->
+	<!-- false：表示只用当前logger的appender-ref。								-->
+	<!-- true：表示当前logger的appender-ref和rootLogger的appender-ref都有效。 		-->
     <logger name="com.somnus.smart" level="trace" additivity="false">
         <appender-ref ref="ROOT_CONSOLE"/>
     </logger>
 
-    <logger name="org.apache.ibatis.logging.slf4j" level="trace" additivity="false">
+    <!-- 如果日志等级比root级别低，如果采用 <logger name="org.jdbcdslog.ConnectionLogger" level="info" /> -->
+	<!-- 将会无效， 必须自己重新指定，不然可以直接使用上述配置，相当于继承了 root的配置-->
+    <logger name="org.jdbcdslog.ConnectionLogger" level="trace" additivity="false">
+    	<appender-ref ref="ROOT_CONSOLE"/>
+    </logger>
+    <logger name="org.jdbcdslog.StatementLogger" level="trace" additivity="false">
+    	<appender-ref ref="ROOT_CONSOLE"/>
+    </logger>
+    <logger name="org.jdbcdslog.SlowQueryLogger" level="trace" additivity="false">
+    	<appender-ref ref="ROOT_CONSOLE"/>
+    </logger>
+    <logger name="org.jdbcdslog.ResultSetLogger" level="trace" additivity="false">
+    	<appender-ref ref="ROOT_CONSOLE"/>
+    </logger>
+    <logger name="org.springframework" level="trace" additivity="false">
+    	<appender-ref ref="ROOT_CONSOLE"/>
+    </logger>
+    <logger name="org.apache.activemq.transport.AbstractInactivityMonitor" level="trace" additivity="false">
         <appender-ref ref="ROOT_CONSOLE"/>
     </logger>
-
-    <logger name="org.springframework.jdbc.datasource" level="trace" additivity="false">
-        <appender-ref ref="ROOT_CONSOLE"/>
-    </logger>
-
-    <logger name="org.mybatis.spring.transaction" level="trace" additivity="false">
-        <appender-ref ref="ROOT_CONSOLE"/>
-    </logger>
-
-    <logger name="org.apache.activemq.transport.AbstractInactivityMonitor" level="info" additivity="false">
-        <appender-ref ref="ROOT_CONSOLE"/>
-    </logger>
-
+	
     <root level="info">
         <appender-ref ref="ROOT_CONSOLE"/>
     </root>

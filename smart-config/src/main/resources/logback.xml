@@ -4,7 +4,7 @@
 		value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%X{sessionId}] %-5level [%thread] %logger{80} :%msg%n" />
 
     <!--smart根 -->
-    <appender name="root"
+    <appender name="ROOT_FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.base}/smart-root.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -192,86 +192,60 @@
         </encoder>
     </appender>
 
-	<logger name="com.somnus.smart.base" additivity="false">
-		<level value="info" />
+	<!-- additivity的作用在于 children-logger是否使用 rootLogger配置的appender进行输出。-->
+	<!-- false：表示只用当前logger的appender-ref。								-->
+	<!-- true：表示当前logger的appender-ref和rootLogger的appender-ref都有效。 		-->
+	<logger name="com.somnus.smart.base" level="info" additivity="false">
 		<appender-ref ref="smart-base" />
 	</logger>
 	
-	<logger name="com.somnus.smart.domain" additivity="false">
-		<level value="info" />
+	<logger name="com.somnus.smart.domain" level="info" additivity="false">
 		<appender-ref ref="smart-domain" />
 	</logger>
 	
-	<logger name="com.somnus.smart.service" additivity="false">
-		<level value="info" />
+	<logger name="com.somnus.smart.service" level="info" additivity="false">
 		<appender-ref ref="smart-service" />
 	</logger>
     
-     <logger name="com.somnus.smart.biz.account" additivity="false">
-        <level value="info" />
+     <logger name="com.somnus.smart.biz.account" level="info" additivity="false">
         <appender-ref ref="smart-biz-account" />
     </logger>
     
-    <logger name="com.somnus.smart.biz.income" additivity="false">
-        <level value="info" />
+    <logger name="com.somnus.smart.biz.income" level="info" additivity="false">
         <appender-ref ref="smart-biz-income" />
     </logger>
     
-    <logger name="com.somnus.smart.biz.draw" additivity="false">
-        <level value="info" />
+    <logger name="com.somnus.smart.biz.draw" level="info" additivity="false">
         <appender-ref ref="smart-biz-draw" />
     </logger>
     
-    <logger name="com.somnus.smart.biz.refund" additivity="false">
-        <level value="info" />
+    <logger name="com.somnus.smart.biz.refund" level="info" additivity="false">
         <appender-ref ref="smart-biz-refund" />
     </logger>
     
-    <logger name="com.somnus.smart.biz.meracc" additivity="false">
-        <level value="info" />
+    <logger name="com.somnus.smart.biz.meracc" level="info" additivity="false">
         <appender-ref ref="smart-biz-meracc" />
     </logger>
     
-    <logger name="com.somnus.smart.biz.custom" additivity="false">
-        <level value="info" />
+    <logger name="com.somnus.smart.biz.custom" level="info" additivity="false">
         <appender-ref ref="smart-biz-custom" />
     </logger>
     
-    <logger name="com.somnus.smart.biz.accquery" additivity="false">
-        <level value="info" />
+    <logger name="com.somnus.smart.biz.accquery" level="info" additivity="false">
         <appender-ref ref="smart-biz-accquery" />
     </logger>
-
-     <logger name="com.somnus.smart.master" additivity="false">
-        <level value="info" />
-        <appender-ref ref="smart-master" />
-    </logger>
-
-	<!-- 日志过滤 -->
-    <!-- log filter-->
-    <logger name="org.jdbcdslog.ConnectionLogger">
-        <level value="info" />
-    </logger>
+    
     <!-- 上线初期建议lever=info，正常运行后建以lever=error,测试时lever=error-->
-    <logger name="org.jdbcdslog.StatementLogger">
-        <level value="info" />
-    </logger>
-    <logger name="org.jdbcdslog.SlowQueryLogger">
-        <level value="info" />
-    </logger>
-    <logger name="org.jdbcdslog.ResultSetLogger">
-        <level value="error" />
-    </logger>
-	<logger name="org.springframework">
-		<level value="info" />
-	</logger>
-	<logger name="org.apache">
-		<level value="info" />
-	</logger>
+    <logger name="org.jdbcdslog.ConnectionLogger" level="info" />
+    <logger name="org.jdbcdslog.StatementLogger" level="info" />
+    <logger name="org.jdbcdslog.SlowQueryLogger" level="info" />
+    <logger name="org.jdbcdslog.ResultSetLogger" level="info" />
+    <logger name="org.springframework" level="info" />
+	<logger name="org.apache" level="info" />
 
 	<!-- root级别控制 -->
-	<root level="INFO">
-		<appender-ref ref="root" />
+	<root level="info">
+		<appender-ref ref="ROOT_FILE" />
 	</root>
 
 </configuration>  
