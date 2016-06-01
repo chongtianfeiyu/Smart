@@ -716,7 +716,7 @@
         </repository>
     </repositories>
     <!-- 公共插件仓库地址 -->
-    <!-- <pluginRepositories>
+    <pluginRepositories>
         <pluginRepository>
             <id>public</id>
             <name>Public Repositories</name>
@@ -728,7 +728,7 @@
                 <enabled>true</enabled>
             </snapshots>
         </pluginRepository>
-    </pluginRepositories> -->
+    </pluginRepositories>
 
     <distributionManagement>
         <!-- 正式发布版本 -->
