@@ -8,7 +8,7 @@
     <result column="ACC_ENTRY_TYPE" property="accEntryType" jdbcType="CHAR" />
     <result column="ACC_CODE_1ST" property="accCode1st" jdbcType="VARCHAR" />
     <result column="SUB_ACC_CODE_1ST" property="subAccCode1st" jdbcType="VARCHAR" />
-    <result column="FIR_SUB_CODE_1ST" property="firSubCode1st" jdbcType="VARCHAR" />
+    <result column="SUB_CODE_1ST" property="subCode1st" jdbcType="VARCHAR" />
     <result column="REL_SUB_CODE_1ST" property="relSubCode1st" jdbcType="VARCHAR" />
     <result column="SUB_INDEX_1ST" property="subIndex1st" jdbcType="DECIMAL" />
     <result column="SEQ_NO_1ST" property="seqNo1st" jdbcType="DECIMAL" />
