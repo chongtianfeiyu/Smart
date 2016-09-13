@@ -14,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 import com.somnus.rest.core.support.JsonUtils;
 import com.somnus.smart.biz.accquery.resource.AccQueryResource;
 import com.somnus.smart.biz.accquery.service.AccQueryService;
-import com.somnus.smart.message.Message;
 import com.somnus.smart.message.accquery.CussubQueryRequest;
 import com.somnus.smart.message.accquery.CussubQueryResponse;
 import com.somnus.smart.message.accquery.IssuedAccDetailQueryRequest;
@@ -54,29 +53,20 @@ public class AccQueryResourceImpl implements AccQueryResource {
 	public CussubQueryResponse queryCusCurBal(CussubQueryRequest request) {
 		log.info(Constants.REQUEST_MSG, JsonUtils.toString(request));
 		CussubQueryResponse response = new CussubQueryResponse();
-		Message message = new Message();
 		try {
 			response = accQueryService.queryCusCurBal(request);
 			// 返回成功报文
-			message = MessageUtil.createCommMsg();
+			MessageUtil.createCommMsg(response);
 		} catch (BizException e) {
 			log.error(Constants.BUSINESS_ERROR, e);
 			// 组织错误报文
-			message = MessageUtil.errRetrunInAction(e);
+			MessageUtil.errRetrunInAction(response,e);
 		} catch (Exception ex) {
 			log.error(Constants.EXCEPTION_ERROR, ex);
 			// 组织错误报文
-			message = MessageUtil.createErrorMsg();
+			MessageUtil.createErrorMsg(response);
 		}
-		log.info(Constants.REPONSE_MSG, JsonUtils.toString(message));
-		response.setBrcCode(message.getBrcCode());
-		response.setChannelNo(message.getChannelNo());
-		response.setFrontNo(message.getFrontNo());
-		response.setFrontTime(message.getFrontTime());
-		response.setSysCode(message.getSysCode());
-		response.setTerminalNo(request.getTerminalNo());
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
+		log.info(Constants.REPONSE_MSG, JsonUtils.toString(response));
 		return response;
 	}
 
@@ -86,31 +76,20 @@ public class AccQueryResourceImpl implements AccQueryResource {
 	public IssuedAccQueryResponse queryIssuedAcc(IssuedAccQueryRequest request) {
 		log.info(Constants.REQUEST_MSG, JsonUtils.toString(request));
 		IssuedAccQueryResponse response = new IssuedAccQueryResponse();
-		Message message = new Message();
 		try {
 			response = accQueryService.queryIssuedAcc(request);
 			// 返回成功报文
-			message = MessageUtil.createCommMsg();
+			MessageUtil.createCommMsg(response);
 		} catch (BizException e) {
 			log.error(Constants.BUSINESS_ERROR, e);
 			// 组织错误报文
-			message = MessageUtil.errRetrunInAction(e);
+			MessageUtil.errRetrunInAction(response,e);
 		} catch (Exception ex) {
 			log.error(Constants.EXCEPTION_ERROR, ex);
 			// 组织错误报文
-			message = MessageUtil.createErrorMsg();
+			MessageUtil.createErrorMsg(response);
 		}
-		log.info(Constants.REPONSE_MSG, JsonUtils.toString(message));
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
-		response.setBrcCode(message.getBrcCode());
-		response.setChannelNo(message.getChannelNo());
-		response.setFrontNo(message.getFrontNo());
-		response.setFrontTime(message.getFrontTime());
-		response.setSysCode(message.getSysCode());
-		response.setTerminalNo(request.getTerminalNo());
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
+		log.info(Constants.REPONSE_MSG, JsonUtils.toString(response));
 		return response;
 	}
 
@@ -121,31 +100,20 @@ public class AccQueryResourceImpl implements AccQueryResource {
 			IssuedAccDetailQueryRequest request) {
 		log.info(Constants.REQUEST_MSG, JsonUtils.toString(request));
 		IssuedAccDetailQueryResponse response = new IssuedAccDetailQueryResponse();
-		Message message = new Message();
 		try {
 			response = accQueryService.queryIssuedAccDetail(request);
 			// 返回成功报文
-			message = MessageUtil.createCommMsg();
+			MessageUtil.createCommMsg(response);
 		} catch (BizException e) {
 			log.error(Constants.BUSINESS_ERROR, e);
 			// 组织错误报文
-			message = MessageUtil.errRetrunInAction(e);
+			MessageUtil.errRetrunInAction(response,e);
 		} catch (Exception ex) {
 			log.error(Constants.EXCEPTION_ERROR, ex);
 			// 组织错误报文
-			message = MessageUtil.createErrorMsg();
+			MessageUtil.createErrorMsg(response);
 		}
-		log.info(Constants.REPONSE_MSG, JsonUtils.toString(message));
-		response.setBrcCode(message.getBrcCode());
-		response.setChannelNo(message.getChannelNo());
-		response.setFrontNo(message.getFrontNo());
-		response.setFrontTime(message.getFrontTime());
-		response.setSysCode(message.getSysCode());
-		response.setTerminalNo(request.getTerminalNo());
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
+		log.info(Constants.REPONSE_MSG, JsonUtils.toString(response));
 		return response;
 	}
 
@@ -155,31 +123,20 @@ public class AccQueryResourceImpl implements AccQueryResource {
 	public QueryCusSubResponse queryCusSubAccInfo(QueryCusSubAccRequest request) {
 		log.info(Constants.REQUEST_MSG, JsonUtils.toString(request));
 		QueryCusSubResponse response = new QueryCusSubResponse();
-		Message message = new Message();
 		try {
 			response = accQueryService.queryCusSubAccInfo(request);
 			// 返回成功报文
-			message = MessageUtil.createCommMsg();
+			MessageUtil.createCommMsg(response);
 		} catch (BizException e) {
 			log.error(Constants.BUSINESS_ERROR, e);
 			// 组织错误报文
-			message = MessageUtil.errRetrunInAction(e);
+			MessageUtil.errRetrunInAction(response,e);
 		} catch (Exception ex) {
 			log.error(Constants.EXCEPTION_ERROR, ex);
 			// 组织错误报文
-			message = MessageUtil.createErrorMsg();
+			MessageUtil.createErrorMsg(response);
 		}
-		log.info(Constants.REPONSE_MSG, JsonUtils.toString(message));
-		response.setBrcCode(message.getBrcCode());
-		response.setChannelNo(message.getChannelNo());
-		response.setFrontNo(message.getFrontNo());
-		response.setFrontTime(message.getFrontTime());
-		response.setSysCode(message.getSysCode());
-		response.setTerminalNo(request.getTerminalNo());
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
+		log.info(Constants.REPONSE_MSG, JsonUtils.toString(response));
 		return response;
 	}
 
@@ -189,31 +146,20 @@ public class AccQueryResourceImpl implements AccQueryResource {
 	public QueryAccDetailResponse queryAccDetail(QueryAccDetailRequest request) {
 		log.info(Constants.REQUEST_MSG, JsonUtils.toString(request));
 		QueryAccDetailResponse response = new QueryAccDetailResponse();
-		Message message = new Message();
 		try {
 			response = accQueryService.queryAccDetail(request);
 			// 返回成功报文
-			message = MessageUtil.createCommMsg();
+			MessageUtil.createCommMsg(response);
 		} catch (BizException e) {
 			log.error(Constants.BUSINESS_ERROR, e);
 			// 组织错误报文
-			message = MessageUtil.errRetrunInAction(e);
+			MessageUtil.errRetrunInAction(response,e);
 		} catch (Exception ex) {
 			log.error(Constants.EXCEPTION_ERROR, ex);
 			// 组织错误报文
-			message = MessageUtil.createErrorMsg();
+			MessageUtil.createErrorMsg(response);
 		}
-		log.info(Constants.REPONSE_MSG, JsonUtils.toString(message));
-		response.setBrcCode(message.getBrcCode());
-		response.setChannelNo(message.getChannelNo());
-		response.setFrontNo(message.getFrontNo());
-		response.setFrontTime(message.getFrontTime());
-		response.setSysCode(message.getSysCode());
-		response.setTerminalNo(request.getTerminalNo());
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
+		log.info(Constants.REPONSE_MSG, JsonUtils.toString(response));
 		return response;
 	}
 
@@ -223,31 +169,20 @@ public class AccQueryResourceImpl implements AccQueryResource {
 	public QueryCusFifResponse queryCusFif(QueryCusFifRequest request) {
 		log.info(Constants.REQUEST_MSG, JsonUtils.toString(request));
 		QueryCusFifResponse response = new QueryCusFifResponse();
-		Message message = new Message();
 		try {
 			response = accQueryService.queryCusFif(request);
 			// 返回成功报文
-			message = MessageUtil.createCommMsg();
+			MessageUtil.createCommMsg(response);
 		} catch (BizException e) {
 			log.error(Constants.BUSINESS_ERROR, e);
 			// 组织错误报文
-			message = MessageUtil.errRetrunInAction(e);
+			MessageUtil.errRetrunInAction(response,e);
 		} catch (Exception ex) {
 			log.error(Constants.EXCEPTION_ERROR, ex);
 			// 组织错误报文
-			message = MessageUtil.createErrorMsg();
+			MessageUtil.createErrorMsg();
 		}
-		log.info(Constants.REPONSE_MSG, JsonUtils.toString(message));
-		response.setBrcCode(message.getBrcCode());
-		response.setChannelNo(message.getChannelNo());
-		response.setFrontNo(message.getFrontNo());
-		response.setFrontTime(message.getFrontTime());
-		response.setSysCode(message.getSysCode());
-		response.setTerminalNo(request.getTerminalNo());
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
+		log.info(Constants.REPONSE_MSG, JsonUtils.toString(response));
 		return response;
 	}
 
@@ -257,31 +192,20 @@ public class AccQueryResourceImpl implements AccQueryResource {
 	public QueryPayAppResponse queryPaymentApp(QueryPayAppRequest request) {
 		log.info(Constants.REQUEST_MSG, JsonUtils.toString(request));
 		QueryPayAppResponse response = new QueryPayAppResponse();
-		Message message = new Message();
 		try {
 			response = accQueryService.queryPaymentApp(request);
 			// 返回成功报文
-			message = MessageUtil.createCommMsg();
+			MessageUtil.createCommMsg(response);
 		} catch (BizException e) {
 			log.error(Constants.BUSINESS_ERROR, e);
 			// 组织错误报文
-			message = MessageUtil.errRetrunInAction(e);
+			 MessageUtil.errRetrunInAction(response,e);
 		} catch (Exception ex) {
 			log.error(Constants.EXCEPTION_ERROR, ex);
 			// 组织错误报文
-			message = MessageUtil.createErrorMsg();
+			MessageUtil.createErrorMsg(response);
 		}
-		log.info(Constants.REPONSE_MSG, JsonUtils.toString(message));
-		response.setBrcCode(message.getBrcCode());
-		response.setChannelNo(message.getChannelNo());
-		response.setFrontNo(message.getFrontNo());
-		response.setFrontTime(message.getFrontTime());
-		response.setSysCode(message.getSysCode());
-		response.setTerminalNo(request.getTerminalNo());
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
-		response.setRepCode(message.getRepCode());
-		response.setRepMsg(message.getRepMsg());
+		log.info(Constants.REPONSE_MSG, JsonUtils.toString(response));
 		return response;
 	}
 
