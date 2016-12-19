@@ -86,7 +86,7 @@
 		<ips.service.api.plugin.version>1.0.0</ips.service.api.plugin.version>
 		<lifecycle.mapping.version>1.0.0</lifecycle.mapping.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jdk.version>1.7</jdk.version>
+		<jdk.version>1.8</jdk.version>
 		<!-- Repositories -->
 		<!-- BACS发布仓库地址 -->
 		<!-- 在maven的settings.xml中的servers节点下，添加如下2个server节点 <server> <id>bacs-releases</id> 
