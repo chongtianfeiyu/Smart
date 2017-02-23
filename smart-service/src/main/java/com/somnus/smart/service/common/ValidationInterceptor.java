@@ -3,16 +3,17 @@ package com.somnus.smart.service.common;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
 import javax.validation.ValidationException;
 import javax.validation.Validator;
+import javax.validation.executable.ExecutableValidator;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.hibernate.validator.method.MethodConstraintViolation;
-import org.hibernate.validator.method.MethodConstraintViolationException;
-import org.hibernate.validator.method.MethodValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,24 +26,24 @@ public class ValidationInterceptor {
     /** Match any public methods in a class annotated with @AutoValidating*/
     private javax.validation.Validator validator;
 
-    @SuppressWarnings("deprecation")
     @Around("execution(public * *(..)) && @within(org.springframework.validation.annotation.Validated)")
     public Object validateMethodInvocation(ProceedingJoinPoint pjp) throws Throwable {
         Object result;
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         try{
-            MethodValidator methodValidator = validator.unwrap(MethodValidator.class);
-            Set<MethodConstraintViolation<Object>> parametersViolations = methodValidator.
-            		validateAllParameters(pjp.getTarget(), signature.getMethod(), pjp.getArgs());
+        	ExecutableValidator executableValidator = Validation.buildDefaultValidatorFactory().getValidator().forExecutables();
+            log.info("args:{}",ArrayUtils.toString(pjp.getArgs()));
+            Set<ConstraintViolation<Object>> parametersViolations = executableValidator.
+            		validateParameters(pjp.getTarget(), signature.getMethod(), pjp.getArgs());
             if (!parametersViolations.isEmpty()) {
-                throw new MethodConstraintViolationException(parametersViolations);
+                throw new ConstraintViolationException(parametersViolations);
             }
             result = pjp.proceed(); //Execute the method
 
-            Set<MethodConstraintViolation<Object>> returnValueViolations = methodValidator.
+            Set<ConstraintViolation<Object>> returnValueViolations = executableValidator.
             		validateReturnValue(pjp.getTarget(), signature.getMethod(), result);
             if (!returnValueViolations.isEmpty()) {
-                throw new MethodConstraintViolationException(returnValueViolations);
+                throw new ConstraintViolationException(returnValueViolations);
             }
         }catch (Throwable throwable){
             log.error("接口数据验证不通过：",throwable);
@@ -55,14 +56,13 @@ public class ValidationInterceptor {
         return result;
     }
 
-    @SuppressWarnings("deprecation")
     private Message exceptionHandle(Throwable throwable,Message message){
         if(throwable instanceof ValidationException){
-            if(throwable instanceof MethodConstraintViolationException){
-                for (ConstraintViolation constraintViolation : ((MethodConstraintViolationException)throwable).getConstraintViolations()) {
+            if(throwable instanceof ConstraintViolationException){
+                for (ConstraintViolation<?> constraintViolation : ((ConstraintViolationException)throwable).getConstraintViolations()) {
                     /*IncomeResourceImpl#bankIncome(arg0).feeWay*/
                 	String path = constraintViolation.getPropertyPath().toString();
-                    int index = path.indexOf('.');
+                    int index = path.lastIndexOf('.');
                     if(index>0){
                         index = index+1;
                     }else{
@@ -70,6 +70,7 @@ public class ValidationInterceptor {
                     }
                     message.setRepCode("112211");
                     message.setRepMsg(path.substring(index).concat(" ").concat(constraintViolation.getMessage()));
+                    log.error("校验失败：{}",path.substring(index).concat(" ").concat(constraintViolation.getMessage()));
                     break;
                 }
             }

@@ -12,12 +12,7 @@
      <!-- @Service 通常作用在业务层，但是目前该功能与 @Component相同 -->
      <!-- @Repository 通常作用在持久层，但是目前该功能与 @Component相同 -->
      <!-- @Constroller 通常作用在控制层，但是目前该功能与 @Component相同 -->
-    <context:component-scan base-package="com.somnus.smart" use-default-filters="false">
-        <!-- 扫描符合@Component @Service @Repository的类 -->
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository" />
-    </context:component-scan>
+    <context:component-scan base-package="com.somnus.smart" />
     
     <!-- application 上下文 -->
     <bean class="com.somnus.smart.support.holder.ApplicationContextHolder"/>
