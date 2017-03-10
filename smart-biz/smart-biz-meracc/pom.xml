@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.somnus</groupId>
+        <groupId>com.somnus.smart</groupId>
         <artifactId>smart-biz</artifactId>
         <version>8.0.1</version>
     </parent>
@@ -12,12 +12,12 @@
   
     <dependencies>
         <dependency>
-            <groupId>com.somnus</groupId>
+            <groupId>com.somnus.smart</groupId>
             <artifactId>smart-service</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.somnus</groupId>
+            <groupId>com.somnus.smart</groupId>
             <artifactId>smart-config</artifactId>
             <version>${project.version}</version>
             <scope>test</scope>

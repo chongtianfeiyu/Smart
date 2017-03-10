@@ -7,7 +7,8 @@
         <artifactId>smart</artifactId>
         <version>8.0.1</version>
     </parent>
-  
+  	
+  	<groupId>com.somnus.smart</groupId>
     <artifactId>smart-service-api</artifactId>
 
     <properties>
