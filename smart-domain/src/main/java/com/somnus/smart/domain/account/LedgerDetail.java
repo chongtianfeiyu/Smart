@@ -27,16 +27,21 @@ import com.somnus.smart.support.util.ValidateUtil;
 /**
  * 台账
  */
-public class LedgerDetail extends TrnLedgerDetail implements
-		DomainModel<LedgerDetail, TrnLedgerDetail> {
+public class LedgerDetail extends TrnLedgerDetail implements DomainModel<LedgerDetail, TrnLedgerDetail> {
+	private static final long serialVersionUID = 1L;
+	
 	/** TrnLedgerDetailDao */
 	private static TrnLedgerDetailDao trnLedgerDetailDaoDao;
+	
 	/** CusAccountedStatusDao */
 	private static CusAccountedStatusDao cusAccountedStatusDao;
+	
 	/** MessageSourceAccessor */
 	private static MessageSourceAccessor messageSourceAccessor;
+	
 	/** AccMappingDao */
 	private static AccMappingDao accMappingDao;
+	
 	/** Logger */
 	private static Logger LOGGER = LoggerFactory.getLogger(LedgerDetail.class);
 

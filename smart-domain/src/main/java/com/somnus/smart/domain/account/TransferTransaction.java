@@ -1,7 +1,5 @@
 package com.somnus.smart.domain.account;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import com.somnus.smart.base.dao.TrnTransferDao;
@@ -14,9 +12,9 @@ import com.somnus.smart.domain.DomainModel;
  */
 public class TransferTransaction extends TrnTransfer implements DomainModel<TransferTransaction, TrnTransfer> {
 
-    private static TrnTransferDao     dao;
+	private static final long serialVersionUID = 1L;
 
-    private static Logger             LOGGER = LoggerFactory.getLogger(TransferTransaction.class);
+	private static TrnTransferDao     dao;
 
     public TransferTransaction() {
     }
@@ -35,13 +33,13 @@ public class TransferTransaction extends TrnTransfer implements DomainModel<Tran
      * @param model
      * @return
      */
-    private static TransferTransaction getTransfer(TrnTransfer model) {
+    /*private static TransferTransaction getTransfer(TrnTransfer model) {
         TransferTransaction transfer = getInstance();
         if (model != null) {
             DomainHelper.setDomainData(transfer, model);
         }
         return transfer;
-    }
+    }*/
 
     /**
      * 落地

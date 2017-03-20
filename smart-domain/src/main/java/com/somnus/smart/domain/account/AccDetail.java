@@ -3,8 +3,6 @@ package com.somnus.smart.domain.account;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import com.somnus.smart.base.dao.TrnAccDetailDao;
@@ -19,9 +17,9 @@ import com.somnus.smart.support.util.DateUtil;
  */
 public class AccDetail extends TrnAccDetail implements DomainModel<AccDetail, TrnAccDetail> {
 
-    private static TrnAccDetailDao dao;
+	private static final long serialVersionUID = 1L;
 
-    private static Logger          LOGGER                   = LoggerFactory.getLogger(AccDetail.class);
+	private static TrnAccDetailDao dao;
 
     private final static String    BIZ_SUB_ACC_CODE__PREFIX = "1";
 
@@ -46,13 +44,13 @@ public class AccDetail extends TrnAccDetail implements DomainModel<AccDetail, Tr
      * @param model
      * @return
      */
-    private static AccDetail getAccDetail(TrnAccDetail model) {
+    /*private static AccDetail getAccDetail(TrnAccDetail model) {
         AccDetail accDetail = getInstance();
         if (model != null) {
             DomainHelper.setDomainData(accDetail, model);
         }
         return accDetail;
-    }
+    }*/
 
     /**
      * 落地

@@ -1,7 +1,5 @@
 package com.somnus.smart.domain.account;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import com.somnus.smart.base.dao.TrnTranrefuseDao;
@@ -14,10 +12,7 @@ import com.somnus.smart.domain.DomainModel;
  */
 public class TranRefuse extends TrnTranrefuse implements DomainModel<TranRefuse, TrnTranrefuse> {
 
-
     private static TrnTranrefuseDao   dao;
-
-    private static Logger             LOGGER = LoggerFactory.getLogger(TranRefuse.class);
 
     public TranRefuse() {
     }
@@ -36,13 +31,13 @@ public class TranRefuse extends TrnTranrefuse implements DomainModel<TranRefuse,
      * @param model
      * @return
      */
-    private static TranRefuse getTranRefuse(TrnTranrefuse model) {
+    /*private static TranRefuse getTranRefuse(TrnTranrefuse model) {
         TranRefuse tranReverse = getInstance();
         if (model != null) {
             DomainHelper.setDomainData(tranReverse, model);
         }
         return tranReverse;
-    }
+    }*/
 
     /**
      * 落地

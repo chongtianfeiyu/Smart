@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.MessageSourceAccessor;
 
-import com.somnus.smart.base.dao.CfgAccEntryDao;
 import com.somnus.smart.base.domain.CfgAccEntry;
 import com.somnus.smart.domain.DomainHelper;
 import com.somnus.smart.domain.DomainModel;
@@ -25,9 +24,10 @@ import com.somnus.smart.support.exceptions.BizException;
  * 分账户明细
  */
 public class AccEntryCfg extends CfgAccEntry implements DomainModel<AccEntryCfg, CfgAccEntry> {
-	/** cfgAccEntryDao */
-    private static CfgAccEntryDao        cfgAccEntryDao;
-    /** messageSourceAccessor */
+    
+	private static final long serialVersionUID = 1L;
+	
+	/** messageSourceAccessor */
     private static MessageSourceAccessor messageSourceAccessor;
     /** cfgAccEntryCache */
     private static CfgAccEntryCache      cfgAccEntryCache;
@@ -48,7 +48,6 @@ public class AccEntryCfg extends CfgAccEntry implements DomainModel<AccEntryCfg,
      * @param context
      */
     public static void init(ApplicationContext context) {
-        cfgAccEntryDao = context.getBean(CfgAccEntryDao.class);
         messageSourceAccessor = context.getBean(MessageSourceAccessor.class);
         cfgAccEntryCache = context.getBean(CfgAccEntryCache.class);
     }
@@ -103,7 +102,7 @@ public class AccEntryCfg extends CfgAccEntry implements DomainModel<AccEntryCfg,
                 }
             }
 
-            accEntryList.add(AccEntryCfg.getInstance().getAccDetail(cfgAccEntry));
+            accEntryList.add(getAccDetail(cfgAccEntry));
         }
         return accEntryList;
     }
@@ -137,8 +136,6 @@ public class AccEntryCfg extends CfgAccEntry implements DomainModel<AccEntryCfg,
      * @return
      */
     public static String getEntryKeyByTranCode(String tranCode, String feeFlag, String feeStlMode,String blnMode) throws Exception{
-        String entryKey = null;
-        
         //商户提现
         if (tranCode.equals(TranCode.MERCHANT_WITHDRAW.getCode())||tranCode.equals(TranCode.MERCHANT_WITHDRAW_OLD.getCode())) {
             return DrawConstants.ENTRY_KEY_DRAW_PRE + feeFlag + feeStlMode;
@@ -174,11 +171,10 @@ public class AccEntryCfg extends CfgAccEntry implements DomainModel<AccEntryCfg,
         //个人账户专用账户充值
         else if(tranCode.equals(TranCode.INDIVIDUAL_SPECIAL_CHARGE.getCode())){
             return AccountConstants.ENTRY_KEY_SPE_CHARGE_PRE+blnMode+feeFlag+feeStlMode;
+        } 
+        else{
+        	throw new BizException("tranCode 为："+tranCode+"entryKey未配置");
         }
-        if(entryKey==null){
-            throw new BizException("tranCode 为："+tranCode+"entryKey未配置");
-        }
-        return entryKey;
     }
 
 }

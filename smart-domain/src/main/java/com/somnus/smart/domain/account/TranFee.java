@@ -1,7 +1,5 @@
 package com.somnus.smart.domain.account;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import com.somnus.smart.base.dao.TcorTrnTranFeeDao;
@@ -16,8 +14,6 @@ public class TranFee extends TcorTrnTranFee implements DomainModel<TranFee, Tcor
 
 
     private static TcorTrnTranFeeDao     dao;
-
-    private static Logger             LOGGER = LoggerFactory.getLogger(TranFee.class);
 
     public TranFee() {
     }
@@ -36,13 +32,13 @@ public class TranFee extends TcorTrnTranFee implements DomainModel<TranFee, Tcor
      * @param model
      * @return
      */
-    private static TranFee getTran(TcorTrnTranFeeDao model) {
+    /*private static TranFee getTran(TcorTrnTranFeeDao model) {
         TranFee tranFee = getInstance();
         if (model != null) {
             DomainHelper.setDomainData(tranFee, model);
         }
         return tranFee;
-    }
+    }*/
 
     /**
      * 落地

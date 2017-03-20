@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 public class DomainHelper {
     private static Logger logger = LoggerFactory.getLogger(DomainHelper.class);
 
-    public static Object getDomainInstance(Class clazz) {
+    public static Object getDomainInstance(Class<?> clazz) {
         DomainProxy proxy = new DomainProxy();
         return proxy.getProxy(clazz);
     }
@@ -62,7 +62,7 @@ public class DomainHelper {
         Object proxy;
 
         try {
-            Class clazz = domain.getClass();
+            Class<?> clazz = domain.getClass();
             proxy = getDomainInstance(clazz);
             PropertyUtils.copyProperties(proxy, domain);
         } catch (IllegalAccessException ex) {
@@ -83,7 +83,7 @@ public class DomainHelper {
         Object domain;
         
         try {
-            Class clazz = proxy.getClass().getSuperclass();
+            Class<?> clazz = proxy.getClass().getSuperclass();
             domain = clazz.newInstance();
             PropertyUtils.copyProperties(domain, proxy);
         } catch (InstantiationException ex) {

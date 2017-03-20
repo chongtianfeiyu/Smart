@@ -9,26 +9,39 @@ import com.somnus.smart.domain.account.SubAccInfo;
  * 记账上下文
  */
 public class AccountContext {
+	
+	private static ThreadLocal<AccountContext>		accountContext = new ThreadLocal<AccountContext>();
+	
     /** 是否多笔台账记账 */
-    private boolean                              isBatchAccount = false;
+    private boolean									isBatchAccount = false;
 
     /** 交易账户锁 */
-    private ThreadLocal<Map<String, SubAccInfo>> subAccInfoLocks;
+    private ThreadLocal<Map<String, SubAccInfo>> 	subAccInfoLocks;
 
     /** RelSubCode和SubCode映射 */
-    private ThreadLocal<Map<String, String>>     relSubCodeSubCodeMap;
+    private ThreadLocal<Map<String, String>>     	relSubCodeSubCodeMap;
 
     /** RelSubCode锁顺序 */
-    private ThreadLocal<List<String>>            relSubAccCodeList;
+    private ThreadLocal<List<String>>            	relSubAccCodeList;
 
-    public AccountContext() {
+    private AccountContext() {
         subAccInfoLocks = new ThreadLocal<Map<String, SubAccInfo>>();
         relSubCodeSubCodeMap = new ThreadLocal<Map<String, String>>();
         relSubAccCodeList = new ThreadLocal<List<String>>();
     }
 
-    public static AccountContext getInstance() {
-        return (AccountContext) DomainHelper.getDomainInstance(AccountContext.class);
+    /**
+     * Returns the AccountContext specific to the current thread.
+     *
+     * @return the AccountContext for the current thread, is never <tt>null</tt>.
+     */
+    public static AccountContext getContext() {
+    	AccountContext context = accountContext.get();
+    	if(context == null){
+    		context = new AccountContext();
+    		accountContext.set(context);
+    	}
+        return context;
     }
 
     /**

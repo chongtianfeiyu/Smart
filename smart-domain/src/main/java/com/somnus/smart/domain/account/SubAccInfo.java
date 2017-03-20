@@ -28,7 +28,9 @@ import com.somnus.smart.support.util.DateUtil;
  */
 public class SubAccInfo extends CusSubaccinfo implements DomainModel<SubAccInfo, CusSubaccinfo> {
 
-    private static CusSubAccInfoDao      cusSubAccInfoDao;
+	private static final long serialVersionUID = 1L;
+
+	private static CusSubAccInfoDao      cusSubAccInfoDao;
 
     private static MeracctInnerService   meracctInnerService;
 

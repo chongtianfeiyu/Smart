@@ -4,7 +4,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.transaction.support.TransactionTemplate;
 
 import com.somnus.smart.domain.account.AccDetail;
 import com.somnus.smart.domain.account.AccEntryCfg;
@@ -32,8 +31,6 @@ import com.somnus.smart.domain.account.TransferTransaction;
 public class DomainInitializer implements InitializingBean, ApplicationContextAware {
 
     private ApplicationContext  applicationContext;
-
-    private TransactionTemplate transactionTemplate;
 
     /**
      * 这个方法将在所有的属性被初始化后调用。 但是会在init前调用。 但是主要的是如果是延迟加载的话，则马上执行。 所以可以在类上加上注解： import
@@ -68,10 +65,6 @@ public class DomainInitializer implements InitializingBean, ApplicationContextAw
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
 
-    }
-
-    public void setTransactionTemplate(TransactionTemplate transactionTemplate) {
-        this.transactionTemplate = transactionTemplate;
     }
 
 }

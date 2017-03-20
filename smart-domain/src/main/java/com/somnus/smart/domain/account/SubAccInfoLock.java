@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import com.somnus.smart.base.dao.CusSubAccInfoDao;
@@ -24,9 +22,7 @@ public class SubAccInfoLock {
 
     private static CusSubAccInfoDao dao;
 
-    private static Logger           LOGGER = LoggerFactory.getLogger(SubAccInfo.class);
-
-    public SubAccInfoLock() {
+    private SubAccInfoLock() {
     }
 
     public static SubAccInfoLock getInstance() {

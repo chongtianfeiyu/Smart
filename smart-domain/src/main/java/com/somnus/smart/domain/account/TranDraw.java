@@ -1,7 +1,5 @@
 package com.somnus.smart.domain.account;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import com.somnus.smart.base.dao.TrnTranDrawDao;
@@ -14,9 +12,9 @@ import com.somnus.smart.domain.DomainModel;
  */
 public class TranDraw extends TrnTranDraw implements DomainModel<TranDraw, TrnTranDraw> {
 
-    private static TrnTranDrawDao     dao;
+	private static final long serialVersionUID = 1L;
 
-    private static Logger             LOGGER = LoggerFactory.getLogger(TranDraw.class);
+	private static TrnTranDrawDao     dao;
 
     public TranDraw() {
     }
@@ -35,13 +33,13 @@ public class TranDraw extends TrnTranDraw implements DomainModel<TranDraw, TrnTr
      * @param model
      * @return
      */
-    private static TranDraw getTranDraw(TrnTranDrawDao model) {
+    /*private static TranDraw getTranDraw(TrnTranDrawDao model) {
         TranDraw tranDraw = getInstance();
         if (model != null) {
             DomainHelper.setDomainData(tranDraw, model);
         }
         return tranDraw;
-    }
+    }*/
 
     /**
      * 落地

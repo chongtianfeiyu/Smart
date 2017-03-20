@@ -10,16 +10,15 @@ import com.somnus.smart.domain.DomainModel;
 /**
  * 出款交易流水
  */
-public class DrawTransaction extends TrnDraw implements
-		DomainModel<DrawTransaction, TrnDraw> {
+public class DrawTransaction extends TrnDraw implements DomainModel<DrawTransaction, TrnDraw> {
 
+	private static final long serialVersionUID = 1L;
 	/** dao */
 	private static TrnDrawDao dao;
 
 	/** 获取实例 */
 	public static DrawTransaction getInstance() {
-		return (DrawTransaction) DomainHelper
-				.getDomainInstance(DrawTransaction.class);
+		return (DrawTransaction) DomainHelper.getDomainInstance(DrawTransaction.class);
 	}
 
 	/** 初始化 */

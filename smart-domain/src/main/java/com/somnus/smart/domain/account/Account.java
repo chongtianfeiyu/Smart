@@ -32,7 +32,7 @@ public class Account {
 	private SubAccInfoLock subAccInfoLock;
 
 	/** 记账上下文 */
-	private AccountContext accountContext = AccountContext.getInstance();
+	private static AccountContext accountContext = AccountContext.getContext();
 
 	/** spring 事务模板 */
 	private static TransactionTemplate transactionTemplate;

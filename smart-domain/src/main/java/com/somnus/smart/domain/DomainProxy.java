@@ -16,7 +16,7 @@ public class DomainProxy implements MethodInterceptor, Serializable {
     private transient Enhancer enhancer         = new Enhancer();
     private Logger             logger;
 
-    public Object getProxy(Class clazz) {
+    public Object getProxy(Class<?> clazz) {
         logger = LoggerFactory.getLogger(clazz);
         enhancer.setSuperclass(clazz);
         enhancer.setCallback(this);
@@ -25,8 +25,8 @@ public class DomainProxy implements MethodInterceptor, Serializable {
     }
 
     @Override
-    public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
-                                                                                        throws Throwable {
+    public Object intercept(Object obj, Method method, 
+    		Object[] args, MethodProxy proxy)throws Throwable {
         try {
             Object result = proxy.invokeSuper(obj, args);
             return result;

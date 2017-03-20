@@ -1,7 +1,5 @@
 package com.somnus.smart.domain.account;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import com.somnus.smart.base.dao.TrnTranVoucherDao;
@@ -14,9 +12,9 @@ import com.somnus.smart.domain.DomainModel;
  */
 public class TranVoucher extends TrnTranVoucher implements DomainModel<TranVoucher, TrnTranVoucher> {
 
-    private static TrnTranVoucherDao  dao;
+	private static final long serialVersionUID = 1L;
 
-    private static Logger             LOGGER = LoggerFactory.getLogger(TranVoucher.class);
+	private static TrnTranVoucherDao  dao;
 
     public TranVoucher() {
     }
@@ -35,13 +33,13 @@ public class TranVoucher extends TrnTranVoucher implements DomainModel<TranVouch
      * @param model
      * @return
      */
-    private static TranVoucher getTranVoucher(TrnTranVoucher model) {
+    /*private static TranVoucher getTranVoucher(TrnTranVoucher model) {
         TranVoucher tranVoucher = getInstance();
         if (model != null) {
             DomainHelper.setDomainData(tranVoucher, model);
         }
         return tranVoucher;
-    }
+    }*/
 
     /**
      * 落地

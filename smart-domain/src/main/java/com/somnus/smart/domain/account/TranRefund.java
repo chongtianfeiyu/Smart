@@ -1,7 +1,5 @@
 package com.somnus.smart.domain.account;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 
 import com.somnus.smart.base.dao.TrnTranRefundDao;
@@ -14,9 +12,9 @@ import com.somnus.smart.domain.DomainModel;
  */
 public class TranRefund extends TrnTranRefund implements DomainModel<TranRefund, TrnTranRefund> {
 
-    private static TrnTranRefundDao   dao;
+	private static final long serialVersionUID = 1L;
 
-    private static Logger             LOGGER = LoggerFactory.getLogger(TranRefund.class);
+	private static TrnTranRefundDao   dao;
 
     public TranRefund() {
     }
@@ -35,13 +33,13 @@ public class TranRefund extends TrnTranRefund implements DomainModel<TranRefund,
      * @param model
      * @return
      */
-    private static TranRefund getTranRefund(TrnTranRefund model) {
+    /*private static TranRefund getTranRefund(TrnTranRefund model) {
         TranRefund tranRefund = getInstance();
         if (model != null) {
             DomainHelper.setDomainData(tranRefund, model);
         }
         return tranRefund;
-    }
+    }*/
 
     /**
      * 落地
